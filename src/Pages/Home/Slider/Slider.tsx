@@ -6,6 +6,12 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 
+// ----------imnage import-----------------
+import banner from "../../../assets/banner/banner.jpeg"
+import banner1 from "../../../assets/banner/banner1.jpeg"
+import banner2 from "../../../assets/banner/banner2.jpeg"
+import banner3 from "../../../assets/banner/banner3.jpeg"
+import banner4 from "../../../assets/banner/banner4.jpeg"
 
 // Define Type for Slider Data
 interface Slide {
@@ -24,7 +30,7 @@ export const sliderData: Slide[] = [
     subtitle: "01 / collection",
     description:
       "Exploring the intersection of form and function in contemporary design.",
-    imgSrc: "https://i.postimg.cc/02V4pMtr/1.jpg",
+    imgSrc: banner,
     gradient: "from-[#2A3D66]/70 to-[#2A3D66]/50",
   },
   {
@@ -32,7 +38,7 @@ export const sliderData: Slide[] = [
     title: "Urban Spaces",
     subtitle: "02 / collection",
     description: "Shoishob girl collection new",
-    imgSrc: "https://i.postimg.cc/VsBpkHnq/2.jpg",
+    imgSrc: banner1,
     gradient: "from-[#4F7B92]/70 to-[#4F7B92]/50",
   },
   {
@@ -40,7 +46,7 @@ export const sliderData: Slide[] = [
     title: "Interior Flow",
     subtitle: "03 / Band collection",
     description: "Shoishob winter collection",
-    imgSrc: "https://i.postimg.cc/vHYjgLtp/3.jpg",
+    imgSrc: banner3,
     gradient: "from-[#5C6B73]/70 to-[#5C6B73]/50",
   },
   {
@@ -48,7 +54,7 @@ export const sliderData: Slide[] = [
     title: "Interior Flow",
     subtitle: "03 / Band collection",
     description: "Shoishob winter collection",
-    imgSrc: "https://i.postimg.cc/vHYjgLtp/3.jpg",
+    imgSrc: banner4,
     gradient: "from-[#5C6B73]/70 to-[#5C6B73]/50",
   },
 ];

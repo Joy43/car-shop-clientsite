@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/react.svg";
+import logo from "../../../assets/logo/logoGif.gif";
 import { FaRegUserCircle } from "react-icons/fa";
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,9 +11,8 @@ export const Navbar = () => {
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center text-primary hover:text-secondary">
-          <img src={logo} alt="Logo" className="h-8 w-8 mr-2" />
-          
-        </Link>
+          <img src={logo} alt="Logo" className="h-14 w-14 mr-2 bg-transparent" />
+          </Link>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -39,7 +38,7 @@ export const Navbar = () => {
               >
                 Services
               </button>
-              {/* Dropdown Menu */}
+              {/* -------------- Dropdown Menu ---------------------*/}
               <ul className={`absolute left-0 bg-white shadow-md py-2 mt-1 rounded-md w-48 transition-all duration-300 ${servicesDropdownOpen ? "block" : "hidden"}`}>
                 <li><Link to="/service-1" className="block px-4 py-2 hover:bg-gray-100">Service 1</Link></li>
                 <li><Link to="/service-2" className="block px-4 py-2 hover:bg-gray-100">Service 2</Link></li>

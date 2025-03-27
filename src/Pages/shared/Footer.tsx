@@ -1,12 +1,13 @@
 
-import logo from "../../../assets/react.svg";
+import logo from "../../assets/logo/logoGif.gif";
+
 import { FaInstagram, FaPhone, FaWhatsapp, FaLinkedin, FaFacebook } from "react-icons/fa";
 
-import bikas from "../../../assets/images/paylogo/bikas.png";
-import nagad from "../../../assets/images/paylogo/Nagad.png";
-import visacard from "../../../assets/images/paylogo/visacard.png";
-import douchbangla from "../../../assets/images/paylogo/dutchbangla.png";
-import martercard from "../../../assets/images/paylogo/mastercard.png";
+import bikas from "../../assets/images/paylogo/bikas.png";
+import nagad from "../../assets/images/paylogo/Nagad.png";
+import visacard from "../../assets/images/paylogo/visacard.png";
+import douchbangla from "../../assets/images/paylogo/dutchbangla.png";
+import martercard from "../../assets/images/paylogo/mastercard.png";
 
 const Footer: React.FC = () => {
   return (
@@ -37,7 +38,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex justify-center">
-          <img src={logo}  alt="Shoishob Logo" />
+          <img className="w-20 h-16" src={logo}  alt="Shoishob Logo" />
         </div>
 
         <div className="flex flex-col items-center gap-2">

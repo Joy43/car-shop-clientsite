@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../assets/logo/logoGif.gif";
+import logo from "../../assets/logo/logoGif.gif";
 import { FaRegUserCircle } from "react-icons/fa";
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

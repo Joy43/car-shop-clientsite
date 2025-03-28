@@ -14,28 +14,36 @@ const Login = () => {
     const toastId = toast.loading('Logging in...');
     try {
       const userInfo = {
-        id: data.userId,
+        email: data.email,
         password: data.password,
       };
+      
+      console.log("Sending request with:", userInfo);  // Debugging
+      
       const res = await login(userInfo).unwrap();
+      
+      console.log("Response received:", res);  // Debugging
+      
       const user = verifyToken(res.data.token) as TUser;
       dispatch(setUser({ user, token: res.data.token }));
+  
       toast.success('Logged in successfully', { id: toastId, duration: 2000 });
     } catch (err) {
+      console.error("Login failed:", err);  // Debugging
       toast.error('Invalid credentials', { id: toastId, duration: 2000 });
     }
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-gray-700">User ID</label>
+            <label className="block text-gray-700">User email</label>
             <input 
               type="text" 
-              {...register('userId', { required: 'User ID is required' })} 
+              {...register('email', { required: 'User email is required' })} 
               className="w-full p-2 border border-gray-300 rounded mt-1 focus:outline-none focus:ring focus:ring-blue-200" 
             />
             {errors.userId && <p className="text-red-500 text-sm">{String(errors.userId.message)}</p>}

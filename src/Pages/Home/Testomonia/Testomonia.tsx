@@ -15,9 +15,7 @@ const CustomerFeedback = () => {
           height={400}
           className="rounded-lg shadow-lg"
         />
-        <div className="absolute top-4 left-4 bg-white px-4 py-2 shadow-lg rounded-md text-sm font-semibold">
-          Download this video
-        </div>
+      
       </div>
 
       {/* Feedback Section */}

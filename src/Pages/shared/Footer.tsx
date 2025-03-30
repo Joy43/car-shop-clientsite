@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
       {/* Contact Info */}
       <div className="flex flex-wrap items-center justify-between gap-6 p-4 text-center md:text-left border-spacing-2 border-pink-100">
         <div className="flex flex-col items-center md:items-start gap-2">
-          <FaPhone className="text-[#F55F1E] w-8 h-8" />
+          <FaPhone className="text-red-500 w-8 h-8" />
           <p className="text-gray-700 text-sm">Do You Need Help</p>
           <a href="tel:+88 01701677162" className="text-blue-600 text-sm">+88 01701677162</a>
         </div>
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             {[FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp].map((Icon, index) => (
               <li key={index}>
                 <a href="#" target="_blank" rel="noopener noreferrer">
-                  <Icon className="h-8 w-8 text-[#F55F1E] hover:text-indigo-400" />
+                  <Icon className="h-8 w-8 text-red-500 hover:text-indigo-400" />
                 </a>
               </li>
             ))}

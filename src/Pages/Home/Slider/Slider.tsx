@@ -97,7 +97,7 @@ const Slider: React.FC = () => {
                   <p className="mt-4 text-base md:text-lg leading-relaxed">
                     {slide.description}
                   </p>
-                  <button className="mt-6 px-6 py-3 text-white bg-[#2B2D42] hover:bg-[#D94E1B] rounded-full text-sm font-medium transition-all duration-300 hover:scale-105">
+                  <button className="mt-6 px-6 py-3 text-white bg-red-500 hover:bg-[#D94E1B] rounded-full text-sm font-medium transition-all duration-300 hover:scale-105">
                     Buy Now →
                   </button>
                 </div>

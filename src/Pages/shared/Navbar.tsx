@@ -1,18 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logoGif.gif";
-import { FaRegUserCircle } from "react-icons/fa";
+
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
+
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-
+  const currentUser = useAppSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   return (
     <header className="bg-white shadow-lg py-4 sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center text-primary hover:text-secondary">
-          <img src={logo} alt="Logo" className="h-14 w-14 mr-2 bg-transparent" />
-          </Link>
+          <img src={logo} alt="Logo" className="h-16 w-16 mr-2 bg-transparent" />
+        </Link>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -38,24 +45,36 @@ export const Navbar = () => {
               >
                 Services
               </button>
-              {/* -------------- Dropdown Menu ---------------------*/}
+              {/* Dropdown Menu */}
               <ul className={`absolute left-0 bg-white shadow-md py-2 mt-1 rounded-md w-48 transition-all duration-300 ${servicesDropdownOpen ? "block" : "hidden"}`}>
                 <li><Link to="/service-1" className="block px-4 py-2 hover:bg-gray-100">Service 1</Link></li>
                 <li><Link to="/service-2" className="block px-4 py-2 hover:bg-gray-100">Service 2</Link></li>
-                <li><Link to="/service-3" className="block px-4 py-2 hover:bg-gray-100">Service 3</Link></li>
+                <li onClick={handleLogout}>
+                  logout
+                </li>
               </ul>
             </li>
             <li><Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link></li>
-            <li>
-              <Link to="/get-started" className="bg-black hover:bg-secondary text-white px-4 py-2 rounded-md transition-colors duration-300">
-                Get Started
-              </Link>
-            </li>
+            
+            {/* Show Dashboard if user is available */}
+            {currentUser ? (
+              <li>
+                <Link to="/dashboard" className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
+                  Dashboard
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login" className="bg-red-500 hover:bg-secondary text-white px-4 py-2 rounded-md transition-colors duration-300">
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
 
-      {/*-------------  Mobile Menu  ---------------*/}
+      {/* Mobile Menu */}
       <nav className={`md:hidden bg-gray-50 border-t border-gray-200 transition-all duration-300 ease-in-out ${mobileMenuOpen ? "block" : "hidden"}`}>
         <ul className="px-4 py-2">
           <li><Link to="/" className="block py-2 hover:text-primary">Home</Link></li>
@@ -75,11 +94,21 @@ export const Navbar = () => {
             </ul>
           </li>
           <li><Link to="/contact" className="block py-2 hover:text-primary">Contact</Link></li>
-          <li>
-            <Link to="/get-started" className="block py-2 bg-primary hover:bg-secondary text-white rounded-md text-center transition-colors duration-300">
-            <FaRegUserCircle />
-            </Link>
-          </li>
+
+          {/* Show Dashboard if user is available */}
+          {currentUser ? (
+            <li>
+              <Link to="/dashboard" className="block py-2 bg-red-500 hover:bg-green-600 text-white rounded-md text-center transition-colors duration-300">
+                Dashboard
+              </Link>
+            </li>
+          ) : (
+            <li>
+              <Link to="/login" className="block py-2 bg-red-500 hover:bg-secondary text-white rounded-md text-center transition-colors duration-300">
+                Login
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>

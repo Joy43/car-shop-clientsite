@@ -4,12 +4,13 @@ import { useLoginMutation } from '../../redux/features/auth/authApi';
 import { useAppDispatch } from '../../redux/hooks';
 import { setUser, TUser } from '../../redux/features/auth/authSlice';
 import { verifyToken } from '../../utils/verifyToken';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useAppDispatch();
   const [login, { isLoading }] = useLoginMutation();
   const { register, handleSubmit, formState: { errors } } = useForm();
-
+  const navigate = useNavigate();
   const onSubmit = async (data: FieldValues) => {
     const toastId = toast.loading('Logging in...');
     try {
@@ -18,18 +19,19 @@ const Login = () => {
         password: data.password,
       };
       
-      console.log("Sending request with:", userInfo);  // Debugging
+      console.log("Sending request with:", userInfo); 
       
       const res = await login(userInfo).unwrap();
       
-      console.log("Response received:", res);  // Debugging
+      console.log("Response received:", res);  
       
       const user = verifyToken(res.data.token) as TUser;
       dispatch(setUser({ user, token: res.data.token }));
   
       toast.success('Logged in successfully', { id: toastId, duration: 2000 });
+      navigate('/');
     } catch (err) {
-      console.error("Login failed:", err);  // Debugging
+      console.error("Login failed:", err);  
       toast.error('Invalid credentials', { id: toastId, duration: 2000 });
     }
   };
@@ -65,7 +67,10 @@ const Login = () => {
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+        <h1 className='mt-4 text-center'>Create a account now <Link className='ml-2 text-blue-600' to="/register"> register now</Link></h1>
       </div>
+
+      
     </div>
   );
 };

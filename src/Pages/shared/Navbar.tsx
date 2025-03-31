@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logoGif.gif";
-
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
 
@@ -10,9 +9,13 @@ export const Navbar = () => {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const currentUser = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
+
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const dashboardLink = currentUser?.role === "admin" ? "/admindashboard" : "/userdashboard";
+
   return (
     <header className="bg-white shadow-lg py-4 sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between px-4">
@@ -38,28 +41,23 @@ export const Navbar = () => {
           <ul className="flex space-x-8">
             <li><Link to="/" className="hover:text-primary transition-colors duration-300">Home</Link></li>
             <li><Link to="/about" className="hover:text-primary transition-colors duration-300">About</Link></li>
+            <li><Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link></li>
             <li className="group relative">
               <button
                 onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
                 className="hover:text-primary transition-colors duration-300"
               >
-                Services
+                Profile
               </button>
-              {/* Dropdown Menu */}
-              <ul className={`absolute left-0 bg-white shadow-md py-2 mt-1 rounded-md w-48 transition-all duration-300 ${servicesDropdownOpen ? "block" : "hidden"}`}>
-            
-  
-                <li onClick={handleLogout}>
-                  logout
+              <ul className={`absolute p-4 left-0 bg-white shadow-md py-2 mt-1 rounded-md w-48 transition-all duration-300 ${servicesDropdownOpen ? "block" : "hidden"}`}>
+                <li>
+                  <button onClick={handleLogout} className="w-full text-left">Logout</button>
                 </li>
               </ul>
             </li>
-            <li><Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link></li>
-            
-            {/* Show Dashboard if user is available */}
             {currentUser ? (
               <li>
-                <Link to="/dashboard" className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
+                <Link to={dashboardLink} className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
                   Dashboard
                 </Link>
               </li>
@@ -79,26 +77,21 @@ export const Navbar = () => {
         <ul className="px-4 py-2">
           <li><Link to="/" className="block py-2 hover:text-primary">Home</Link></li>
           <li><Link to="/about" className="block py-2 hover:text-primary">About</Link></li>
+          <li><Link to="/contact" className="block py-2 hover:text-primary">Contact</Link></li>
           <li>
             <button
               onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
               className="block py-2 hover:text-primary w-full text-left"
             >
-              Services
+              Profile
             </button>
-            {/* Mobile Dropdown */}
             <ul className={`pl-4 ${servicesDropdownOpen ? "block" : "hidden"}`}>
-            <li onClick={handleLogout}>
-                  logout
-                </li>
+              <li onClick={handleLogout}>Logout</li>
             </ul>
           </li>
-          <li><Link to="/contact" className="block py-2 hover:text-primary">Contact</Link></li>
-
-          {/* Show Dashboard if user is available */}
           {currentUser ? (
             <li>
-              <Link to="/dashboard" className="block py-2 bg-red-500 hover:bg-green-600 text-white rounded-md text-center transition-colors duration-300">
+              <Link to={dashboardLink} className="block py-2 bg-red-500 hover:bg-green-600 text-white rounded-md text-center transition-colors duration-300">
                 Dashboard
               </Link>
             </li>

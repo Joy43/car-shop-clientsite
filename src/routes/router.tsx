@@ -13,6 +13,8 @@ import UserLayout from "../Pages/Mainlayout/userLayout";
 import AdminLayout from "../Pages/Mainlayout/adminLayout";
 import userHome from './../Pages/user/userHome/userHome';
 import UserHome from "./../Pages/user/userHome/userHome";
+import ManageCar from "../Pages/admin/ManageCars/ManageCars";
+import AddCars from "../Pages/admin/AddCars/AddCars";
 
 
 
@@ -48,12 +50,17 @@ element:<Register/>
         children:[
          {
             path:'managecar',
-            element:<ManageCars/>
+            element:<ManageCar/>
          },
          {
             path:"adminhome",
             element:<AdminUser/>
+         },
+         {
+            path:'addcarproduct',
+            element:<AddCars/>
          }
+         
         ]
     },
     // ----------user------------

@@ -2,3 +2,58 @@ https://preview.themeforest.net/item/chaka-car-sale-and-rent-html-template/full_
 https://rifatsarker.com/
 https://github.com/rifat-sarker/Bi-cycle-store
 https://github.com/rifat-sarker/bicycle-store-client
+
+
+[
+  {
+    "_id": "1",
+    "brand": "Toyota",
+    "model": "Camry",
+    "year": 2023,
+    "price": 25000,
+    "category": "Sedan",
+    "imageUrls": [
+      "https://example.com/images/camry1.jpg",
+      "https://example.com/images/camry2.jpg"
+    ],
+    "description": "A reliable and fuel-efficient sedan with modern features.",
+    "quantity": 10,
+    "inStock": true,
+    "createdAt": "2024-03-01T10:00:00Z",
+    "updatedAt": "2024-03-05T12:00:00Z"
+  },
+  {
+    "_id": "2",
+    "brand": "Ford",
+    "model": "F-150",
+    "year": 2024,
+    "price": 40000,
+    "category": "Truck",
+    "imageUrls": [
+      "https://example.com/images/f150_1.jpg",
+      "https://example.com/images/f150_2.jpg"
+    ],
+    "description": "A powerful and durable truck designed for heavy-duty tasks.",
+    "quantity": 5,
+    "inStock": true,
+    "createdAt": "2024-02-15T09:30:00Z",
+    "updatedAt": "2024-03-01T11:15:00Z"
+  },
+  {
+    "_id": "3",
+    "brand": "BMW",
+    "model": "M4",
+    "year": 2024,
+    "price": 70000,
+    "category": "Coupe",
+    "imageUrls": [
+      "https://example.com/images/m4_1.jpg",
+      "https://example.com/images/m4_2.jpg"
+    ],
+    "description": "A luxury sports coupe with high performance and premium features.",
+    "quantity": 3,
+    "inStock": true,
+    "createdAt": "2024-02-20T14:00:00Z",
+    "updatedAt": "2024-03-02T16:45:00Z"
+  }
+]

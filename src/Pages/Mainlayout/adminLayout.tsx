@@ -4,11 +4,11 @@ import {
   FaUsers,
   FaFolder,
   FaCalendarAlt,
-  FaFileAlt,
-  FaSearch,
   FaUser,
   FaBars,
+  FaCarSide
 } from "react-icons/fa";
+import { IoBagAdd } from "react-icons/io5";
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
 
@@ -33,12 +33,12 @@ const AdminLayout = () => {
 
         {/* Logo */}
         <div className="flex items-center gap-2 mb-6 mt-6">
-          <div className="w-10 h-10 bg-green-500 rounded-full"></div>
-          {isSidebarOpen && <h1 className="text-lg font-semibold">User Pro</h1>}
+          <div className="w-10 h-10 bg-[#1C398E] rounded-full"></div>
+          {isSidebarOpen && <h1 className="text-lg font-semibold">Admin Dahboard</h1>}
         </div>
 
         {/* Search Bar */}
-        {isSidebarOpen && (
+        {/* {isSidebarOpen && (
           <div className="relative mb-4">
             <FaSearch className="absolute left-3 top-3 text-gray-400" size={18} />
             <input
@@ -47,24 +47,24 @@ const AdminLayout = () => {
               className="bg-gray-800 text-white w-full p-2 pl-10 rounded-md focus:outline-none"
             />
           </div>
-        )}
+        )} */}
 
-        {/* Menu Items */}
+        {/*---------------  Menu Items ----------------- */}
         <ul className="space-y-2 flex-1">
           {[
-            { to: "/admindashboard/adminhome", icon: FaHome, label: "User Home" },
-            { to: "#", icon: FaChartBar, label: "Analytics" },
-            { to: "#", icon: FaUsers, label: "Team" },
-            { to: "#", icon: FaFolder, label: "Projects" },
-            { to: "#", icon: FaCalendarAlt, label: "Calendar" },
-            { to: "/", icon: FaFileAlt, label: "Home" },
+       
+            { to: "/admindashboard/adminhome", icon: FaChartBar, label: "Analytics" },
+            { to: "/admindashboard/managecar", icon: FaCarSide, label: "Car-Management" },
+            { to: "/admindashboard/addcarproduct", icon:  IoBagAdd, label: "Add Cars" },
+            { to: "/", icon: FaUser, label: "User-Manage" },
+            { to: "/", icon: FaHome, label: " Home" },
           ].map((item, index) => (
             <li key={index}>
               <NavLink
                 to={item.to}
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-2 rounded-md cursor-pointer transition-colors duration-300 ${
-    isActive ? "bg-green-600" : "hover:bg-gray-700"}
+    isActive ? "bg-[#1C398E]" : "hover:bg-gray-700"}
                 `}
               >
                 <item.icon size={22} />
@@ -86,7 +86,7 @@ const AdminLayout = () => {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/*------------ Main Content ------------------ */}
       <div className="flex-1 p-8">
         <Outlet />
       </div>

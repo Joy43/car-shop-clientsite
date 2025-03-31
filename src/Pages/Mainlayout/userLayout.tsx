@@ -87,7 +87,7 @@ const UserLayout = () => {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/*------------ Main Content --------------*/}
       <div className="flex-1 p-8">
         <Outlet />
       </div>

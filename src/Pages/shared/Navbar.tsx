@@ -47,8 +47,8 @@ export const Navbar = () => {
               </button>
               {/* Dropdown Menu */}
               <ul className={`absolute left-0 bg-white shadow-md py-2 mt-1 rounded-md w-48 transition-all duration-300 ${servicesDropdownOpen ? "block" : "hidden"}`}>
-                <li><Link to="/service-1" className="block px-4 py-2 hover:bg-gray-100">Service 1</Link></li>
-                <li><Link to="/service-2" className="block px-4 py-2 hover:bg-gray-100">Service 2</Link></li>
+            
+  
                 <li onClick={handleLogout}>
                   logout
                 </li>
@@ -88,9 +88,9 @@ export const Navbar = () => {
             </button>
             {/* Mobile Dropdown */}
             <ul className={`pl-4 ${servicesDropdownOpen ? "block" : "hidden"}`}>
-              <li><Link to="/service-1" className="block py-2 hover:text-primary">Service 1</Link></li>
-              <li><Link to="/service-2" className="block py-2 hover:text-primary">Service 2</Link></li>
-              <li><Link to="/service-3" className="block py-2 hover:text-primary">Service 3</Link></li>
+            <li onClick={handleLogout}>
+                  logout
+                </li>
             </ul>
           </li>
           <li><Link to="/contact" className="block py-2 hover:text-primary">Contact</Link></li>

@@ -4,6 +4,7 @@ import { TResponseRedux } from '../../../types/global';
 
 const carProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // ----------get all product-------------------
     getAllcars: builder.query({
       query: (args: TQueryParam[] | undefined) => {
         const params: Record<string, any> = {};
@@ -25,9 +26,53 @@ const carProductApi = baseApi.injectEndpoints({
         };
       },
     }),
+
+    // ----------get product by id---------------
+
+    getCarById:builder.query({
+      query:(id:string)=>({
+        url:`/cars/${id}`,
+        method:"GET"
+      }),
+      transformResponse: (response: TResponseRedux<TProduct>) => response,
+    }),
+
+// ----------ADD CAR PRODUCT-----------
+addCarProduct:builder.mutation({
+  query:(data)=>({
+    url:"/cars",
+    method:"POST",
+    body:data,
   }),
+}),
+
+// -------------update car product--------------
+updateCarProduct:builder.mutation({
+  query:({id,...data})=>({
+ url:`/cars/${id}`,
+ mathod:"PATCH",
+ body:data,
+  }),
+}),
+
+// ----------------delete car product-------------
+deleteCarProduct:builder.mutation({
+  query:(id:string)=>({
+    url:`/cars/${id}`,
+    mehthod:"DELETE",
+  }),
+}),
+
+
+  })
 });
 
 
 
-export const {useGetAllcarsQuery} = carProductApi ;
+export const {
+  useGetAllcarsQuery,
+  useGetCarByIdQuery,
+  useAddCarProductMutation,
+  useDeleteCarProductMutation,
+  useUpdateCarProductMutation
+} = carProductApi ;

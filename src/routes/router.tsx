@@ -6,7 +6,14 @@ import Login from "../Components/Auth/Login";
 import ProtectedRoute from "./ProtectedRoutes";
 
 import Register from "../Components/Auth/Register";
-import product from './../Pages/product/product';
+
+import ManageCars from "../Pages/admin/ManageCars/ManageCars";
+import AdminUser from "../Pages/admin/AdminUser/AdminUser";
+import UserLayout from "../Pages/Mainlayout/userLayout";
+import AdminLayout from "../Pages/Mainlayout/adminLayout";
+import userHome from './../Pages/user/userHome/userHome';
+import UserHome from "./../Pages/user/userHome/userHome";
+
 
 
 
@@ -27,14 +34,47 @@ export const router =createBrowserRouter([
 path:'/register',
 element:<Register/>
             },
-            {
-                path:'/product',
-               element:(
-                <ProtectedRoute>
-                    <product/>
-                </ProtectedRoute>
-               )
-            }
+         
         ]
-    }
+    },
+// ---------admin route-----------
+    {
+        path:'admindashboard',
+        element:(
+            <ProtectedRoute>
+                <AdminLayout/>
+            </ProtectedRoute>
+        ),
+        children:[
+         {
+            path:'managecar',
+            element:<ManageCars/>
+         },
+         {
+            path:"adminhome",
+            element:<AdminUser/>
+         }
+        ]
+    },
+    // ----------user------------
+    {
+        path:'userdashboard',
+        element:(
+            <ProtectedRoute>
+                <UserLayout/>
+            </ProtectedRoute>
+        ),
+        children:[
+         {
+            path:'managecar',
+            element:<ManageCars/>
+         },
+         {
+            path:"userhome",
+            element:<UserHome/>
+         }
+        ]
+    },
+
+
 ])

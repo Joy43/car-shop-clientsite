@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo/logoGif.gif";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { FaUserCircle } from "react-icons/fa";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const currentUser = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
-
+console.log(currentUser);
   const handleLogout = () => {
     dispatch(logout());
+    setUserDropdownOpen(false);
   };
 
   const dashboardLink = currentUser?.role === "admin" ? "/admindashboard" : "/userdashboard";
@@ -37,73 +39,69 @@ export const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            <li><Link to="/" className="hover:text-primary transition-colors duration-300">Home</Link></li>
-            <li><Link to="/about" className="hover:text-primary transition-colors duration-300">About</Link></li>
-            <li><Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link></li>
-            <li className="group relative">
-              <button
-                onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-                className="hover:text-primary transition-colors duration-300"
+        <nav className="hidden md:flex items-center space-x-8">
+          <Link to="/" className="hover:text-primary transition-colors duration-300">Home</Link>
+          <Link to="/about" className="hover:text-primary transition-colors duration-300">About</Link>
+          <Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link>
+          
+          {currentUser ? (
+            <div className="relative">
+              <button 
+                onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                className="flex items-center space-x-2 hover:text-primary transition-colors duration-300"
               >
-                Profile
+                <FaUserCircle className="text-2xl" />
               </button>
-              <ul className={`absolute p-4 left-0 bg-white shadow-md py-2 mt-1 rounded-md w-48 transition-all duration-300 ${servicesDropdownOpen ? "block" : "hidden"}`}>
-                <li>
-                  <button onClick={handleLogout} className="w-full text-left">Logout</button>
-                </li>
-              </ul>
-            </li>
+              {userDropdownOpen && (
+                <ul 
+                  className="absolute right-0 mt-2 bg-white shadow-md rounded-md w-48 py-2 transition-opacity duration-300"
+                >
+                  <li className="px-4">
+                    Name: {currentUser.name}
+                  </li>
+                  <li>
+                    <Link to={dashboardLink} className="block px-4 py-2 hover:bg-gray-100">Dashboard</Link>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-gray-100">Logout</button>
+                  </li>
+                </ul>
+              )}
+            </div>
+          ) : (
+            <Link to="/login" className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
+              Login
+            </Link>
+          )}
+        </nav>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <nav className="md:hidden bg-gray-50 border-t border-gray-200 py-2">
+          <ul className="px-4">
+            <li><Link to="/" className="block py-2 hover:text-primary">Home</Link></li>
+            <li><Link to="/about" className="block py-2 hover:text-primary">About</Link></li>
+            <li><Link to="/contact" className="block py-2 hover:text-primary">Contact</Link></li>
             {currentUser ? (
-              <li>
-                <Link to={dashboardLink} className="bg-red-500 hover:bg-green-600 text-white px-4 py-2 rounded-md transition-colors duration-300">
-                  Dashboard
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link to={dashboardLink} className="block py-2 hover:text-primary">Dashboard</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogout} className="w-full text-left py-2 hover:text-primary">Logout</button>
+                </li>
+              </>
             ) : (
               <li>
-                <Link to="/login" className="bg-red-500 hover:bg-secondary text-white px-4 py-2 rounded-md transition-colors duration-300">
+                <Link to="/login" className="block py-2 bg-red-500 hover:bg-secondary text-white rounded-md text-center transition-colors duration-300">
                   Login
                 </Link>
               </li>
             )}
           </ul>
         </nav>
-      </div>
-
-      {/* Mobile Menu */}
-      <nav className={`md:hidden bg-gray-50 border-t border-gray-200 transition-all duration-300 ease-in-out ${mobileMenuOpen ? "block" : "hidden"}`}>
-        <ul className="px-4 py-2">
-          <li><Link to="/" className="block py-2 hover:text-primary">Home</Link></li>
-          <li><Link to="/about" className="block py-2 hover:text-primary">About</Link></li>
-          <li><Link to="/contact" className="block py-2 hover:text-primary">Contact</Link></li>
-          <li>
-            <button
-              onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
-              className="block py-2 hover:text-primary w-full text-left"
-            >
-              Profile
-            </button>
-            <ul className={`pl-4 ${servicesDropdownOpen ? "block" : "hidden"}`}>
-              <li onClick={handleLogout}>Logout</li>
-            </ul>
-          </li>
-          {currentUser ? (
-            <li>
-              <Link to={dashboardLink} className="block py-2 bg-red-500 hover:bg-green-600 text-white rounded-md text-center transition-colors duration-300">
-                Dashboard
-              </Link>
-            </li>
-          ) : (
-            <li>
-              <Link to="/login" className="block py-2 bg-red-500 hover:bg-secondary text-white rounded-md text-center transition-colors duration-300">
-                Login
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
+      )}
     </header>
   );
 };

@@ -8,7 +8,7 @@ const authApi = baseApi.injectEndpoints({
         url: '/auth/login',
         method: 'POST',
         body: userInfo,
-        headers: { 'Content-Type': 'application/json' },
+        // headers: { 'Content-Type': 'application/json' },
       }),
     }),
 // -----------register---------
@@ -17,7 +17,7 @@ register: builder.mutation({
     url: "/auth/register",
     method: "POST",
     body: userInfo,
-    headers: { "Content-Type": "application/json" }, // Explicitly set headers
+    // headers: { "Content-Type": "application/json" }, 
   }),
 }),
 

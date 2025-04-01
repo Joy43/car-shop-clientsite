@@ -1,116 +1,324 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { useAddCarProductMutation } from '../../../redux/features/carProduct/carProduct.api';
-import { TProduct } from '../../../types';
 import { toast } from 'sonner';
+import { useState } from 'react';
+import { FiAlertCircle, FiUploadCloud } from 'react-icons/fi';
 
 const categories = ['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'];
 
+const carSchema = z.object({
+  brand: z.string().min(1, 'Brand is required'),
+  model: z.string().min(1, 'Model is required'),
+  year: z.number().min(1900, 'Invalid year').max(new Date().getFullYear() + 1),
+  price: z.number().min(0, 'Price must be positive'),
+  category: z.string().min(1, 'Category is required'),
+  description: z.string().min(10, 'Description must be at least 10 characters'),
+  quantity: z.number().min(1, 'Minimum quantity is 1'),
+  inStock: z.boolean().default(true),
+});
+
+type CarFormValues = z.infer<typeof carSchema>;
+
 const AddCars = () => {
   const [addCarProduct] = useAddCarProductMutation();
-  const [carData, setCarData] = useState<Partial<TProduct>>({
-    brand: '',
-    model: '',
-    year: new Date().getFullYear(),
-    price: 0,
-    category: '',
-    imageUrls: [],
-    description: '',
-    quantity: 1,
-    inStock: true,
-  });
-
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    setCarData((prev) => ({
-      ...prev,
-      [name]: name === 'year' || name === 'price' || name === 'quantity' ? Number(value) : value,
-    }));
-  };
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors },
+    reset
+  } = useForm<CarFormValues>({
+    resolver: zodResolver(carSchema),
+    defaultValues: {
+      year: new Date().getFullYear(),
+      price: 0,
+      quantity: 1,
+      inStock: true,
+    }
+  });
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
-      const previews = files.map((file) => URL.createObjectURL(file));
-
-      setImagePreviews(previews);
       setImageFiles(files);
+      imagePreviews.forEach((url) => URL.revokeObjectURL(url));
+      setImagePreviews(files.map((file) => URL.createObjectURL(file)));
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!carData.brand || !carData.model || !carData.year || !carData.price || !carData.category || !carData.description) {
-      toast.error('All fields are required.');
-      return;
-    }
+  const onSubmit = async (data: CarFormValues) => {
+    // const token = localStorage.getItem('token');
+    // if (!token) {
+    //   toast.error('Authentication required. Please login.');
+    //   return;
+    // }
 
     const formData = new FormData();
     imageFiles.forEach((file) => formData.append('images', file));
-
-    Object.entries(carData).forEach(([key, value]) => {
-      if (key !== 'imageUrls') formData.append(key, String(value));
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, String(value));
     });
 
     try {
-      const response = await addCarProduct(formData).unwrap();
-      console.log('API Response:', response);
-
+      const response = await addCarProduct({ data: formData }).unwrap();
       if (response.success) {
         toast.success('Car added successfully!');
-        setCarData({
-          brand: '',
-          model: '',
-          year: new Date().getFullYear(),
-          price: 0,
-          category: '',
-          imageUrls: [],
-          description: '',
-          quantity: 1,
-          inStock: true,
-        });
+        reset();
         setImagePreviews([]);
         setImageFiles([]);
-      } else {
-        toast.error(response.message || 'Failed to add car.');
       }
     } catch (error: any) {
-      console.error('Error adding car:', error);
       toast.error(error?.data?.message || 'Failed to add car.');
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6 mt-10">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">Add Car</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input className="w-full p-2 border rounded-md" type="text" name="brand" placeholder="Brand" onChange={handleChange} value={carData.brand} required />
-        <input className="w-full p-2 border rounded-md" type="text" name="model" placeholder="Model" onChange={handleChange} value={carData.model} required />
-        <input className="w-full p-2 border rounded-md" type="number" name="year" placeholder="Year" onChange={handleChange} value={carData.year} required />
-        <input className="w-full p-2 border rounded-md" type="number" name="price" placeholder="Price" onChange={handleChange} value={carData.price} required />
+    <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl rounded-2xl p-8 my-8">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center font-serif">
+        Add New Car Listing
+      </h1>
+      
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Brand Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+              Brand <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                {...register('brand')}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.brand ? 'border-red-500' : 'border-gray-300'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                placeholder="Mercedes, BMW, Audi..."
+              />
+              {errors.brand && (
+                <div className="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+                  <FiAlertCircle className="h-5 w-5 text-red-500" />
+                </div>
+              )}
+            </div>
+            {errors.brand && (
+              <p className="text-red-600 text-sm flex items-center gap-1">
+                <FiAlertCircle className="inline" /> {errors.brand.message}
+              </p>
+            )}
+          </div>
 
-        <select className="w-full p-2 border rounded-md" name="category" onChange={handleChange} value={carData.category} required>
-          <option value="">Select Category</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
+          {/* Model Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+              Model <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                {...register('model')}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.model ? 'border-red-500' : 'border-gray-300'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                placeholder="e.g., Model S, X5, A4..."
+              />
+              {errors.model && (
+                <div className="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+                  <FiAlertCircle className="h-5 w-5 text-red-500" />
+                </div>
+              )}
+            </div>
+            {errors.model && (
+              <p className="text-red-600 text-sm flex items-center gap-1">
+                <FiAlertCircle className="inline" /> {errors.model.message}
+              </p>
+            )}
+          </div>
 
-        <input className="w-full p-2 border rounded-md" type="file" multiple accept="image/*" onChange={handleImageUpload} />
-        
-        <div className="flex gap-2 mt-2">
-          {imagePreviews.map((src, index) => (
-            <img key={index} src={src} alt={`Preview ${index}`} className="w-20 h-20 object-cover rounded-md shadow-md" />
-          ))}
+          {/* Year Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+              Manufacturing Year <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register('year', { valueAsNumber: true })}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.year ? 'border-red-500' : 'border-gray-300'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+              />
+              {errors.year && (
+                <div className="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+                  <FiAlertCircle className="h-5 w-5 text-red-500" />
+                </div>
+              )}
+            </div>
+            {errors.year && (
+              <p className="text-red-600 text-sm flex items-center gap-1">
+                <FiAlertCircle className="inline" /> {errors.year.message}
+              </p>
+            )}
+          </div>
+
+          {/* Price Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+              Price ($) <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register('price', { valueAsNumber: true })}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.price ? 'border-red-500' : 'border-gray-300'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+              />
+              {errors.price && (
+                <div className="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+                  <FiAlertCircle className="h-5 w-5 text-red-500" />
+                </div>
+              )}
+            </div>
+            {errors.price && (
+              <p className="text-red-600 text-sm flex items-center gap-1">
+                <FiAlertCircle className="inline" /> {errors.price.message}
+              </p>
+            )}
+          </div>
+
+          {/* Category Select */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+              Category <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <select
+                {...register('category')}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.category ? 'border-red-500' : 'border-gray-300'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all appearance-none bg-white`}
+              >
+                <option value="">Select Category</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat} className="capitalize">
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              {errors.category && (
+                <div className="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+                  <FiAlertCircle className="h-5 w-5 text-red-500" />
+                </div>
+              )}
+            </div>
+            {errors.category && (
+              <p className="text-red-600 text-sm flex items-center gap-1">
+                <FiAlertCircle className="inline" /> {errors.category.message}
+              </p>
+            )}
+          </div>
+
+          {/* Quantity Input */}
+          <div className="space-y-2">
+            <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+              Stock Quantity <span className="text-red-500">*</span>
+            </label>
+            <div className="relative">
+              <input
+                type="number"
+                {...register('quantity', { valueAsNumber: true })}
+                className={`w-full px-4 py-3 rounded-lg border ${
+                  errors.quantity ? 'border-red-500' : 'border-gray-300'
+                } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+              />
+              {errors.quantity && (
+                <div className="absolute inset-y-0 right-3 flex items-center pr-3 pointer-events-none">
+                  <FiAlertCircle className="h-5 w-5 text-red-500" />
+                </div>
+              )}
+            </div>
+            {errors.quantity && (
+              <p className="text-red-600 text-sm flex items-center gap-1">
+                <FiAlertCircle className="inline" /> {errors.quantity.message}
+              </p>
+            )}
+          </div>
         </div>
 
-        <textarea className="w-full p-2 border rounded-md" name="description" placeholder="Description" onChange={handleChange} value={carData.description} required></textarea>
-        
-        <button type="submit" className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition">Add Car</button>
+        {/* Image Upload Section */}
+        <div className="space-y-4">
+          <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+            Car Images <span className="text-red-500">*</span>
+          </label>
+          <div className="group relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center transition-all hover:border-blue-500 hover:bg-blue-50 cursor-pointer">
+            <input
+              type="file"
+              multiple
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            <div className="space-y-4">
+              <FiUploadCloud className="w-12 h-12 text-gray-400 mx-auto group-hover:text-blue-500 transition-colors" />
+              <div>
+                <p className="text-sm font-medium text-gray-600">
+                  Drag & drop images here, or click to select
+                </p>
+                <p className="text-xs text-gray-500 mt-1">
+                  High-quality photos recommended (PNG, JPG, up to 10MB each)
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
+            {imagePreviews.map((src, index) => (
+              <div key={index} className="relative aspect-square">
+                <img
+                  src={src}
+                  alt={`Preview ${index}`}
+                  className="w-full h-full object-cover rounded-lg shadow-sm border-2 border-gray-100"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Description Textarea */}
+        <div className="space-y-4">
+          <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
+            Description <span className="text-red-500">*</span>
+          </label>
+          <div className="relative">
+            <textarea
+              {...register('description')}
+              rows={4}
+              className={`w-full px-4 py-3 rounded-lg border ${
+                errors.description ? 'border-red-500' : 'border-gray-300'
+              } focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+              placeholder="Detailed description including features, condition, and special notes..."
+            />
+            {errors.description && (
+              <div className="absolute top-3 right-3">
+                <FiAlertCircle className="h-5 w-5 text-red-500" />
+              </div>
+            )}
+          </div>
+          {errors.description && (
+            <p className="text-red-600 text-sm flex items-center gap-1">
+              <FiAlertCircle className="inline" /> {errors.description.message}
+            </p>
+          )}
+        </div>
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-[1.01] shadow-lg hover:shadow-xl"
+        >
+          Add New Car Listing
+        </button>
       </form>
     </div>
   );

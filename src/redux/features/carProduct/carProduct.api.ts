@@ -38,13 +38,16 @@ const carProductApi = baseApi.injectEndpoints({
     }),
 
 // ----------ADD CAR PRODUCT-----------
-addCarProduct:builder.mutation({
-  query:(data)=>({
-    url:"/cars",
-    method:"POST",
-    body:data,
+   // ----------ADD CAR PRODUCT-----------
+   addCarProduct: builder.mutation({
+    query: (data) => ({
+      url: '/cars',
+      method: 'POST',
+      body: data,
+      // headers: token ? { Authorization: `Bearer ${token}` } : {},
+    }),
   }),
-}),
+
 
 // -------------update car product--------------
 updateCarProduct:builder.mutation({

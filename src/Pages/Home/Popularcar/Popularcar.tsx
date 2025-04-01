@@ -3,6 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 import { BsChatQuoteFill, BsFillCarFrontFill } from "react-icons/bs";
 import { MdSpeed } from "react-icons/md";
 import { useGetAllcarsQuery } from "../../../redux/features/carProduct/carProduct.api";
+import { Link } from "react-router-dom";
 
 const Popularcar = () => {
   const { data: products, isLoading } = useGetAllcarsQuery(undefined);
@@ -38,7 +39,8 @@ const Popularcar = () => {
               </span>
             )}
           </div>
-          <div className="p-4">
+     
+      <div className="p-4">
             <p className="text-gray-500 text-sm">{new Date(car.createdAt).toDateString()}</p>
             <h3 className="text-lg font-semibold text-gray-900">{car.brand} {car.model}</h3>
             <div className="flex items-center gap-1">
@@ -71,14 +73,17 @@ const Popularcar = () => {
               </div>
             </div>
           </div>
+  
         </div>
       ))}
     </div>
     {/* ------------button see more---------- */}
 <div className="mt-4 py-2 text-center">
+<Link to="/product">
 <button className="text-white font-semibold bg-red-500 rounded-md p-2 mr-2">
         See More
     </button>
+</Link>
 </div>
    
    </div>

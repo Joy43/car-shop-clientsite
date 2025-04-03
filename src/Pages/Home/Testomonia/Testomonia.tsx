@@ -44,8 +44,8 @@ const CustomerFeedback = () => {
         {/* Contact Information */}
         <div className="mt-8 grid md:grid-cols-2 gap-4">
           <div className="bg-red-600 text-white p-6 rounded-lg shadow-md">
-            <h4 className="text-lg font-semibold">Reliability and Quality Service.</h4>
-            <p className="text-sm mt-2">
+            <h4 className="text-2xl font-semibold">Reliability & Quality Service.</h4>
+            <p className="text-lg mt-2">
               If you would like to take our service and support, please contact us through our
               provided number.
             </p>
@@ -53,9 +53,9 @@ const CustomerFeedback = () => {
           <div className="bg-blue-900 text-white p-6 rounded-lg shadow-md flex items-center gap-4">
             <FaPhoneAlt className="text-2xl" />
             <div>
-              <h4 className="text-lg font-semibold">+1 817-946-1548</h4>
-              <p className="text-sm">9:00 AM - 8:00 PM</p>
-              <p className="text-sm">Sunday Off</p>
+              <h4 className="text-2xl font-semibold">+1 817-946-1548</h4>
+              <p className="text-lg">9:00 AM - 8:00 PM</p>
+              <p className="text-lg">Sunday Off</p>
             </div>
           </div>
         </div>

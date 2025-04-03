@@ -11,10 +11,12 @@ import ManageCars from "../Pages/admin/ManageCars/ManageCars";
 import AdminUser from "../Pages/admin/AdminUser/AdminUser";
 import UserLayout from "../Pages/Mainlayout/userLayout";
 import AdminLayout from "../Pages/Mainlayout/adminLayout";
-import userHome from './../Pages/user/userHome/userHome';
+
 import UserHome from "./../Pages/user/userHome/userHome";
 import ManageCar from "../Pages/admin/ManageCars/ManageCars";
 import AddCars from "../Pages/admin/AddCars/AddCars";
+import AdminProfile from "../Pages/admin/AdminProfile/AdminProfile";
+import UserManage from "../Pages/admin/ManageUser/UserManage";
 
 
 
@@ -48,6 +50,7 @@ element:<Register/>
             </ProtectedRoute>
         ),
         children:[
+           
          {
             path:'managecar',
             element:<ManageCar/>
@@ -59,8 +62,15 @@ element:<Register/>
          {
             path:'addcarproduct',
             element:<AddCars/>
+         },
+         {
+            path:'adminprofile',
+            element:<AdminProfile/>
+         },
+         {
+            path:'usermanage',
+            element:<UserManage/>
          }
-         
         ]
     },
     // ----------user------------

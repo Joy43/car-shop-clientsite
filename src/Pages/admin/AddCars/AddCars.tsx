@@ -5,6 +5,8 @@ import { useAddCarProductMutation } from '../../../redux/features/carProduct/car
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { FiAlertCircle, FiUploadCloud } from 'react-icons/fi';
+import ImageUploader from '../../../Components/ImageUpload';
+import ImagePreviewer from '../../../Components/ImageUpload/ImagePreview';
 
 const categories = ['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'];
 
@@ -41,44 +43,38 @@ const AddCars = () => {
     }
   });
 
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const files = Array.from(e.target.files);
-      setImageFiles(files);
-      imagePreviews.forEach((url) => URL.revokeObjectURL(url));
-      setImagePreviews(files.map((file) => URL.createObjectURL(file)));
-    }
-  };
+  // Removed unused handleImageUpload function to resolve the error
 
   const onSubmit = async (data: CarFormValues) => {
-    // const token = localStorage.getItem('token');
-    // if (!token) {
-    //   toast.error('Authentication required. Please login.');
-    //   return;
-    // }
-
-    const formData = new FormData();
-    imageFiles.forEach((file) => formData.append('images', file));
-    Object.entries(data).forEach(([key, value]) => {
-      formData.append(key, String(value));
-    });
-
+    const requestData = {
+      ...data,
+      year: Number(data.year),
+      price: Number(data.price),
+      quantity: Number(data.quantity),
+      inStock: Boolean(data.inStock),
+      imageUrls: imagePreviews, 
+    };
+  
     try {
-      const response = await addCarProduct({ data: formData }).unwrap();
-      if (response.success) {
-        toast.success('Car added successfully!');
-        reset();
-        setImagePreviews([]);
-        setImageFiles([]);
-      }
+      const result = await addCarProduct({
+         data: JSON.stringify(requestData)
+         }).unwrap(); 
+      toast.success(result.message);
+      console.log('Created car:', result.data);
+      reset();
+      setImagePreviews([]);
+      setImageFiles([]);
     } catch (error: any) {
-      toast.error(error?.data?.message || 'Failed to add car.');
+      console.error('Full error:', error);
+      toast.error(error?.data?.message || 'Car creation failed');
     }
   };
+  
 
   return (
-    <div className="max-w-4xl mx-auto bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl rounded-2xl p-8 my-8">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8 text-center font-serif">
+    <div className="max-w-4xl mx-auto bg-gradient-to-br
+     from-gray-50 to-gray-100 shadow-2xl rounded-2xl p-2 my-4">
+      <h1 className="text-4xl font-bold text-gray-900  text-center font-serif">
         Add New Car Listing
       </h1>
       
@@ -162,7 +158,7 @@ const AddCars = () => {
             )}
           </div>
 
-          {/* Price Input */}
+          {/*------------- Price Input ------------------*/}
           <div className="space-y-2">
             <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
               Price ($) <span className="text-red-500">*</span>
@@ -252,36 +248,19 @@ const AddCars = () => {
           <label className="block text-sm font-semibold text-gray-700 uppercase tracking-wide">
             Car Images <span className="text-red-500">*</span>
           </label>
-          <div className="group relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center transition-all hover:border-blue-500 hover:bg-blue-50 cursor-pointer">
-            <input
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          <div className="space-y-4">
+            <ImageUploader
+              setImageFiles={setImageFiles}
+              setImagePreview={setImagePreviews}
+              label="Click to Upload Images"
+              className="w-full"
             />
-            <div className="space-y-4">
-              <FiUploadCloud className="w-12 h-12 text-gray-400 mx-auto group-hover:text-blue-500 transition-colors" />
-              <div>
-                <p className="text-sm font-medium text-gray-600">
-                  Drag & drop images here, or click to select
-                </p>
-                <p className="text-xs text-gray-500 mt-1">
-                  High-quality photos recommended (PNG, JPG, up to 10MB each)
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
-            {imagePreviews.map((src, index) => (
-              <div key={index} className="relative aspect-square">
-                <img
-                  src={src}
-                  alt={`Preview ${index}`}
-                  className="w-full h-full object-cover rounded-lg shadow-sm border-2 border-gray-100"
-                />
-              </div>
-            ))}
+            <ImagePreviewer
+              setImageFiles={setImageFiles}
+              imagePreview={imagePreviews}
+              setImagePreview={setImagePreviews}
+              className="w-full"
+            />
           </div>
         </div>
 
@@ -315,9 +294,9 @@ const AddCars = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-[1.01] shadow-lg hover:shadow-xl"
+          className=" bg-red-500  hover:from-blue-700 hover:to-blue-800 text-white font-semibold py-4 px-6 rounded-xl transition-all transform hover:scale-[1.01] shadow-lg hover:shadow-xl"
         >
-          Add New Car Listing
+          Add Car 
         </button>
       </form>
     </div>

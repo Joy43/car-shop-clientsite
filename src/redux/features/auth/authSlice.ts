@@ -4,7 +4,7 @@ import { RootState } from '../../store';
 export type TUser = {
   email: string;
   role: string;
-  name:string;
+  name: string;
   iat: number;
   exp: number;
 };
@@ -13,10 +13,10 @@ type TAuthState = {
   user: null | TUser;
   token: null | string;
 };
-
+ // Load user from localStorage
 const initialState: TAuthState = {
-  user: null,
-  token: null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'), 
+  token: localStorage.getItem('token') || null, 
 };
 
 const authSlice = createSlice({
@@ -27,10 +27,14 @@ const authSlice = createSlice({
       const { user, token } = action.payload;
       state.user = user;
       state.token = token;
+      localStorage.setItem('user', JSON.stringify(user)); 
+      localStorage.setItem('token', token); 
     },
     logout: (state) => {
       state.user = null;
       state.token = null;
+      localStorage.removeItem('user'); 
+      localStorage.removeItem('token');  
     },
   },
 });

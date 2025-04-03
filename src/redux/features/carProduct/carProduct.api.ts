@@ -32,21 +32,29 @@ const carProductApi = baseApi.injectEndpoints({
     getCarById:builder.query({
       query:(id:string)=>({
         url:`/cars/${id}`,
-        method:"GET"
+        method:"GET",
+        query: (data:any) => ({
+          url: '/cars',
+          method: 'POST',
+          body: data,
+          
+        }),
+        
+
       }),
       transformResponse: (response: TResponseRedux<TProduct>) => response,
     }),
 
 // ----------ADD CAR PRODUCT-----------
-   // ----------ADD CAR PRODUCT-----------
-   addCarProduct: builder.mutation({
-    query: (data) => ({
-      url: '/cars',
-      method: 'POST',
-      body: data,
-      // headers: token ? { Authorization: `Bearer ${token}` } : {},
-    }),
+addCarProduct: builder.mutation({
+  query: (data) => ({
+    url: '/cars',
+    method: 'POST',
+    body: data,
+ 
   }),
+  
+}),
 
 
 // -------------update car product--------------

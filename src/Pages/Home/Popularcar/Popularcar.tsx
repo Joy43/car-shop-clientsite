@@ -24,9 +24,10 @@ const Popularcar = () => {
 </div>
 
 {/* ---------car product ------------------- */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {products?.data?.slice(0, 6).map((car, idx) => (
-        <div key={car._id} className="bg-white shadow-md rounded-lg overflow-hidden w-80 border">
+        <div key={car._id} className="bg-white shadow-md rounded-lg overflow-hidden w-96 border">
+          {/* -------car image section--------- */}
           <div className="relative">
             <img
               src={car.imageUrls[0]}
@@ -39,7 +40,7 @@ const Popularcar = () => {
               </span>
             )}
           </div>
-     
+     {/* -----------car content--------- */}
       <div className="p-4">
             <p className="text-gray-500 text-sm">{new Date(car.createdAt).toDateString()}</p>
             <h3 className="text-lg font-semibold text-gray-900">{car.brand} {car.model}</h3>

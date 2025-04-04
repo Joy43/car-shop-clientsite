@@ -7,6 +7,8 @@ export type TUser = {
   name: string;
   iat: number;
   exp: number;
+  status?: string;
+  _id?: string;
 };
 
 type TAuthState = {

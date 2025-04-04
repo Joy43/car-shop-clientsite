@@ -5,9 +5,10 @@ import { TUser } from "../auth/authSlice";
 
 const userManagementApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    // -----------get all suer-----------
     getUsers: builder.query({
       query: (args) => {
-        // console.log(args);
+       console.log(args);
         const params = new URLSearchParams();
 
         if (args) {
@@ -29,16 +30,18 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    // -------------update user status----------
     updateUser: builder.mutation({
       query: (args) => ({
-        url: `/user/${args._id}`,
+        url: `/user/${args.id}`,
         method: "PATCH",
         body: args.data,
       }),
     }),
+    // ----------DELETE USER------
     deleteUser: builder.mutation({
-      query: (_id) => ({
-        url: `/user/${_id}`,
+      query: (id) => ({
+        url: `/user/${id}`,
         method: "DELETE",
       }),
     }),

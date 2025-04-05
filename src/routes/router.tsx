@@ -17,6 +17,7 @@ import ManageCar from "../Pages/admin/ManageCars/ManageCars";
 import AddCars from "../Pages/admin/AddCars/AddCars";
 import AdminProfile from "../Pages/admin/AdminProfile/AdminProfile";
 import UserManage from "../Pages/admin/ManageUser/UserManage";
+import ProductPage from "../Pages/product/product";
 
 
 
@@ -38,6 +39,12 @@ export const router =createBrowserRouter([
 path:'/register',
 element:<Register/>
             },
+            {
+                path:'product',
+                element:<ProductPage/>
+    
+    
+             }
          
         ]
     },
@@ -70,7 +77,8 @@ element:<Register/>
          {
             path:'usermanage',
             element:<UserManage/>
-         }
+         },
+      
         ]
     },
     // ----------user------------
@@ -89,7 +97,9 @@ element:<Register/>
          {
             path:"userhome",
             element:<UserHome/>
-         }
+         },
+        
+
         ]
     },
 

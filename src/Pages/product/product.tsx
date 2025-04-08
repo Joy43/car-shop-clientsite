@@ -1,14 +1,15 @@
-'use client';
+
 
 import { useEffect, useState } from 'react';
 import { TQueryParam, TProduct } from '../../types';
 import { useGetAllcarsQuery } from '../../redux/features/carProduct/carProduct.api';
 import ProductSkeleton from './ProductSkeleton';
+import { Link } from 'react-router-dom';
  
 
-const categories = ['All', 'SUV', 'Sedan', 'Truck', 'Coupe'];
+const categories = ['All', 'SUV', 'Sedan', 'Truck', 'Coupe', 'Convertible', 'BMW', 'Tesla Cybertruck'];
 const itemsPerPage = 6;
-const MAX_PRICE = 200000; 
+const MAX_PRICE = 840000; 
 
 export default function ProductPage() {
   const [page, setPage] = useState(1);
@@ -78,12 +79,12 @@ export default function ProductPage() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 p-4 min-h-screen bg-gray-50">
-      {/* Filter Sidebar */}
+      {/*----------------- Filter Sidebar -------------------------*/}
       <aside className="lg:w-72 w-full bg-white p-6 rounded-xl shadow-md h-fit sticky top-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">Filters</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6"> Car Product</h2>
 
         <div className="space-y-6">
-          {/* Search */}
+          {/* --------------------Search --------------------------*/}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
             <input
@@ -95,7 +96,7 @@ export default function ProductPage() {
             />
           </div>
 
-          {/* Category */}
+          {/*----------------- Category --------------------*/}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
             <div className="grid grid-cols-2 gap-2">
@@ -105,7 +106,7 @@ export default function ProductPage() {
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-4 py-2 text-sm rounded-md transition-colors ${
                     selectedCategory === cat
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-red-500 text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                   }`}
                 >
@@ -115,7 +116,7 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* Price */}
+          {/*------------------ Price------------------ */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Max Price: ${priceRange.toLocaleString()}
@@ -125,7 +126,7 @@ export default function ProductPage() {
                 type="range"
                 min="0"
                 max={MAX_PRICE}
-                step="1000"
+                step="2000"
                 value={priceRange}
                 onChange={(e) => setPriceRange(Number(e.target.value))}
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
@@ -136,7 +137,7 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/* In Stock */}
+          {/*--------------- In Stock -------------------*/}
           <div className="flex items-center space-x-3">
             <input
               type="checkbox"
@@ -152,14 +153,14 @@ export default function ProductPage() {
         </div>
       </aside>
 
-      {/* Main Content */}
+      {/*---------------- Main Content ------------------------*/}
       <main className="flex-1">
-        {/* Results Header */}
+        {/*--------------------  Results Header ----------------------*/}
         <div className="bg-white p-4 rounded-xl shadow-md mb-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <h1 className="text-xl font-semibold text-gray-800">
+            {/* <h1 className="text-xl font-semibold text-gray-800">
               {totalItems.toLocaleString()} results
-            </h1>
+            </h1> */}
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">Sort by:</span>
               <select className="border border-gray-300 rounded-md px-3 py-1.5 text-sm">
@@ -171,7 +172,7 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/* Product Grid */}
+        {/*----------------- Product itaems ------------------------*/}
         {isError ? (
           <div className="text-center py-12 bg-white rounded-xl shadow-md">
             <p className="text-red-500">Error loading products: {(error as any)?.message}</p>
@@ -196,7 +197,7 @@ export default function ProductPage() {
                       alt={`${product.brand} ${product.model}`}
                       className="w-full h-full object-cover"
                     />
-                    <span className="absolute top-2 right-2 bg-white/90 px-2 py-1 rounded-full text-xs font-medium">
+                    <span className="absolute top-2 right-2 bg-white/90 px-2 py-1 rounded-full text-red-500 text-xs font-medium">
                       {product.year}
                     </span>
                   </div>
@@ -205,7 +206,7 @@ export default function ProductPage() {
                       <h3 className="text-lg font-semibold text-gray-800">
                         {product.brand} {product.model}
                       </h3>
-                      <p className="text-lg font-bold text-blue-600">
+                      <p className="text-lg font-bold text-red-500">
                         ${product.price.toLocaleString()}
                       </p>
                     </div>
@@ -220,18 +221,24 @@ export default function ProductPage() {
                             : 'bg-red-100 text-red-800'
                         }`}
                       >
-                        {product.inStock ? 'In Stock' : 'Out of Stock'}
+                        {product?.inStock ? 'In Stock' : 'Out of Stock'}
                       </span>
-                      <button className="px-3 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">
+
+                      {/* -----------viw deails------- */}
+
+                      <Link to={`/products/${product._id}`}>
+                      <button className="px-3 py-1.5 bg-red-500 text-white rounded-md hover:bg-blue-700 transition-colors text-sm">
                         View Details
                       </button>
+                      </Link>
+                     
                     </div>
                   </div>
                 </article>
               ))}
             </div>
 
-            {/* Pagination */}
+            {/*------------------- Pagination ----------------*/}
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center items-center gap-2">
                 <button
@@ -256,6 +263,7 @@ export default function ProductPage() {
                   </button>
                 ))}
 
+{/* ------------------next------------------- */}
                 <button
                   onClick={() => setPage(Math.min(totalPages, page + 1))}
                   disabled={page === totalPages}

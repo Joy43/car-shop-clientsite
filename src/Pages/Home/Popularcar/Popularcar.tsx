@@ -4,11 +4,12 @@ import { BsChatQuoteFill, BsFillCarFrontFill } from "react-icons/bs";
 import { MdSpeed } from "react-icons/md";
 import { useGetAllcarsQuery } from "../../../redux/features/carProduct/carProduct.api";
 import { Link } from "react-router-dom";
+import Loading from "../../../Components/Loading";
 
 const Popularcar = () => {
   const { data: products, isLoading } = useGetAllcarsQuery(undefined);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading/>;
 
   return (
    <div className="px-6 my-6 bg-slate-50">
@@ -24,8 +25,8 @@ const Popularcar = () => {
 </div>
 
 {/* ---------car product ------------------- */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {products?.data?.slice(0, 6).map((car, idx) => (
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {products?.data?.slice(0, 6).map((car, _id) => (
         <div key={car._id} className="bg-white shadow-md rounded-lg overflow-hidden w-96 border">
           {/* -------car image section--------- */}
           <div className="relative">
@@ -41,7 +42,8 @@ const Popularcar = () => {
             )}
           </div>
      {/* -----------car content--------- */}
-      <div className="p-4">
+     <Link to={`/products/${car._id}`} className="block hover:shadow-lg transition duration-300 ease-in-out">
+     <div className="p-4">
             <p className="text-gray-500 text-sm">{new Date(car.createdAt).toDateString()}</p>
             <h3 className="text-lg font-semibold text-gray-900">{car.brand} {car.model}</h3>
             <div className="flex items-center gap-1">
@@ -74,6 +76,8 @@ const Popularcar = () => {
               </div>
             </div>
           </div>
+     </Link>
+     
   
         </div>
       ))}

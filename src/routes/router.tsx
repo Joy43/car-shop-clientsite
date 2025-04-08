@@ -19,6 +19,9 @@ import AdminProfile from "../Pages/admin/AdminProfile/AdminProfile";
 import UserManage from "../Pages/admin/ManageUser/UserManage";
 import ProductPage from "../Pages/product/product";
 
+import ProductDetails from "../Pages/product/ProductDeatils";
+import Checkout from "../Pages/admin/Checkout/Checkout";
+
 
 
 
@@ -44,7 +47,20 @@ element:<Register/>
                 element:<ProductPage/>
     
     
-             }
+             },
+             {
+                path: '/products',
+                children: [
+                  {
+                    path: '/products:id',  
+                    element: <ProductDetails />
+                  },
+                  
+                ]
+              },
+              { path: "/product/checkout/:id",
+                element: <Checkout /> 
+            }
          
         ]
     },

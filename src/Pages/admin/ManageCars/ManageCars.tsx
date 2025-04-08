@@ -1,46 +1,106 @@
-
-
-const data = [
-  { name: "Abhiraj K", role: "Developer", status: "Active", img: "https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722165/AbhirajK/Abhirajk.webp" },
-  { name: "John Doe", role: "Designer", status: "Active", img: "https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722163/AbhirajK/Abhirajk%20mykare.webp" },
-  { name: "Jane Smith", role: "Project Manager", status: "Inactive", img: "https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk2.webp" },
-  { name: "Emily Davis", role: "QA Engineer", status: "Active", img: "https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722161/AbhirajK/Abhirajk2.webp" },
-  { name: "Michael Brown", role: "DevOps Engineer", status: "Pending", img: "https://res.cloudinary.com/djv4xa6wu/image/upload/v1735722159/AbhirajK/Abhirajk5.webp" },
-];
-
-
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  useDeleteCarProductMutation,
+  useGetAllcarsQuery,
+} from "../../../redux/features/carProduct/carProduct.api";
+import Loading from "../../../Components/Loading";
 
 const ManageCar = () => {
+  const [page, setPage] = useState(1);
+  const [deleteCarProduct] = useDeleteCarProductMutation();
+
+  const {
+    data: products,
+    isLoading,
+    refetch,
+  } = useGetAllcarsQuery([
+    { name: "limit", value: 8 },
+    { name: "page", value: page },
+    { name: "sort", value: "id" },
+  ]);
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteCarProduct(id).unwrap();
+      toast.success("Car product deleted successfully!");
+      refetch();
+    } catch {
+      toast.error("Failed to delete car product!");
+    }
+  };
+
   return (
     <div className="container mx-auto p-6">
       <div className="overflow-x-auto rounded-lg shadow">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
-            <tr>
-              <th className="px-6 py-3">image</th>
-              <th className="px-6 py-3">band</th>
-              <th className="px-6 py-3">update</th>
-              <th className="px-6 py-3">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((person, index) => (
-              <tr key={index} className={`border-b dark:border-gray-700 ${index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-800'}`}>
-              <td className="px-6 py-4">
-                  <img src={person.img} alt={person.name} className="w-10 h-10 rounded-full" />
-                </td>
-                <td className="px-6 py-4">{person.name}</td>
-                <td className="px-6 py-4">{person.role}</td>
-                <td className={`px-6 py-4 ${getStatusColor(person.status)}`}>{person.status}</td>
-                
+        {isLoading ? (
+          <div className="text-center text-lg text-gray-500">
+            <Loading/>
+          </div>
+        ) : (
+          <table className="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+            <thead className="text-xs uppercase bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">
+              <tr>
+                <th className="px-6 py-3">Image</th>
+                <th className="px-6 py-3">Brand</th>
+                <th className="px-6 py-3">Model</th>
+              
+                <th className="px-6 py-3">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-900">
-          <button className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded">Previous</button>
-          <span className="text-sm text-gray-700 dark:text-gray-400">Page 1 of 10</span>
-          <button className="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded">Next</button>
+            </thead>
+            <tbody>
+              {products?.data?.map((car: any, index: number) => (
+                <tr
+                  key={car._id}
+                  className={`border-b ${
+                    index % 2 === 0
+                      ? "bg-white dark:bg-gray-900"
+                      : "bg-gray-50 dark:bg-gray-800"
+                  }`}
+                >
+                  <td className="px-6 py-4">
+                    <img
+                      src={car.imageUrls?.[0]}
+                      alt={car.brand}
+                      className="w-12 h-12 rounded object-cover"
+                    />
+                  </td>
+                  <td className="px-6 py-4">{car.brand}</td>
+                  <td className="px-6 py-4">{car.model}</td>
+                  
+                  <td className="px-6 py-4">
+                    <button
+                      onClick={() => handleDelete(car._id)}
+                      className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition"
+                    >
+                      Delete
+                    </button>
+                    <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition ml-2">
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-900 mt-4">
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            className="px-3 py-1 bg-gray-300 dark:bg-gray-700 text-black dark:text-white rounded"
+          >
+            Previous
+          </button>
+          <span className="text-sm text-gray-700 dark:text-gray-400">
+            Page {page}
+          </span>
+          <button
+            onClick={() => setPage((prev) => prev + 1)}
+            className="px-3 py-1 bg-gray-300 dark:bg-gray-700 text-black dark:text-white rounded"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

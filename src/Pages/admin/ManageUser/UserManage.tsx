@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
+import { selectCurrentUser, TUser } from "../../../redux/features/auth/authSlice";
 import { useDeleteUserMutation, useGetUsersQuery, useUpdateUserMutation } from "../../../redux/features/user/userManage.api";
 import { useAppSelector } from "../../../redux/hooks";
 
@@ -12,7 +12,7 @@ const UserManagement = () => {
   const currentUserEmail = currentUser?.email;
 
   const isAdmin = currentUser?.role === "admin";
-  const filteredUsers = (users?.data ?? []).filter(
+  const filteredUsers = (Array.isArray(users?.data) ? users.data : []).filter(
     (user) => isAdmin || user.email === currentUserEmail
   );
 
@@ -28,7 +28,7 @@ const UserManagement = () => {
   };
 
   // ---------status change handle------------------
-  const handleStatusChange = async (userId: string | undefined, status: string) => {
+  const handleStatusChange = async (userId: string | undefined, status:boolean ) => {
     try {
       await updateUserStatus({ id: userId, data: { status } }).unwrap();
       toast.success("User status updated successfully!");
@@ -55,37 +55,41 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredUsers.map(({ _id, name, email, role, status }) => (
-              <tr key={_id} className="text-center border border-gray-300">
-                <td className="p-3 border border-gray-300">{name}</td>
-                <td className="p-3 border border-gray-300">{email}</td>
-                <td className="p-3 border border-gray-300">{role}</td>
-                <td className="p-3 border border-gray-300">
-                  {isAdmin ? (
-                    <select
-                      value={status}
-                      onChange={(e) => handleStatusChange(_id, e.target.value)}
-                      className="px-2 py-1 border rounded"
-                    >
-                      <option value="in-progress">In-progress</option>
-                      <option value="blocked">Blocked</option>
-                    </select>
-                  ) : (
-                    <span>{status}</span>
-                  )}
-                </td>
-                <td className="p-3 border border-gray-300">
-                  {isAdmin && (
-                    <button
-                      onClick={() => handleDeleteUser(_id)}
-                      className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                    >
-                      Delete
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
+          {filteredUsers.map((user: TUser) => {
+  const { _id, name, email, role, status } = user;
+  return (
+    <tr key={_id} className="text-center border border-gray-300">
+      <td className="p-3 border border-gray-300">{name}</td>
+      <td className="p-3 border border-gray-300">{email}</td>
+      <td className="p-3 border border-gray-300">{role}</td>
+      <td className="p-3 border border-gray-300">
+        {isAdmin ? (
+          <select
+            value={status}
+            onChange={(e) => handleStatusChange(_id, e.target.value === 'in-progress')}
+            className="px-2 py-1 border rounded"
+          >
+            <option value="in-progress">In-progress</option>
+            <option value="blocked">Blocked</option>
+          </select>
+        ) : (
+          <span>{status}</span>
+        )}
+      </td>
+      <td className="p-3 border border-gray-300">
+        {isAdmin && (
+          <button
+            onClick={() => handleDeleteUser(_id)}
+            className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            Delete
+          </button>
+        )}
+      </td>
+    </tr>
+  );
+})}
+
           </tbody>
         </table>
       )}

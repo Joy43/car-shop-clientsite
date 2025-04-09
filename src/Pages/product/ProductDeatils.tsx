@@ -5,20 +5,6 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import Loading from "../../Components/Loading";
 
-// interface TProduct {
-//   _id: string;
-//   brand: string;
-//   model: string;
-//   year: number;
-//   price: number;
-//   category: string;
-//   imageUrls: string[];
-//   description: string;
-//   quantity: number;
-//   inStock: boolean;
-//   createdAt: string;
-//   updatedAt: string;
-// }
 
 const ProductDetails = () => {
   const { id } = useParams();

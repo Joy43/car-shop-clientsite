@@ -1,5 +1,4 @@
 
-import ReactPlayer from "react-player";
 import herovid from "../../../assets/images/hero.webm";
 
 export const Banner = () => {

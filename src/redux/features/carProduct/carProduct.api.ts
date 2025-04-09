@@ -1,6 +1,6 @@
-import { TProduct, TQueryParam } from '../../../types';
+import { CProduct, TQueryParam } from '../../../types';
 import { baseApi } from '../../api/baseApi';
-import { TResponseRedux } from '../../../types/global';
+import { CResponseRedux } from '../../../types/global';
 
 const carProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -19,7 +19,7 @@ const carProductApi = baseApi.injectEndpoints({
           params,
         };
       },
-      transformResponse: (response: TResponseRedux<TProduct[]>) => {
+      transformResponse: (response: CResponseRedux<CProduct[]>) => {
         return {
           data: response.data,
           meta: response.meta,
@@ -42,7 +42,7 @@ const carProductApi = baseApi.injectEndpoints({
         
 
       }),
-      transformResponse: (response: TResponseRedux<TProduct>) => response,
+      transformResponse: (response: CResponseRedux<CProduct>) => response,
     }),
 
 // ----------ADD CAR PRODUCT-----------

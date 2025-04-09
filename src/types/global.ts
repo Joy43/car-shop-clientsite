@@ -26,7 +26,16 @@ export type TResponse<T> = {
   message: string;
 };
 
+export type CResponse<C> = {
+  data?: C;
+  error?: TError;
+  meta?: TMeta;
+  success: boolean;
+  message: string;
+};
+
 export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
+export type CResponseRedux<C> = CResponse<C> & BaseQueryApi;
 
 
 export type TQueryParam = {

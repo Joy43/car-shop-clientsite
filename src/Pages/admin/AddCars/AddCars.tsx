@@ -18,7 +18,7 @@ type FormValues = {
 
 const CreateProduct = () => {
   const [createProduct] = useAddCarProductMutation();
-  const { control, handleSubmit, formState: { errors }, reset } = useForm<FormValues>();
+  const { control, handleSubmit, formState: { errors } } = useForm<FormValues>();
 
   // Local image preview state
   const [imageFiles, setImageFiles] = useState<File[]>([]);
@@ -66,8 +66,8 @@ const CreateProduct = () => {
   
       // Send the wrapped payload
       const res = (await createProduct(payload)) as TResponse<any>;
-  
-      // ... rest of your error handling
+  console.log(res)
+ 
     } catch (error) {
       toast.error('Something went wrong', { id: toastId });
     }

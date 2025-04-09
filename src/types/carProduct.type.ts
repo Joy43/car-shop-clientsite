@@ -1,16 +1,24 @@
 export type TProduct = {
-    _id: string
-    brand: string
-    model: string
-    year: number
-    price: number
-    category: string
-    imageUrls: string[]
-    description: string
-    quantity: number
-    inStock: boolean
-    createdAt: string
-    updatedAt: string
-    car:string
-    __v: number
-  };
+  price: number;
+  inStock: boolean;
+  createdAt: string;
+  _id: string;
+  brand: string;
+  model: string;
+  year: string;
+  category: string;
+  imageUrls: string[];
+  description: string;
+};
+export type CProduct = {
+  price: number;
+  inStock: boolean;
+  createdAt: string;
+  _id: string;
+  brand: string;
+  model: string;
+  year: string;
+  category: string;
+  imageUrls: string[];
+  description: string;
+};

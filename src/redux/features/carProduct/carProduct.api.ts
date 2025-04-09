@@ -6,11 +6,11 @@ const carProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // ----------get all product-------------------
     getAllcars: builder.query({
-      query: (args: TQueryParam[] | undefined) => {
-        const params: Record<string, any> = {};
+      query: (args) => {
+        const params = new URLSearchParams();
         if (args) {
           args.forEach((item: TQueryParam) => {
-            params[item.name] = item.value;
+            params.append(item.name, item.value as string);
           });
         }
         return {

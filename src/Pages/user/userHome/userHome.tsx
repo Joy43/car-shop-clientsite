@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
+import {  useAppSelector } from "../../../redux/hooks";
 import { FaUserCircle } from "react-icons/fa";
 
 const UserHome = () => {
   const currentUser = useAppSelector(selectCurrentUser);
-  const dispatch = useAppDispatch();
+
   const [timeLeft, setTimeLeft] = useState("");
 
   // Countdown Logic

@@ -1,15 +1,12 @@
-
-
 import { useEffect, useState } from 'react';
-import { TQueryParam, TProduct } from '../../types';
+import { TQueryParam } from '../../types';
 import { useGetAllcarsQuery } from '../../redux/features/carProduct/carProduct.api';
 import ProductSkeleton from './ProductSkeleton';
 import { Link } from 'react-router-dom';
- 
 
 const categories = ['All', 'SUV', 'Sedan', 'Truck', 'Coupe', 'Convertible', 'BMW', 'Tesla Cybertruck'];
 const itemsPerPage = 6;
-const MAX_PRICE = 840000; 
+const MAX_PRICE = 840000;
 
 export default function ProductPage() {
   const [page, setPage] = useState(1);
@@ -18,43 +15,38 @@ export default function ProductPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [priceRange, setPriceRange] = useState(MAX_PRICE);
   const [inStockOnly, setInStockOnly] = useState(false);
-  const [params, setParams] = useState<TQueryParam[]>();
+  const [params, setParams] = useState<TQueryParam[]>([]);
 
-  // Debounce search input
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(search);
       setPage(1);
     }, 500);
-
     return () => clearTimeout(handler);
   }, [search]);
 
-  // Sync state with URL parameters
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    setSearch(queryParams.get('search') || '');
+    setSearch(queryParams.get('searchTerm') || '');
     setSelectedCategory(queryParams.get('category') || 'All');
-    setPriceRange(Number(queryParams.get('maxPrice')) || MAX_PRICE);
+    setPriceRange(Number(queryParams.get('price_lte')) || MAX_PRICE);
     setInStockOnly(queryParams.get('inStock') === 'true');
     setPage(Number(queryParams.get('page')) || 1);
   }, []);
 
-  // Update query params and URL
   useEffect(() => {
     const queryParams: TQueryParam[] = [
-      { name: 'limit', value: itemsPerPage },
+      { name: 'limit', value: itemsPerPage.toString() },
       { name: 'page', value: page.toString() },
     ];
 
-    if (debouncedSearch) queryParams.push({ name: 'name', value: debouncedSearch });
+    if (debouncedSearch) queryParams.push({ name: 'searchTerm', value: debouncedSearch });
     if (selectedCategory !== 'All') queryParams.push({ name: 'category', value: selectedCategory });
     if (priceRange < MAX_PRICE) queryParams.push({ name: 'price_lte', value: priceRange.toString() });
     if (inStockOnly) queryParams.push({ name: 'inStock', value: 'true' });
 
-    // Update URL
     const url = new URL(window.location.href);
-    queryParams.forEach(({ name, value }) => url.searchParams.set(name, value));
+    queryParams.forEach(({ name, value }) => url.searchParams.set(name, value.toString()));
     window.history.replaceState(null, '', url.toString());
 
     setParams(queryParams);
@@ -62,15 +54,13 @@ export default function ProductPage() {
 
   const { data, isLoading, isError, error } = useGetAllcarsQuery(params);
   const products = data?.data || [];
-  const totalItems = data?.meta?.total || 0;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = data?.meta?.totalPage || 0;
 
-  // Pagination controls
   const visiblePages = () => {
     const pages = [];
     const startPage = Math.max(1, page - 2);
     const endPage = Math.min(totalPages, page + 2);
-    
+
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
     }
@@ -79,12 +69,11 @@ export default function ProductPage() {
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 p-4 min-h-screen bg-gray-50">
-      {/*----------------- Filter Sidebar -------------------------*/}
+      {/* Filter Sidebar */}
       <aside className="lg:w-72 w-full bg-white p-6 rounded-xl shadow-md h-fit sticky top-4">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6"> Car Product</h2>
-
+        <h2 className="text-2xl font-bold text-gray-800 mb-6">Car Product</h2>
         <div className="space-y-6">
-          {/* --------------------Search --------------------------*/}
+          {/* Search */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Search</label>
             <input
@@ -96,7 +85,7 @@ export default function ProductPage() {
             />
           </div>
 
-          {/*----------------- Category --------------------*/}
+          {/* Category */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
             <div className="grid grid-cols-2 gap-2">
@@ -116,7 +105,7 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/*------------------ Price------------------ */}
+          {/* Price */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Max Price: ${priceRange.toLocaleString()}
@@ -137,7 +126,7 @@ export default function ProductPage() {
             </div>
           </div>
 
-          {/*--------------- In Stock -------------------*/}
+          {/* In Stock */}
           <div className="flex items-center space-x-3">
             <input
               type="checkbox"
@@ -153,14 +142,11 @@ export default function ProductPage() {
         </div>
       </aside>
 
-      {/*---------------- Main Content ------------------------*/}
+      {/* Main Content */}
       <main className="flex-1">
-        {/*--------------------  Results Header ----------------------*/}
+        {/* Results Header */}
         <div className="bg-white p-4 rounded-xl shadow-md mb-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            {/* <h1 className="text-xl font-semibold text-gray-800">
-              {totalItems.toLocaleString()} results
-            </h1> */}
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">Sort by:</span>
               <select className="border border-gray-300 rounded-md px-3 py-1.5 text-sm">
@@ -172,7 +158,7 @@ export default function ProductPage() {
           </div>
         </div>
 
-        {/*----------------- Product itaems ------------------------*/}
+        {/*--------------- Product Items ------------------------*/}
         {isError ? (
           <div className="text-center py-12 bg-white rounded-xl shadow-md">
             <p className="text-red-500">Error loading products: {(error as any)?.message}</p>
@@ -204,7 +190,7 @@ export default function ProductPage() {
                   <div className="p-4">
                     <div className="flex justify-between items-start mb-2">
                       <h3 className="text-lg font-semibold text-gray-800">
-                        {product.brand} {product.model}
+                        {product.brand} 
                       </h3>
                       <p className="text-lg font-bold text-red-500">
                         ${product.price.toLocaleString()}
@@ -238,7 +224,7 @@ export default function ProductPage() {
               ))}
             </div>
 
-            {/*------------------- Pagination ----------------*/}
+            {/* Pagination */}
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center items-center gap-2">
                 <button
@@ -248,7 +234,7 @@ export default function ProductPage() {
                 >
                   Previous
                 </button>
-                
+
                 {visiblePages().map((p) => (
                   <button
                     key={p}
@@ -263,7 +249,6 @@ export default function ProductPage() {
                   </button>
                 ))}
 
-{/* ------------------next------------------- */}
                 <button
                   onClick={() => setPage(Math.min(totalPages, page + 1))}
                   disabled={page === totalPages}

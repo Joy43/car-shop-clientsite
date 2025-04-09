@@ -60,7 +60,11 @@ element:<Register/>
                 ]
               },
               { path: "/product/checkout/:id",
-                element: <Checkout /> 
+                element: (
+                    <ProtectedRoute>
+                        <Checkout />
+                    </ProtectedRoute>
+                ) 
             },
             {
                 path:"order/verification",

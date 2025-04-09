@@ -10,6 +10,7 @@ import banner1 from "../../../assets/banner/banner1.jpeg";
 import banner2 from "../../../assets/banner/banner2.jpeg";
 import banner3 from "../../../assets/banner/banner3.jpeg";
 import banner4 from "../../../assets/banner/banner4.jpeg";
+import { Link } from "react-router-dom";
 
 // Slide Data Type
 interface Slide {
@@ -60,7 +61,7 @@ const sliderData: Slide[] = [
 
 const Slider: React.FC = () => {
   return (
-    <div className="relative w-full h-[700px] bg-gray-100 text-white overflow-hidden">
+    <div className="relative w-full h-[500px] bg-gray-100 text-white overflow-hidden">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
@@ -92,9 +93,12 @@ const Slider: React.FC = () => {
                   {slide?.title}
                 </h2>
                 <p className="mt-4 text-lg text-gray-300">{slide?.description}</p>
-                <button className="mt-6 px-6 py-3 text-white bg-red-600 hover:bg-red-700 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 shadow-lg">
+            
+            <Link to="/product">
+            <button className="mt-6 px-6 py-3 text-white bg-red-600 hover:bg-red-700 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 shadow-lg">
                  Buy More →
                 </button>
+            </Link>
               </div>
             </div>
           </SwiperSlide>

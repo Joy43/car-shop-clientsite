@@ -20,7 +20,8 @@ import UserManage from "../Pages/admin/ManageUser/UserManage";
 import ProductPage from "../Pages/product/product";
 
 import ProductDetails from "../Pages/product/ProductDeatils";
-import Checkout from "../Pages/admin/Checkout/Checkout";
+import Checkout from "../Pages/order/Checkout/Checkout";
+import VerifyOrder from "../Pages/order/varifyorder/varifyOrder";
 
 
 
@@ -60,6 +61,10 @@ element:<Register/>
               },
               { path: "/product/checkout/:id",
                 element: <Checkout /> 
+            },
+            {
+                path:"order/verification",
+                element:<VerifyOrder/>
             }
          
         ]

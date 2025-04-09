@@ -1,20 +1,29 @@
 import {
   FaHome,
-  FaChartBar,
-  FaUsers,
-  FaFolder,
-  FaCalendarAlt,
-  FaFileAlt,
-  FaSearch,
   FaUser,
-  FaBars,
+  FaChartBar,
+
+  FaSearch,
+ 
 } from "react-icons/fa";
+import { BsCartCheck } from  "react-icons/bs";
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { MdOutlineVerticalSplit } from "react-icons/md";
 
 const UserLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const currentUser = useAppSelector(selectCurrentUser);
+  const dispatch = useAppDispatch();
 
+  // ---------logout function-----------------
+  console.log(currentUser);
+    const handleLogout = () => {
+      dispatch(logout());
+    
+    };
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -25,15 +34,15 @@ const UserLayout = () => {
       >
         {/* Toggle Button */}
         <button
-          className="absolute top-4 right-4 text-white focus:outline-none"
+          className="absolute cursor-pointer top-4 right-4 text-white focus:outline-none"
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         >
-          <FaBars size={20} />
+          <MdOutlineVerticalSplit size={24} />
         </button>
 
         {/* Logo */}
         <div className="flex items-center gap-2 mb-6 mt-6">
-          <div className="w-10 h-10 bg-green-500 rounded-full"></div>
+          <div className="w-10 h-10 bg-red-500 rounded-full"></div>
           {isSidebarOpen && <h1 className="text-lg font-semibold">User Pro</h1>}
         </div>
 
@@ -52,20 +61,19 @@ const UserLayout = () => {
         {/* Menu Items */}
         <ul className="space-y-2 flex-1">
           {[
-            { to: "/userdashboard/userhome", icon: FaHome, label: "User Home" },
-            { to: "#", icon: FaChartBar, label: "Analytics" },
-            { to: "#", icon: FaUsers, label: "Team" },
-            { to: "#", icon: FaFolder, label: "Projects" },
-            { to: "#", icon: FaCalendarAlt, label: "Calendar" },
-            { to: "#", icon: FaFileAlt, label: "Documents" },
-            { to: "/", icon: FaHome, label: "Home" },
+            { to: "/userdashboard/userhome", icon:  FaUser, label: "User Profile" },
+            { to: "/userdashboard/useractivaty", icon: FaChartBar, label: "Analytics" },
+            { to: "/userdashboard/myorder", icon: BsCartCheck , label: "Order" },
+            { to: "/", icon: FaHome , label: "Home" },
+            
+      
           ].map((item, index) => (
             <li key={index}>
               <NavLink
                 to={item.to}
                 className={({ isActive }) =>
                   `flex items-center gap-4 p-2 rounded-md cursor-pointer transition-colors duration-300 ${
-    isActive ? "bg-green-600" : "hover:bg-gray-700"}
+    isActive ? "bg-red-600" : "hover:bg-gray-700"}
                 `}
               >
                 <item.icon size={22} />
@@ -80,8 +88,8 @@ const UserLayout = () => {
           <FaUser size={24} />
           {isSidebarOpen && (
             <div>
-              <p className="font-semibold">Tom Cook</p>
-              <p className="text-sm text-gray-400">View profile</p>
+              <p className="font-semibold">{currentUser?.name}</p>
+              <button  onClick={handleLogout} className="text-sm text-gray-400 cursor-pointer">Logout</button>
             </div>
           )}
         </div>

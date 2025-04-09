@@ -159,6 +159,7 @@ const ProductDetails = () => {
 
               <div className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Link to={`/product/checkout/${product._id}`} className="flex-1">
                   <button
                     className="bg-red-500 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={!product.inStock}
@@ -168,16 +169,8 @@ const ProductDetails = () => {
                     </svg>
                     Add to Cart
                   </button>
-              <Link to={`/product/checkout/${product._id}`} className="flex-1">
-              <button
-                    className="bg-green-600 text-white px-6 py-4 rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                    disabled={!product.inStock}
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    Buy Now
-                  </button>
+             
+              
               </Link>
                 </div>
               </div>

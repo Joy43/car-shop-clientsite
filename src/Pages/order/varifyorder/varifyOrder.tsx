@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import Loading from "../../../Components/Loading";
 import { toast } from "sonner";
 import { useVerifyOrderQuery } from "../../../redux/features/user/userOrder.api";
-import { FiCheckCircle, FiXCircle, FiCreditCard, FiUser, FiBox, FiDollarSign } from "react-icons/fi";
+import { FiCheckCircle, FiXCircle, FiCreditCard, FiUser, FiBox } from "react-icons/fi";
 import { MdPending } from "react-icons/md";
 import { format } from "date-fns";
 
@@ -71,7 +71,7 @@ const VerifyOrder = () => {
             </p>
           </div>
 
-          {/* Order Summary */}
+          {/*------------- Order Summary ----------------------*/}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div className="bg-gray-50 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
@@ -80,12 +80,12 @@ const VerifyOrder = () => {
               <dl className="space-y-3">
                 <div className="flex justify-between">
                   <dt className="text-gray-600">Order ID:</dt>
-                  <dd className="font-medium">{orderData.order_id}</dd>
+                  <dd className="font-medium">{orderData?.order_id}</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-gray-600">Date:</dt>
                   <dd className="font-medium">
-                    {format(new Date(orderData.date_time), 'dd MMM yyyy, h:mm a')}
+                    {format(new Date(orderData?.date_time), 'dd MMM yyyy, h:mm a')}
                   </dd>
                 </div>
                 <div className="flex justify-between">
@@ -101,7 +101,7 @@ const VerifyOrder = () => {
                   </dd>
                 </div>
                 
-                {orderData.discount_amount && (
+                {orderData?.discount_amount && (
                   <div className="flex justify-between">
                     <dt className="text-gray-600">Discount:</dt>
                     <dd className="font-medium text-red-600">
@@ -112,7 +112,7 @@ const VerifyOrder = () => {
               </dl>
             </div>
 
-            {/* User Information */}
+            {/*--------------- User Information------------------- */}
             <div className="bg-gray-50 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
                 <FiUser className="text-purple-500" /> Customer Information
@@ -140,7 +140,7 @@ const VerifyOrder = () => {
             </div>
           </div>
 
-          {/* Payment Information */}
+          {/* --------------- Payment Information -------------------*/}
           <div className="bg-gray-50 rounded-lg p-6">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <FiCreditCard className="text-green-500" /> Payment Details

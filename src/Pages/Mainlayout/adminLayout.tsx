@@ -1,11 +1,7 @@
 import {
   FaHome,
   FaChartBar,
-  FaUsers,
-  FaFolder,
-  FaCalendarAlt,
   FaUser,
-  FaBars,
   FaCarSide
 } from "react-icons/fa";
 import { MdOutlineVerticalSplit } from "react-icons/md";
@@ -57,6 +53,7 @@ const AdminLayout = () => {
             { to: "/admindashboard/managecar", icon: FaCarSide, label: "Car-Management" },
             { to: "/admindashboard/addcarproduct", icon:  IoBagAdd, label: "Add Cars" },
             { to: "/admindashboard/usermanage", icon: FaUser, label: "User-Manage" },
+            { to: "/admindashboard/manageorder", icon: FaUser, label: "Order-Manage" },
             { to: "/", icon: FaHome, label: " Home" },
           ].map((item, index) => (
             <li key={index}>

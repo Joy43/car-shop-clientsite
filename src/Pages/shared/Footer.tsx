@@ -85,17 +85,17 @@ const Footer: React.FC = () => {
 
           <div className="mt-6">
             <p className="text-lg font-bold text-gray-900">Contact Us</p>
-            <div className="flex gap-4 mt-2">
+            {/* <div className="flex gap-4 mt-2">
               <a href="#">
                 <img src="https://mcqmate.com/public/imgs/icons/playstore.svg" alt="Playstore Button" width={40} height={40} />
               </a>
               <a href="https://www.youtube.com/channel/UCo8tEi6SrGFP8XG9O0ljFgA">
                 <img src="https://mcqmate.com/public/imgs/icons/youtube.svg" alt="Youtube Button"  />
               </a>
-            </div>
+            </div> */}
             <div className="mt-4">
               <p className="text-gray-700">
-                <strong>Email:</strong> <a href="mailto:info@shoishobbd.com" className="text-blue-600">info@shoishobbd.com</a>
+                <strong>Email:</strong> <a href="mailto:info@shoishobbd.com" className="text-blue-600">ssjoy43@gmail.com</a>
               </p>
               <p className="text-gray-700">
                 <strong>Phone:</strong> <a href="tel:+8802 55058350" className="text-blue-600">+8802 55058350</a>
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-5 mt-5 text-sm text-gray-600">
-          <p>Copyright 2025 © Shoishob Fashion Ltd. All rights reserved.</p>
+          <p>Copyright 2025 © Car shop. All rights reserved.</p>
           <ul className="flex gap-5">
             <li><a href="#">Made by NI Car Shop</a></li>
           </ul>

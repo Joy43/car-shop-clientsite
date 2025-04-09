@@ -14,7 +14,7 @@ import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { MdOutlineVerticalSplit } from "react-icons/md";
 
 const UserLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const currentUser = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
 

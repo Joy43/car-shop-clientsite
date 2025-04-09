@@ -34,4 +34,6 @@ export type User = {
     _id: string;
     createdAt: string;
     updatedAt: string;
+    result: any;
+    __v: number;
   };

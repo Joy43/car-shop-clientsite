@@ -17,7 +17,9 @@ export type TMeta = {
 };
 
 export type TResponse<T> = {
-  data?: T;
+  data: {
+    result: T;
+  };
   error?: TError;
   meta?: TMeta;
   success: boolean;

@@ -26,7 +26,7 @@ const Popularcar = () => {
 
 {/* ---------car product ------------------- */}
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {products?.data?.slice(0, 6).map((car, _id) => (
+{products?.data?.slice(0, 6).map((car) => (
         <div key={car._id} className="bg-white shadow-md rounded-lg overflow-hidden w-96 border">
           {/* -------car image section--------- */}
           <div className="relative">
@@ -47,8 +47,8 @@ const Popularcar = () => {
             <p className="text-gray-500 text-sm">{new Date(car.createdAt).toDateString()}</p>
             <h3 className="text-lg font-semibold text-gray-900">{car.brand} {car.model}</h3>
             <div className="flex items-center gap-1">
-              <span className="text-green-600 font-bold text-lg">${car.price.toLocaleString()}</span>
-              <span className="text-gray-400 text-sm">/MRP</span>
+              <span className="text-green-600 font-bold text-lg">{car.price.toLocaleString()}</span>
+              <span className="text-gray-400 text-sm">/BDT</span>
             </div>
             <div className="flex items-center text-yellow-500 text-sm mt-1">
               {Array.from({ length: 5 }, (_, i) => (
@@ -72,7 +72,7 @@ const Popularcar = () => {
               </div>
               <div className="flex items-center gap-1">
                 <span className="text-red-400">📅</span>
-                <span>{car.year}</span>
+                <span>{car?.year}</span>
               </div>
             </div>
           </div>

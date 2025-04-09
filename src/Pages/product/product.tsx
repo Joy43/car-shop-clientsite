@@ -193,7 +193,7 @@ export default function ProductPage() {
                         {product.brand} 
                       </h3>
                       <p className="text-lg font-bold text-red-500">
-                        ${product.price.toLocaleString()}
+                      ৳ {product.price.toLocaleString()}
                       </p>
                     </div>
                     <p className="text-sm text-gray-600 line-clamp-2 mb-3">
@@ -224,7 +224,7 @@ export default function ProductPage() {
               ))}
             </div>
 
-            {/* Pagination */}
+            {/*------------- Pagination -------------------*/}
             {totalPages > 1 && (
               <div className="mt-8 flex justify-center items-center gap-2">
                 <button

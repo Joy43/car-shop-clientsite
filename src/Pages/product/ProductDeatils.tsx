@@ -3,21 +3,22 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetCarByIdQuery } from "../../redux/features/carProduct/carProduct.api";
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
+import Loading from "../../Components/Loading";
 
-interface TProduct {
-  _id: string;
-  brand: string;
-  model: string;
-  year: number;
-  price: number;
-  category: string;
-  imageUrls: string[];
-  description: string;
-  quantity: number;
-  inStock: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+// interface TProduct {
+//   _id: string;
+//   brand: string;
+//   model: string;
+//   year: number;
+//   price: number;
+//   category: string;
+//   imageUrls: string[];
+//   description: string;
+//   quantity: number;
+//   inStock: boolean;
+//   createdAt: string;
+//   updatedAt: string;
+// }
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -37,9 +38,7 @@ const ProductDetails = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex justify-center items-center">
-        <div className="animate-pulse">
-          <p className="text-gray-500 text-lg">Loading vehicle details...</p>
-        </div>
+        <Loading/>
       </div>
     );
   }
@@ -69,18 +68,18 @@ const ProductDetails = () => {
           <span className="ml-2">Back to Results</span>
         </button>
 
+{/* -----------------product iteams---------------- */}
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
             {/* Image Gallery */}
             <div className="space-y-6">
               <div className="aspect-square bg-gray-100 rounded-sm overflow-hidden shadow-sm relative">
                 <Zoom
-                  zoomMargin={40}
-                  overlayBgColorEnd="rgba(255, 255, 255, 0.95)"
+                
                 >
                   <img
                     src={selectedImage}
-                    alt={product.model}
+                    alt={product?.model}
                     className="w-full object-cover cursor-zoom-in transition-opacity duration-300"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = "/placeholder-car.jpg";
@@ -161,7 +160,7 @@ const ProductDetails = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <Link to={`/product/checkout/${product._id}`} className="flex-1">
                   <button
-                    className="bg-red-500 text-white px-6 py-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={!product.inStock}
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

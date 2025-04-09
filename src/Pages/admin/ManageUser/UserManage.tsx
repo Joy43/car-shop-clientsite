@@ -40,7 +40,7 @@ const UserManagement = () => {
 
   return (
     <div className="p-6 w-full">
-      <h2 className="text-2xl font-semibold mb-4">User Management</h2>
+      <h2 className="text-2xl text-center font-semibold mb-4">User Management</h2>
       {isLoading ? (
         <p>Loading users...</p>
       ) : (

@@ -22,6 +22,7 @@ import ProductPage from "../Pages/product/product";
 import ProductDetails from "../Pages/product/ProductDeatils";
 import Checkout from "../Pages/order/Checkout/Checkout";
 import VerifyOrder from "../Pages/order/varifyorder/varifyOrder";
+import UserOrder from "../Pages/user/order/UserOrder";
 
 
 
@@ -122,6 +123,10 @@ element:<Register/>
          {
             path:"userhome",
             element:<UserHome/>
+         },
+         {
+            path:"myorder",
+            element:<UserOrder/>
          },
         
 

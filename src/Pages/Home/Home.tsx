@@ -1,3 +1,4 @@
+import Footer from "../shared/Footer";
 import { Banner } from "./Banner/Banner"
 import CarPurchaseSection from "./CarPurchaseSection/CarPurchaseSection";
 import Popularcar from "./Popularcar/Popularcar";
@@ -13,7 +14,9 @@ export const Home = () => {
     <Popularcar/>
     <CustomerFeedback/>
     <CarPurchaseSection/>
-    
+    <main className="min-h-screen">
+        <Footer/>
+        </main>
     </>
   )
 };

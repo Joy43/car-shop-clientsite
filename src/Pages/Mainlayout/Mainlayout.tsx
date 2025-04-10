@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom"
 import { Navbar } from "../shared/Navbar";
-import Footer from "../shared/Footer";
+
 
 
 const Mainlayout = () => {
@@ -8,9 +8,7 @@ const Mainlayout = () => {
     <div>
         <Navbar/>
         <Outlet/>
-        <main className="min-h-screen">
-        <Footer/>
-        </main>
+        
        
     </div>
   )

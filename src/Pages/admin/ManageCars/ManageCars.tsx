@@ -5,6 +5,7 @@ import {
   useGetAllcarsQuery,
 } from "../../../redux/features/carProduct/carProduct.api";
 import Loading from "../../../Components/Loading";
+import { Link } from "react-router-dom";
 
 const ManageCar = () => {
   const [page, setPage] = useState(1);
@@ -75,9 +76,12 @@ const ManageCar = () => {
                     >
                       Delete
                     </button>
-                    <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition ml-2">
-                      Edit
-                    </button>
+                    <Link to={`/admindashboard/carupdate/${car._id}`}>
+  <button className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition ml-2">
+    Edit
+  </button>
+</Link>
+
                   </td>
                 </tr>
               ))}

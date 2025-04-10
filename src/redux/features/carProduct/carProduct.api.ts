@@ -46,15 +46,18 @@ const carProductApi = baseApi.injectEndpoints({
     }),
 
 // ----------ADD CAR PRODUCT-----------
+// Example RTK Query definition
 addCarProduct: builder.mutation({
-  query: ( data) => ({
+  query: (data) => ({
     url: '/cars',
     method: 'POST',
-    body: data,
- 
+    body: data, 
+    headers:{
+      'appender': 'application/json',
+    }
   }),
-  
 }),
+
 
 
 // -------------update car product--------------

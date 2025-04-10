@@ -5,10 +5,11 @@ export type TProduct = {
   _id: string;
   brand: string;
   model: string;
-  year: string;
+  year: number;
   category: string;
   imageUrls: string[];
   description: string;
+  quantity: number;
 };
 export type CProduct = {
   price: number;
@@ -17,8 +18,10 @@ export type CProduct = {
   _id: string;
   brand: string;
   model: string;
-  year: string;
+  year: number;
   category: string;
   imageUrls: string[];
   description: string;
+  quantity: number;
+ 
 };

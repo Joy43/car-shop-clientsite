@@ -24,6 +24,7 @@ import Checkout from "../Pages/order/Checkout/Checkout";
 import VerifyOrder from "../Pages/order/varifyorder/varifyOrder";
 import UserOrder from "../Pages/user/order/UserOrder";
 import ManageOrder from "../Pages/admin/OrderManage/OrderManage";
+import UpdateCars from "../Pages/admin/ManageCars/UpdateCars";
 
 
 
@@ -37,13 +38,14 @@ export const router =createBrowserRouter([
             {
                path:"/",
                element:<Home/>
-            },{
+            },
+            {
                 path:"/login",
                 element:<Login/>
             },
             {
-path:'/register',
-element:<Register/>
+            path:'/register',
+            element:<Register/>
             },
             {
                 path:'product',
@@ -64,14 +66,15 @@ element:<Register/>
               { path: "/product/checkout/:id",
                 element: (
                     <ProtectedRoute>
-                        <Checkout />
+                    <Checkout />
                     </ProtectedRoute>
                 ) 
             },
             {
                 path:"order/verification",
                 element:<VerifyOrder/>
-            }
+            },
+            
          
         ]
     },
@@ -108,7 +111,12 @@ element:<Register/>
          {
             path:'manageorder',
             element:<ManageOrder/>
-         }
+         },
+         {
+            path: 'carupdate/:id', 
+            element: <UpdateCars />,
+           
+          },
       
         ]
     },
@@ -133,7 +141,7 @@ element:<Register/>
             path:"myorder",
             element:<UserOrder/>
          },
-        
+         
 
         ]
     },

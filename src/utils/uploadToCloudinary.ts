@@ -1,7 +1,9 @@
 export const uploadToCloudinary = async (file: File): Promise<string | null> => {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', 'cars'); 
+  const data = new FormData();
+  data.append('file', file);
+  data.append('upload_preset', 'upload_car'); 
+  data.append('cloud_name', 'dluuillmt'); 
+
 
   try {
     // Replace with your actual cloud name from Cloudinary dashboard
@@ -9,7 +11,7 @@ export const uploadToCloudinary = async (file: File): Promise<string | null> => 
       'https://api.cloudinary.com/v1_1/dluuillmt/image/upload',
       {
         method: 'POST',
-        body: formData,
+        body:data,
       }
     );
 
@@ -19,8 +21,8 @@ export const uploadToCloudinary = async (file: File): Promise<string | null> => 
       throw new Error(`Upload failed: ${errorData.error.message}`);
     }
 
-    const data = await response.json();
-    return data.secure_url;
+    const responseData = await response.json();
+    return responseData.secure_url;
   } catch (error) {
     console.error('Upload Error:', error);
     return null;

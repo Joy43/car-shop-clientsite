@@ -32,7 +32,7 @@ To run the project locally, follow these steps:
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/car-shop.git
+git clone https://github.com/Joy43/car-shop-clientsite.git
 
 # 2. Navigate to the project directory
 cd car-shop

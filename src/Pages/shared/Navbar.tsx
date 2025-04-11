@@ -16,7 +16,7 @@ console.log(currentUser);
     setUserDropdownOpen(false);
   };
 
-  const dashboardLink = currentUser?.role === "admin" ? "/admindashboard" : "/userdashboard";
+  const dashboardLink = currentUser?.role === "admin" ? "/admindashboard/addcarproduct" : "/userdashboard";
 
   return (
     <header className="bg-white shadow-lg py-4 sticky top-0 z-50">

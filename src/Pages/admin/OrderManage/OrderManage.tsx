@@ -154,7 +154,7 @@ const ManageOrder = () => {
                               loadingCancelId === order._id ? "opacity-50" : ""
                             }`}
                           >
-                            Cancel
+                            Delete
                           </button>
                         )}
                       </td>

@@ -25,6 +25,7 @@ import VerifyOrder from "../Pages/order/varifyorder/varifyOrder";
 import UserOrder from "../Pages/user/order/UserOrder";
 import ManageOrder from "../Pages/admin/OrderManage/OrderManage";
 import UpdateCars from "../Pages/admin/ManageCars/UpdateCars";
+import Errorpage from "../Components/Errorpage";
 
 
 
@@ -34,6 +35,7 @@ export const router =createBrowserRouter([
     {
         path:"/",
         element:<Mainlayout/>,
+        errorElement:<Errorpage/>,
         children:[
             {
                path:"/",

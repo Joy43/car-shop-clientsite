@@ -10,7 +10,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
-
+import { MdProductionQuantityLimits } from "react-icons/md";
 const AdminLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const currentUser = useAppSelector(selectCurrentUser);
@@ -40,7 +40,7 @@ const AdminLayout = () => {
 
         {/* Logo */}
         <div className="flex items-center gap-2 mb-6 mt-10">
-          <div className="w-10 h-10 bg-[#1C398E] rounded-full"></div>
+          <div className="w-8 h-8 bg-[#1C398E] rounded-full"></div>
           {isSidebarOpen && <h1 className="text-lg font-semibold">Admin: {currentUser?.name}</h1>}
         </div>
 
@@ -53,7 +53,7 @@ const AdminLayout = () => {
             { to: "/admindashboard/managecar", icon: FaCarSide, label: "Car-Management" },
             { to: "/admindashboard/addcarproduct", icon:  IoBagAdd, label: "Add Cars" },
             { to: "/admindashboard/usermanage", icon: FaUser, label: "User-Manage" },
-            { to: "/admindashboard/manageorder", icon: FaUser, label: "Order-Manage" },
+            { to: "/admindashboard/manageorder", icon: MdProductionQuantityLimits, label: "Order-Manage" },
             { to: "/", icon: FaHome, label: " Home" },
           ].map((item, index) => (
             <li key={index}>

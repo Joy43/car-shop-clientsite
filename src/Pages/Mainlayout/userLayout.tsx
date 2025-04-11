@@ -42,7 +42,7 @@ const UserLayout = () => {
 
         {/* Logo */}
         <div className="flex items-center gap-2 mb-6 mt-6">
-          <div className="w-10 h-10 bg-red-500 rounded-full"></div>
+          <div className="w-7 h-7 bg-red-500 rounded-full"></div>
           {isSidebarOpen && <h1 className="text-lg font-semibold">User Pro</h1>}
         </div>
 
@@ -62,7 +62,7 @@ const UserLayout = () => {
         <ul className="space-y-2 flex-1">
           {[
             { to: "/userdashboard/userhome", icon:  FaUser, label: "User Profile" },
-            { to: "/userdashboard/useractivaty", icon: FaChartBar, label: "Analytics" },
+   
             { to: "/userdashboard/myorder", icon: BsCartCheck , label: "Order" },
             { to: "/", icon: FaHome , label: "Home" },
             

@@ -41,7 +41,7 @@ const UserHome = () => {
     <div className="w-full max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8 mt-10">
       <div className="flex items-center gap-6">
         <div className="text-red-500">
-          <FaUserCircle size={60} />
+          <FaUserCircle size={40} />
         </div>
 
         <div className="flex-1">

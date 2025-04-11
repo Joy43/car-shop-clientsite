@@ -1,8 +1,5 @@
 https://preview.themeforest.net/item/chaka-car-sale-and-rent-html-template/full_screen_preview/26239854?_ga=2.114059015.1240143139.1742945038-2091273120.1723221974&_gac=1.257283705.1742165230.Cj0KCQjw7dm-BhCoARIsALFk4v8pDlTXzzP_G8KfqIv5y_s_tnOhLWRlVaa2OUQ9Rx3scR129YI_vS0aAsp-EALw_wcB
-https://rifatsarker.com/
-https://github.com/rifat-sarker/Bi-cycle-store
-https://github.com/rifat-sarker/bicycle-store-client
-https://bicycle-store-client.vercel.app/
+
 
 
 [
@@ -56,5 +53,11 @@ https://bicycle-store-client.vercel.app/
     "inStock": true,
     "createdAt": "2024-02-20T14:00:00Z",
     "updatedAt": "2024-03-02T16:45:00Z"
+  }
+  {
+    https://rifatsarker.com/
+https://github.com/rifat-sarker/Bi-cycle-store
+https://github.com/rifat-sarker/bicycle-store-client
+https://bicycle-store-client.vercel.app/
   }
 ]

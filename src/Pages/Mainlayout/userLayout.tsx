@@ -1,7 +1,7 @@
 import {
   FaHome,
   FaUser,
-  FaChartBar,
+
 
   FaSearch,
  

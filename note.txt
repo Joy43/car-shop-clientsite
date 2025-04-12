@@ -58,6 +58,6 @@ https://preview.themeforest.net/item/chaka-car-sale-and-rent-html-template/full_
     https://rifatsarker.com/
 https://github.com/rifat-sarker/Bi-cycle-store
 https://github.com/rifat-sarker/bicycle-store-client
-https://bicycle-store-client.vercel.app/
+
   }
 ]

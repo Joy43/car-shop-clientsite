@@ -1,6 +1,6 @@
 # 🚗 Car Shop
 
-A responsive and visually appealing Car Shop application built using **React** and **Vite**. This project emphasizes secure authentication, smooth product management, and a user-friendly experience.
+A responsive and visually appealing Car Shop application built using **React** and **TypeScript**. This project emphasizes secure authentication, smooth product management, and a user-friendly experience.
 
 ---
 

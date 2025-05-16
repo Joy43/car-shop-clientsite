@@ -1,4 +1,4 @@
-import { FaWhatsapp } from "react-icons/fa";
+
 import Footer from "../shared/Footer";
 import { Banner } from "./Banner/Banner"
 import CarPurchaseSection from "./CarPurchaseSection/CarPurchaseSection";
@@ -6,7 +6,8 @@ import Popularcar from "./Popularcar/Popularcar";
 import Slider from "./Slider/Slider"
 import CustomerFeedback from "./Testomonia/Testomonia"
 
-
+import { MdContactSupport } from "react-icons/md";
+import { Link } from "react-router-dom";
 export const Home = () => {
   return (
     <>
@@ -18,15 +19,15 @@ export const Home = () => {
     <main className="min-h-screen">
         <Footer/>
         </main>
-        <a
-        href="https://wa.me/+8801726606815"
+        <Link
+      to="/carsupport"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-green-500 text-white p-2
+        className="fixed bottom-6 right-6 bg-[#FA2B35] text-white p-2
          rounded-full shadow-lg hover:bg-green-600 transition duration-300"
       >
-        <FaWhatsapp size={22} />
-      </a>
+        <MdContactSupport  size={30} />
+      </Link>
     </>
   )
 };

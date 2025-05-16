@@ -26,6 +26,7 @@ import UserOrder from "../Pages/user/order/UserOrder";
 import ManageOrder from "../Pages/admin/OrderManage/OrderManage";
 import UpdateCars from "../Pages/admin/ManageCars/UpdateCars";
 import Errorpage from "../Components/Errorpage";
+import Chatbot from "../Pages/openai/chatboot";
 
 
 
@@ -48,6 +49,10 @@ export const router =createBrowserRouter([
             {
             path:'/register',
             element:<Register/>
+            },
+            {
+             path:'/carsupport',
+             element:<Chatbot/>
             },
             {
                 path:'product',

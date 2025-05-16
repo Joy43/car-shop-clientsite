@@ -213,7 +213,7 @@ const Chatbot = () => {
           {loading && (
             <div className="flex justify-start">
               <div className="max-w-xl p-4 bg-white border border-gray-200 rounded-xl animate-pulse">
-                Analyzing question...
+                Analyzing question now...
               </div>
             </div>
           )}

@@ -42,7 +42,7 @@ console.log(currentUser);
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="hover:text-primary transition-colors duration-300">Home</Link>
           <Link to="/about" className="hover:text-primary transition-colors duration-300">About</Link>
-          <Link to="/carsupport" className="hover:text-primary transition-colors duration-300">Chat Bot</Link>
+          <Link to="/carsupport" className="hover:text-primary transition-colors duration-300">ChatBot</Link>
           <Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link>
           
           {currentUser ? (

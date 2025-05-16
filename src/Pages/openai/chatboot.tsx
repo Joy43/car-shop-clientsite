@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import jsPDF from 'jspdf';
-
+import { FaCopy } from "react-icons/fa";
+import { FaFileDownload } from "react-icons/fa";
+import { IoMdSend } from "react-icons/io";
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
@@ -88,12 +90,12 @@ const Chatbot = () => {
     try {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
-        headers: {
-          "Authorization": "Bearer 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",
-          "HTTP-Referer": "https://car-shop-clientsite.vercel.app/",
-          "X-Title": "car-shop-clientsite",
-          "Content-Type": "application/json"
-        },
+     headers: {
+  "Authorization": "Bearer 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",
+  "Content-Type": "application/json",
+  "HTTP-Referer": "https://car-shop-clientsite.vercel.app/", 
+  "X-Title": "car-shop-clientsite"         
+},
         body: JSON.stringify({
           model: "microsoft/phi-4-reasoning-plus:free",
           messages: [...messages, userMessage].map(({ role, content }) => ({ role, content }))
@@ -160,7 +162,7 @@ const Chatbot = () => {
         </footer>
       </aside>
 
-      {/* Chat Interface */}
+      {/* --------------Chat Interface -----------------------*/}
       <main className="flex-1 flex flex-col">
         {/* Header with PDF download */}
         <div className="border-b border-gray-200 bg-white p-4 flex justify-between items-center">
@@ -169,7 +171,7 @@ const Chatbot = () => {
             onClick={handleDownloadPDF}
             className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2"
           >
-            <DownloadIcon className="w-5 h-5" />
+            <FaFileDownload className="w-5 h-5" />
             Download PDF
           </button>
         </div>
@@ -197,7 +199,7 @@ const Chatbot = () => {
                   }`}
                   title="Copy message"
                 >
-                  <CopyIcon className="w-4 h-4" />
+                  <FaCopy className="w-4 h-4" />
                 </button>
                 <p className="whitespace-pre-wrap w-full">{message.content}</p>
                 <time className="text-xs mt-2 opacity-70 block">
@@ -243,7 +245,7 @@ const Chatbot = () => {
               disabled={loading}
               className="absolute right-3 bottom-3 p-2 bg-red-600 hover:bg-red-700 disabled:bg-gray-400 rounded-lg text-white transition-colors"
             >
-              <SendIcon className="w-5 h-5" />
+              <IoMdSend className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -258,57 +260,4 @@ const Chatbot = () => {
     </div>
   );
 };
-
-// SVG Icon Components
-const SendIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className={className}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"
-    />
-  </svg>
-);
-
-const DownloadIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className={className}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"
-    />
-  </svg>
-);
-
-const CopyIcon = ({ className }: { className?: string }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className={className}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M15.666 3.888A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.166 2.888c.052.13.182.25.347.35l3.526 2.176c.1.062.226.098.347.098.121 0 .247-.036.347-.098l3.526-2.176c.165-.1.295-.22.347-.35zM11.379 6.913a.75.75 0 00-.758 1.3l4.5 3.5a.75.75 0 00.758-1.3l-4.5-3.5zM16.5 6.75h3a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0119.5 21.75h-3a2.25 2.25 0 01-2.25-2.25V9A2.25 2.25 0 0116.5 6.75zM6.75 6.75h3a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 019.75 21.75h-3A2.25 2.25 0 014.5 19.5V9A2.25 2.25 0 016.75 6.75z"
-    />
-  </svg>
-);
-
 export default Chatbot;

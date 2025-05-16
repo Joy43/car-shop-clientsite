@@ -10,6 +10,7 @@ interface ChatMessage {
 }
 
 const Chatbot = () => {
+
   // State Management
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'assistant', content: 'Hi! Ask me anything about Cars.', timestamp: new Date() }
@@ -91,13 +92,13 @@ const Chatbot = () => {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
      headers: {
-  "Authorization": "Bearer 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",
+  "Authorization": "Bearer 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" ,
   "Content-Type": "application/json",
-  "HTTP-Referer": "https://car-shop-clientsite.vercel.app/", 
+  "HTTP-Referer": "https://car-shop-clientsite.vercel.app/carsupport", 
   "X-Title": "car-shop-clientsite"         
 },
         body: JSON.stringify({
-          model: "microsoft/phi-4-reasoning-plus:free",
+          model: "deepseek/deepseek-r1-distill-qwen-32b:free",
           messages: [...messages, userMessage].map(({ role, content }) => ({ role, content }))
         })
       });

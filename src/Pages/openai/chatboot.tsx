@@ -92,13 +92,13 @@ const Chatbot = () => {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
      headers: {
-  "Authorization": "Bearer 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" ,
+  "Authorization": "Bearer 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" ,
   "Content-Type": "application/json",
   "HTTP-Referer": "https://car-shop-clientsite.vercel.app/carsupport", 
   "X-Title": "car-shop-clientsite"         
 },
         body: JSON.stringify({
-          model: "deepseek/deepseek-r1-distill-qwen-32b:free",
+          model: "deepseek/deepseek-r1:free",
           messages: [...messages, userMessage].map(({ role, content }) => ({ role, content }))
         })
       });

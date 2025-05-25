@@ -3,7 +3,7 @@ import { IoIosArrowUp, IoIosSearch } from "react-icons/io";
 import logo from "../../assets/logo/carlogo.gif"
 import { TbLogout2 } from "react-icons/tb";
 import { CiMenuFries } from "react-icons/ci";
-import { MdLaptopMac, MdOutlineArrowRightAlt } from "react-icons/md";
+import {  MdOutlineArrowRightAlt } from "react-icons/md";
 import { BsBuildings} from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Nabvbartop from "./Nabvbartop";
@@ -48,18 +48,22 @@ export const Navbar = () => {
                         className="absolute top-[9px] left-3 text-[#424242] text-[1.3rem]"/>
                 </div>
         {/* nav links */}
-        <ul className="items-center gap-[20px] text-[1rem] text-[#424242] md:flex hidden">
+        <ul className="items-center relative gap-[20px] text-[1rem] text-[#424242] md:flex hidden">
 
-          <li>Contract</li>
-          {/* Product megamenu */}
+          <li>
+            <Link to="/contract">
+            Contract
+            </Link>
+          </li>
+          {/*-------------- Product megamenu -------------*/}
           <li
             className={`${
-              isProductHover ? "text-[#3B9DF8]" : "text-gray-600"
+              isProductHover ? "text-[#f83b6a]" : "text-gray-600"
             } flex items-center gap-[5px] cursor-pointer`}
             onMouseEnter={() => setIsProductHover(true)}
             onMouseLeave={() => setIsProductHover(false)}
           >
-            <FaCar className="text-[1.1rem] text-red-400" />
+            <FaCar className="text-[1.1rem] text-red-500" />
             Products
             <IoIosArrowUp
               className={`${
@@ -84,7 +88,7 @@ export const Navbar = () => {
                     {
                       icon: "https://i.ibb.co/LQBDJGD/icon-logo-container.png",
                       title: "Demo App",
-                      desc: "Lorem ipsum dolor sit amet, consect adipiscing elit",
+                      desc: "Lorem ipsum ",
                       color: "#FF5E5E",
                     },
                   
@@ -120,7 +124,7 @@ export const Navbar = () => {
                       <div>
                         <h1 className="text-[1rem] text-gray-600 font-[500]">{item.title}</h1>
                         <p className="text-[0.9rem] text-gray-400 font-[300]">
-                          Lorem ipsum dolor sit amet, consect adipiscing elit
+                           adipiscing elit
                         </p>
                       </div>
                     </div>

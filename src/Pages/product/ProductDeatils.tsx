@@ -4,6 +4,8 @@ import { useGetCarByIdQuery } from "../../redux/features/carProduct/carProduct.a
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import Loading from "../../Components/Loading";
+import Reviews from "./reviews";
+
 
 
 const ProductDetails = () => {
@@ -11,6 +13,8 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const { data: response, isLoading, isError } = useGetCarByIdQuery(id as string);
   const [selectedImage, setSelectedImage] = useState<string>("");
+
+
 
   const product = response?.data;
   const imageUrls = product?.imageUrls || [];
@@ -193,24 +197,8 @@ const ProductDetails = () => {
           </div>
 
           {/* Reviews Section */}
-          <div className="mt-8 pt-8 border-t">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">Customer Reviews (0)</h3>
-              <button className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                Write a Review
-              </button>
-            </div>
-            <div className="bg-gray-50 p-6 rounded-lg text-center">
-              <p className="text-gray-500 mb-3">Be the first to review this vehicle</p>
-              <div className="flex justify-center items-center space-x-2">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-6 h-6 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-          </div>
+        <Reviews productId={product._id} />
+
         </div>
       </div>
     </div>

@@ -3,7 +3,6 @@ import { IoIosArrowUp, IoIosSearch } from "react-icons/io";
 import logo from "../../assets/logo/carlogo.gif"
 import { TbLogout2 } from "react-icons/tb";
 import { CiMenuFries } from "react-icons/ci";
-import {  MdOutlineArrowRightAlt } from "react-icons/md";
 import { BsBuildings} from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Nabvbartop from "./Nabvbartop";
@@ -139,7 +138,7 @@ export const Navbar = () => {
       onClick={() => setAccountMenuOpen(!accountMenuOpen)}>
       <div className="relative">
         <img
-          src={currentUser.image ? currentUser.image : 'https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?t=st=1724605498~exp=1724609098~hmac=7f6fc106bae2c17b0c93af1b2e5483d9d8368f3e51284aaec7c7d50590d2bae5&w=740'}
+          src="https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?t=st=1724605498~exp=1724609098~hmac=7f6fc106bae2c17b0c93af1b2e5483d9d8368f3e51284aaec7c7d50590d2bae5&w=740"
           alt="avatar" className="w-[35px] h-[35px] rounded-full object-cover" />
         <div
           className="w-[10px] h-[10px] rounded-full bg-green-500 absolute bottom-[0px] right-0 border-2 border-white"></div>

@@ -1,6 +1,6 @@
 import {  TQueryParam } from '../../../types';
 import { baseApi } from '../../api/baseApi';
-import { CResponseRedux } from '../../../types/global';
+import { CResponseRedux, TResponseRedux } from '../../../types/global';
 import { TReview } from '../../../types/review.types';
 
 const ReviewApi = baseApi.injectEndpoints({
@@ -20,7 +20,7 @@ const ReviewApi = baseApi.injectEndpoints({
           params,
         };
       },
-      transformResponse: (response: CResponseRedux<TReview[]>) => {
+      transformResponse: (response: TResponseRedux<TReview[]>) => {
         return {
           data: response.data,
           meta: response.meta,

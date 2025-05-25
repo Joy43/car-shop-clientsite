@@ -41,6 +41,7 @@ const Reviews = ({ productId }: ReviewProps) => {
         rating,
       }).unwrap();
       toast.success("Review submitted successfully!");
+
       setReviewText("");
       setRating(5);
       setShowForm(false);
@@ -60,7 +61,7 @@ const Reviews = ({ productId }: ReviewProps) => {
         {currentUser && (
           <button
             onClick={() => setShowForm(!showForm)}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition"
+            className="bg-red-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition"
           >
             {showForm ? "Cancel" : "Write a Review"}
           </button>

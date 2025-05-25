@@ -30,7 +30,7 @@ const Nabvbartop = () => {
       </div>
 
       {/* Secondary Navigation Bar */}
-      <div className="hidden md:flex justify-between items-center px-6 py-3 bg-white border-b border-gray-200">
+      <div className="hidden md:flex justify-between items-center px-6 py-3 border-b border-gray-200">
         <p className="text-sm font-semibold text-gray-800">Car Shop</p>
         <ul className="flex gap-6 text-sm text-gray-700">
           <li className="hover:text-red-500 transition-colors duration-200">

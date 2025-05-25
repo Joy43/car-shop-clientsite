@@ -9,6 +9,7 @@ export type TAllUser = {
   email: string;
   needsPasswordChange: boolean;
   role: "admin" | "customer";
+  image:string;
   createdAt: string;
   updatedAt: string;
 };

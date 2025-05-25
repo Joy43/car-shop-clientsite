@@ -1,7 +1,7 @@
 
 import logo from "../../assets/logo/carlogo.gif";
 
-import { FaInstagram, FaPhone, FaWhatsapp, FaLinkedin, FaFacebook } from "react-icons/fa";
+import { FaInstagram, FaPhone, FaWhatsapp, FaLinkedin, FaFacebook, FaFacebookF, FaLinkedinIn, FaSkype } from "react-icons/fa";
 
 import bikas from "../../assets/images/paylogo/bikas.png";
 import nagad from "../../assets/images/paylogo/Nagad.png";
@@ -56,54 +56,79 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Footer Section */}
-      <footer className="bg-gray-100 p-6 border-t-2">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="sm:col-span-1">
-            <h2 className="text-xl font-bold text-gray-800">Our Company</h2>
-            <p className="mt-4 text-sm text-gray-700 leading-relaxed">
-              Shoishob is a leading kids fashion brand in Bangladesh that represents style and quality since 2008.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-lg font-bold text-gray-800">Customer Services</h2>
-            <ul className="flex flex-col gap-2 mt-4 text-sm text-gray-700">
-              {["Contact Us", "Fabric Care", "Store Locator", "Terms & Conditions", "Return & Exchange Policy", "Track Your Order", "Privacy Policy", "FAQs"].map((item, index) => (
-                <li key={index}><a href="#">{item}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-lg font-bold text-gray-800">Our Categories</h2>
-            <ul className="flex flex-col gap-2 mt-4 text-sm text-gray-700">
-              {["Baby Collection", "Girls Collection", "Boys Collection", "Bubble", "Accessories"].map((item, index) => (
-                <li key={index}><a href="#">{item}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mt-6">
-            <p className="text-lg font-bold text-gray-900">Contact Us</p>
-            
-            <div className="mt-4">
-              <p className="text-gray-700">
-                <strong>Email:</strong> <a href="mailto:info@shoishobbd.com" className="text-blue-600">ssjoy43@gmail.com</a>
-              </p>
-              <p className="text-gray-700">
-                <strong>Phone:</strong> <a href="tel:+8802 55058350" className="text-blue-600">+01755058350</a>
-              </p>
-            </div>
+    <footer className="w-full mx-auto max-w-[1400px] pt-16 pb-6 px-6 flex justify-between md:flex-row flex-col gap-8">
+        <div className="w-full md:w-[30%]">
+        <img src={logo} 
+         className="w-32"
+        alt="" />
+          <p className="mt-3">
+            Simple innate summer fat appear bas innate summer fat appear basket
+            his desire joy.fat appear basket his desire joy.
+          </p>
+          <div className="flex items-center gap-4 mt-6">
+            <FaFacebookF className="p-2 text-[2rem] bg-brandColor text-white rounded-full" />
+            <FaInstagram className="p-2 text-[2rem] bg-brandColor text-white rounded-full" />
+            <FaLinkedinIn className="p-2 text-[2rem] bg-brandColor text-white rounded-full" />
+            <FaSkype className="p-2 text-[2rem] bg-brandColor text-white rounded-full" />
           </div>
         </div>
 
+        <div className="flex flex-col gap-3">
+          <h2 className="text-[21px] font-[600]">Company</h2>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            About Us
+          </p>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Carear
+          </p>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Blog
+          </p>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Pricing
+          </p>
+        </div>
+        <div className="flex flex-col gap-3">
+          <h2 className="text-[21px] font-[600]">Resources</h2>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Templates
+          </p>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Free Templates
+          </p>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Tuitorials
+          </p>
+          <p className="hover:text-brandColor cursor-pointer transition-all duration-300">
+            Contract templates
+          </p>
+        </div>
+        <div className="flex flex-col gap-3">
+          <h2 className="text-[21px] font-[600]">Join Our Newsletter</h2>
+          <div className=" relative w-full">
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Your email address"
+              className="py-3 px-6 bordeno focus:outline-none bg-[#f3f3f3] w-full"
+            />
+            <button className="px-8 h-full absolute top-0 right-0 bg-red-500 text-white font-semibold">
+              Subscribe
+            </button>
+          </div>
+          <p className="w-[70%]">
+            * Will send you weekly updates for your better finance management.
+          </p>
+        </div>
+      </footer>
+      
         <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-5 mt-5 text-sm text-gray-600">
           <p>Copyright 2025 © Car shop. All rights reserved.</p>
           <ul className="flex gap-5">
             <li><a href="#">Made by NI Car Shop</a></li>
           </ul>
         </div>
-      </footer>
     </div>
   );
 };

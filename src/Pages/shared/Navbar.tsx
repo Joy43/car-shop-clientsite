@@ -30,7 +30,7 @@ export const Navbar = () => {
     currentUser?.role === "admin" ? "/admindashboard/addcarproduct" : "/userdashboard";
 
   return (
-    <header className="bg-white px-4 shadow-lg py-4 sticky top-0 z-50">
+    <header className="bg-white px-4 shadow-lg py-4 sticky top-0 z-50 text-xl">
       <Nabvbartop />
       <nav className="flex items-center justify-between w-full relative">
         {/* logo */}
@@ -133,7 +133,7 @@ export const Navbar = () => {
               </div>
 
               {/* Featured call-to-action area */}
-              <div className="flex flex-col gap-[20px] bg-gray-50 rounded-md p-[20px] w-full">
+              {/* <div className="flex flex-col gap-[20px] bg-gray-50 rounded-md p-[20px] w-full">
                 {[
                   {
                     img: "https://i.ibb.co/VTqw5rY/img-container.png",
@@ -161,7 +161,7 @@ export const Navbar = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
           </li>
 

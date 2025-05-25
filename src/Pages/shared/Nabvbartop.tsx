@@ -8,7 +8,7 @@ const Nabvbartop = () => {
   return (
     <>
       {/* Top Announcement Bar */}
-      <div className="bg-salt-400 text-black px-4 py-2 flex flex-col md:flex-row items-center justify-between gap-2">
+      <div className="bg-salt-400 text-black px-4  flex flex-col md:flex-row items-center justify-between gap-2">
         <div className="flex items-center text-sm font-medium">
           <CiDeliveryTruck className="text-red-400 text-xl mr-2" />
           <span>40+ outlets nationwide with international delivery</span>

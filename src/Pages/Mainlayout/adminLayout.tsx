@@ -4,7 +4,7 @@ import {
   FaUser,
   FaCarSide
 } from "react-icons/fa";
-import { MdOutlineVerticalSplit } from "react-icons/md";
+import { MdOutlineVerticalSplit, MdReviews } from "react-icons/md";
 import { IoBagAdd } from "react-icons/io5";
 import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
@@ -54,6 +54,7 @@ const AdminLayout = () => {
             { to: "/admindashboard/addcarproduct", icon:  IoBagAdd, label: "Add Cars" },
             { to: "/admindashboard/usermanage", icon: FaUser, label: "User-Manage" },
             { to: "/admindashboard/manageorder", icon: MdProductionQuantityLimits, label: "Order-Manage" },
+            { to: "/admindashboard/review", icon: MdReviews, label: "Review-Manage" },
             { to: "/", icon: FaHome, label: " Home" },
           ].map((item, index) => (
             <li key={index}>

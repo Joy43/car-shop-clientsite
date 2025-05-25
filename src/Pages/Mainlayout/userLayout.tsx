@@ -11,7 +11,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
-import { MdOutlineVerticalSplit } from "react-icons/md";
+import { MdOutlineVerticalSplit, MdReviews } from "react-icons/md";
 
 const UserLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -64,6 +64,7 @@ const UserLayout = () => {
             { to: "/userdashboard/userhome", icon:  FaUser, label: "User Profile" },
    
             { to: "/userdashboard/myorder", icon: BsCartCheck , label: "Order" },
+            { to: "/userdashboard/review", icon: MdReviews , label: "My-Review" },
             { to: "/", icon: FaHome , label: "Home" },
             
       

@@ -1,4 +1,5 @@
 import { BaseQueryApi } from "@reduxjs/toolkit/query";
+import { TReview } from './review.types';
 
 export type TError = {
   data: {
@@ -33,6 +34,22 @@ export type CResponse<C> = {
   success: boolean;
   message: string;
 };
+
+export type TReviewResponse = {
+  success: boolean;
+  message: string;
+  statusCode: number;
+  data: {
+    meta: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPage: number;
+    };
+    result: TReview[];
+  };
+};
+
 
 export type TResponseRedux<T> = TResponse<T> & BaseQueryApi;
 export type CResponseRedux<C> = CResponse<C> & BaseQueryApi;

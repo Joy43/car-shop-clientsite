@@ -1,7 +1,7 @@
 import { TProduct } from "./carProduct.type";
 import { TAllUser } from "./User.types";
 
-export type TReview= {
+export type TReview = {
   _id: string;
   review: string;
   rating: number;
@@ -11,5 +11,5 @@ export type TReview= {
   flaggedReason: string;
   createdAt: string;
   updatedAt: string;
-  result:[]
-}
+};
+

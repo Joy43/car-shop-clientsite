@@ -58,9 +58,7 @@ const Footer: React.FC = () => {
       {/* Footer Section */}
     <footer className="w-full mx-auto max-w-[1400px] pt-16 pb-6 px-6 flex justify-between md:flex-row flex-col gap-8">
         <div className="w-full md:w-[30%]">
-        <img src={logo} 
-         className="w-32"
-        alt="" />
+     <h3 className="text-xl font-light font-stretch-200%">Car Shop</h3>
           <p className="mt-3">
             Simple innate summer fat appear bas innate summer fat appear basket
             his desire joy.fat appear basket his desire joy.
@@ -103,23 +101,21 @@ const Footer: React.FC = () => {
             Contract templates
           </p>
         </div>
+        {/* -----------newsletter------------- */}
         <div className="flex flex-col gap-3">
-          <h2 className="text-[21px] font-[600]">Join Our Newsletter</h2>
-          <div className=" relative w-full">
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="Your email address"
-              className="py-3 px-6 bordeno focus:outline-none bg-[#f3f3f3] w-full"
-            />
-            <button className="px-8 h-full absolute top-0 right-0 bg-red-500 text-white font-semibold">
-              Subscribe
-            </button>
-          </div>
-          <p className="w-[70%]">
-            * Will send you weekly updates for your better finance management.
-          </p>
+         <section className="w-full rounded-xl p-[20px]">
+
+            <h1 className="capitalize text-[1.5rem] sm:text-[2rem] font-[600] text-center text-[#FF354D]">Subscribe
+                to our newsletter</h1>
+
+            <div className="relative mt-6 w-full sm:w-[70%] mx-auto">
+                <input placeholder="Email Address"
+                       className="py-4 pl-6 pr-[130px] border rounded-full outline-none focus:ring-0 border-[#FF354D] w-full"/>
+                <button
+                    className="py-3 px-6 absolute top-[50%] translate-y-[-50%] transform right-1.5 hover:bg-[#ea253c] bg-[#FF354D] text-white rounded-full">Subscribe
+                </button>
+            </div>
+        </section>
         </div>
       </footer>
       

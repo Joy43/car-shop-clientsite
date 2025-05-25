@@ -22,11 +22,11 @@ import ProductPage from "../Pages/product/product";
 import ProductDetails from "../Pages/product/ProductDeatils";
 import Checkout from "../Pages/order/Checkout/Checkout";
 import VerifyOrder from "../Pages/order/varifyorder/varifyOrder";
-import UserOrder from "../Pages/user/order/UserOrder";
 import ManageOrder from "../Pages/admin/OrderManage/OrderManage";
 import UpdateCars from "../Pages/admin/ManageCars/UpdateCars";
 import Errorpage from "../Components/Errorpage";
 import Chatbot from "../Pages/openai/chatboot";
+import UserReview from "../Pages/user/userReview/userReview";
 
 
 
@@ -120,6 +120,10 @@ export const router =createBrowserRouter([
             element:<ManageOrder/>
          },
          {
+            path:'review',
+            element:<UserReview/>
+         },
+         {
             path: 'carupdate/:id', 
             element: <UpdateCars />,
            
@@ -145,8 +149,8 @@ export const router =createBrowserRouter([
             element:<UserHome/>
          },
          {
-            path:"myorder",
-            element:<UserOrder/>
+            path:'review',
+            element:<UserReview/>
          },
          
 

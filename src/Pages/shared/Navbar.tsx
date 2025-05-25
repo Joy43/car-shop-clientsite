@@ -40,14 +40,14 @@ export const Navbar = () => {
           alt="logo"
           className="w-[55px]"
         /></Link>
- <div className="relative md:flex hidden">
+        <div className="relative md:flex hidden">
                     <input
                         className="py-1.5 pr-4 border border-[#424242] pl-10 rounded-full outline-none focus:border-[#f83b6a]"
                         placeholder="Search..."/>
                     <IoIosSearch
                         className="absolute top-[9px] left-3 text-[#424242] text-[1.3rem]"/>
                 </div>
-        {/* nav links */}
+        {/*-------- nav links ---------------*/}
         <ul className="items-center relative gap-[20px] text-[1rem] text-[#424242] md:flex hidden">
 
           <li>
@@ -87,8 +87,8 @@ export const Navbar = () => {
                   {[
                     {
                       icon: "https://i.ibb.co/LQBDJGD/icon-logo-container.png",
-                      title: "Demo App",
-                      desc: "Lorem ipsum ",
+                      title: "Laxary car",
+                      desc: "this is most popular car ",
                       color: "#FF5E5E",
                     },
                   
@@ -98,24 +98,19 @@ export const Navbar = () => {
                       <div>
                         <h1 className="text-[1rem] text-gray-600 font-[500]">{item.title}</h1>
                         <p className="text-[0.9rem] text-gray-400 font-[300]">{item.desc}</p>
-                        <button
-                          className={`text-[${item.color}] mt-2 flex items-center gap-[4px] text-[0.9rem]`}
-                        >
-                          Call to action
-                          <MdOutlineArrowRightAlt className="text-[1.4rem] group-hover:ml-[5px] transition-all duration-300" />
-                        </button>
+                      
                       </div>
                     </div>
                   ))}
                 </div>
 
                 <div className="flex flex-col gap-[20px]">
-                  <h3 className="text-[1.2rem] text-gray-500 font-[500]">Ecosystem</h3>
+                  <h3 className="text-[1.2rem] text-gray-500 font-[500]">car category</h3>
 
                   {[
                     {
                       icon: <BsBuildings className="text-[1.4rem] text-gray-600" />,
-                      title: "Directory",
+                      title: "more than 10 car",
                     },
                     
                   ].map((item, i) => (
@@ -124,7 +119,7 @@ export const Navbar = () => {
                       <div>
                         <h1 className="text-[1rem] text-gray-600 font-[500]">{item.title}</h1>
                         <p className="text-[0.9rem] text-gray-400 font-[300]">
-                           adipiscing elit
+                           Best way performance
                         </p>
                       </div>
                     </div>
@@ -132,39 +127,9 @@ export const Navbar = () => {
                 </div>
               </div>
 
-              {/* Featured call-to-action area */}
-              {/* <div className="flex flex-col gap-[20px] bg-gray-50 rounded-md p-[20px] w-full">
-                {[
-                  {
-                    img: "https://i.ibb.co/VTqw5rY/img-container.png",
-                    title: "Check the new app",
-                    badge: "Featured",
-                  },
-                
-                ].map((item, i) => (
-                  <div key={i} className="flex float-start gap-[10px] group">
-                    <img src={item.img} alt="cta" className="w-[100px]" />
-                    <div>
-                      <div className="mb-2 flex items-center gap-[5px]">
-                        <h1 className="text-[1rem] text-gray-600 font-[500]">{item.title}</h1>
-                        <p className="py-[3px] px-[8px] text-[0.6rem] text-gray-500 border border-gray-300 rounded-full text-center">
-                          {item.badge}
-                        </p>
-                      </div>
-                      <p className="text-[0.9rem] text-gray-400 font-[300]">
-                        Lorem ipsum dolor sit amet, consect adipiscing elit
-                      </p>
-                      <button className="text-[#FF5E5E] mt-2 flex items-center gap-[4px] text-[0.9rem]">
-                        Call to action
-                        <MdOutlineArrowRightAlt className="text-[1.4rem] group-hover:ml-[5px] transition-all duration-300" />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-              </div> */}
+          
             </div>
           </li>
-
         
            {/* user account */}
             <div className="flex items-center gap-[15px]">

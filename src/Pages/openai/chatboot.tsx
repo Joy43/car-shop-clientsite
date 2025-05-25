@@ -98,7 +98,7 @@ const Chatbot = () => {
   "X-Title": "car-shop-clientsite"         
 },
         body: JSON.stringify({
-          model: "deepseek/deepseek-r1:free",
+          model: "meta-llama/llama-3.3-8b-instruct:free",
           messages: [...messages, userMessage].map(({ role, content }) => ({ role, content }))
         })
       });

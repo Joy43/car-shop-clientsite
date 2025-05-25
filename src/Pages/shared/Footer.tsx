@@ -1,5 +1,5 @@
 
-import logo from "../../assets/logo/logoGif.gif";
+import logo from "../../assets/logo/carlogo.gif";
 
 import { FaInstagram, FaPhone, FaWhatsapp, FaLinkedin, FaFacebook } from "react-icons/fa";
 

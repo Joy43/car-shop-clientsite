@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo/logoGif.gif";
+import logo from "../../assets/logo/carlogo.gif";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logout, selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { FaUserCircle } from "react-icons/fa";
+import Nabvbartop from "./Nabvbartop";
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -19,11 +20,12 @@ console.log(currentUser);
   const dashboardLink = currentUser?.role === "admin" ? "/admindashboard/addcarproduct" : "/userdashboard";
 
   return (
-    <header className="bg-white shadow-lg py-4 sticky top-0 z-50">
-      <div className="container mx-auto flex items-center justify-between px-4">
+    <header className="bg-white  px-4 shadow-lg py-4 sticky top-0 z-50">
+      <Nabvbartop/>
+      <div className="container mx-auto flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center text-primary hover:text-secondary">
-          <img src={logo} alt="Logo" className="h-16 w-16 mr-2 bg-transparent" />
+          <img src={logo} alt="Logo" className="h-20 w-24 mr-2 bg-transparent" />
         </Link>
 
         {/* Mobile Menu Button */}
@@ -41,7 +43,6 @@ console.log(currentUser);
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="hover:text-primary transition-colors duration-300">Home</Link>
-          <Link to="/about" className="hover:text-primary transition-colors duration-300">About</Link>
           <Link to="/carsupport" className="hover:text-primary transition-colors duration-300">ChatBot</Link>
           <Link to="/contact" className="hover:text-primary transition-colors duration-300">Contact</Link>
           

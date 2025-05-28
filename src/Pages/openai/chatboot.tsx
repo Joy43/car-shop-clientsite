@@ -19,7 +19,7 @@ const Chatbot = () => {
     const fetchInitialGreeting = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('http://localhost:5000/api/chatbot');
+        const response = await fetch('https://server-car-industy.vercel.app/api/chatbot');
         const data = await response.json();
         
         if (data.success && data.data) {
@@ -73,7 +73,7 @@ const Chatbot = () => {
 
     try {
       // Send to backend API
-      const response = await fetch('http://localhost:5000/api/chatbot', {
+      const response = await fetch('https://server-car-industy.vercel.app/api/chatbot', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

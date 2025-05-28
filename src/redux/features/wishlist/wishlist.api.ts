@@ -1,4 +1,4 @@
-import {  TQueryParam, TResponseRedux } from '../../../types';
+import {  CResponseRedux, TQueryParam} from '../../../types';
 import { baseApi } from '../../api/baseApi';
 
 import { TWishlistItem } from '../../../types/wishlist.types';
@@ -20,7 +20,7 @@ const WishlistApi = baseApi.injectEndpoints({
           params,
         };
       },
-      transformResponse: (response: TResponseRedux<TWishlistItem[]>) => {
+      transformResponse: (response: CResponseRedux<TWishlistItem[]>) => {
         return {
           data: response.data,
           meta: response.meta,

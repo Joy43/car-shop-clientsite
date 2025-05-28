@@ -158,7 +158,7 @@ const Chatbot = () => {
             key={message.id} 
             className={`max-w-[85%] p-3 rounded-2xl animate-fadeIn ${
               message.sender === 'user' 
-                ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white self-end rounded-br-none' 
+                ? 'bg-gradient-to-r from-red-500 to-blue-600 text-white self-end rounded-br-none' 
                 : 'bg-white text-gray-800 shadow-sm self-start rounded-bl-none'
             }`}
           >

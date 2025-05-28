@@ -3,6 +3,7 @@ import Footer from "../shared/Footer";
 import AboutUs from "./AboutUs/AboutUs";
 import { Banner } from "./Banner/Banner"
 import Blogs from "./Blogs/Blogs";
+import NewsletterForm from "./Newsletter/Nesletter";
 // import CarPurchaseSection from "./CarPurchaseSection/CarPurchaseSection";
 import Popularcar from "./Popularcar/Popularcar";
 import Slider from "./Slider/Slider"
@@ -20,12 +21,13 @@ export const Home = () => {
     <CustomerFeedback/>
     {/* <CarPurchaseSection/> */}
     <Blogs/>
+    <NewsletterForm/>
     <main className="min-h-screen">
         <Footer/>
         </main>
         <Link
       to="/carsupport"
-        target="_blank"
+        
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 bg-[#FA2B35] text-white p-2
          rounded-full shadow-lg hover:bg-green-600 transition duration-300"

@@ -29,6 +29,9 @@ import Chatbot from "../Pages/openai/chatboot";
 import UserReview from "../Pages/user/userReview/userReview";
 import UserWishlist from "../Pages/user/UserWishlist/userWishlist";
 import UserOrder from "../Pages/user/order/UserOrder";
+import AboutUs from "../Pages/Home/AboutUs/AboutUs";
+import AboutCompany from "../Pages/Home/AboutCompnay/AboutCompany";
+import Contact from "../Pages/Contract/Contract";
 
 
 
@@ -43,6 +46,18 @@ export const router =createBrowserRouter([
             {
                path:"/",
                element:<Home/>
+            },
+            {
+          path:"/aboutus",
+         element:<AboutUs/>
+            },
+            {
+             path:"/contract",
+               element:<Contact/>
+            },
+            {path:"/aboutcomany",
+               element:<AboutCompany/>
+
             },
             {
                 path:"/login",

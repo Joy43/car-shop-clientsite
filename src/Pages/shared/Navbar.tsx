@@ -29,173 +29,159 @@ export const Navbar = () => {
     currentUser?.role === "admin" ? "/admindashboard/addcarproduct" : "/userdashboard";
 
   return (
-    <header className="bg-white px-4 shadow-lg py-4 sticky top-0 z-50 text-xl">
-      <Nabvbartop />
-      <nav className="flex items-center justify-between w-full relative">
-        {/* logo */}
-      <Link to="/">
-        <img
-          src={logo}
-          alt="logo"
-          className="w-[55px]"
-        /></Link>
-        <div className="relative md:flex hidden">
-                    <input
-                        className="py-1.5 pr-4 border border-[#424242] pl-10 rounded-full outline-none focus:border-[#f83b6a]"
-                        placeholder="Search..."/>
-                    <IoIosSearch
-                        className="absolute top-[9px] left-3 text-[#424242] text-[1.3rem]"/>
-                </div>
-        {/*-------- nav links ---------------*/}
-        <ul className="items-center relative gap-[20px] text-[1rem] text-[#424242] md:flex hidden">
+   <header className="bg-white shadow-lg sticky top-0 z-50">
+  <Nabvbartop />
+  <nav className="px-4 py-3 flex justify-between items-center w-full">
+    {/* Logo */}
+    <Link to="/">
+      <img src={logo} alt="logo" className="w-[45px] md:w-[55px]" />
+    </Link>
 
-          <li>
-            <Link to="/contract">
-            Contract
-            </Link>
-          </li>
-          {/*-------------- Product megamenu -------------*/}
-          <li
-            className={`${
-              isProductHover ? "text-[#f83b6a]" : "text-gray-600"
-            } flex items-center gap-[5px] cursor-pointer`}
-            onMouseEnter={() => setIsProductHover(true)}
-            onMouseLeave={() => setIsProductHover(false)}
-          >
-            <FaCar className="text-[1.1rem] text-red-500" />
-            Products
-            <IoIosArrowUp
-              className={`${
-                isProductHover ? "rotate-0" : "rotate-[-180deg]"
-              } transition-all duration-300`}
-            />
-
-            {/* Mega menu car */}
-            <div
-              className={`${
-                isProductHover
-                  ? "translate-y-0 opacity-100 z-30"
-                  : "translate-y-[20px] opacity-0 z-[-1]"
-              } bg-white rounded-md w-full absolute top-[40px] left-0 p-[30px] transition-all duration-300 boxShadow flex flex-wrap gap-[30px]`}
-            >
-              <div className="grid grid-cols-2 gap-[30px]">
-                <div className="flex flex-col gap-[20px]">
-                  <h3 className="text-[1.2rem] text-gray-500 font-[500]">More Products</h3>
-
-                  {/* Product cards */}
-                  {[
-                    {
-                      icon: "https://i.ibb.co/LQBDJGD/icon-logo-container.png",
-                      title: "Laxary car",
-                      desc: "this is most popular car ",
-                      color: "#FF5E5E",
-                    },
-                  
-                  ].map((item, i) => (
-                    <div key={i} className="flex float-start gap-[10px] group">
-                      <img src={item.icon} alt="icon" className="w-[30px] h-[30px]" />
-                      <div>
-                        <h1 className="text-[1rem] text-gray-600 font-[500]">{item.title}</h1>
-                        <p className="text-[0.9rem] text-gray-400 font-[300]">{item.desc}</p>
-                      
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-col gap-[20px]">
-                  <h3 className="text-[1.2rem] text-gray-500 font-[500]">car category</h3>
-
-                  {[
-                    {
-                      icon: <BsBuildings className="text-[1.4rem] text-gray-600" />,
-                      title: "more than 10 car",
-                    },
-                    
-                  ].map((item, i) => (
-                    <div key={i} className="flex float-start gap-[10px]">
-                      {item.icon}
-                      <div>
-                        <h1 className="text-[1rem] text-gray-600 font-[500]">{item.title}</h1>
-                        <p className="text-[0.9rem] text-gray-400 font-[300]">
-                           Best way performance
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-          
-            </div>
-          </li>
-        
-           {/* user account */}
-            <div className="flex items-center gap-[15px]">
-{
-  currentUser ? (
-    <div className="flex items-center gap-[10px] cursor-pointer relative"
-      onClick={() => setAccountMenuOpen(!accountMenuOpen)}>
-      <div className="relative">
-        <img
-          src="https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?t=st=1724605498~exp=1724609098~hmac=7f6fc106bae2c17b0c93af1b2e5483d9d8368f3e51284aaec7c7d50590d2bae5&w=740"
-          alt="avatar" className="w-[35px] h-[35px] rounded-full object-cover" />
-        <div
-          className="w-[10px] h-[10px] rounded-full bg-green-500 absolute bottom-[0px] right-0 border-2 border-white"></div>
-      </div>
-
-      <h1 className="text-[1rem] font-[400] text-gray-600 sm:block hidden"> Name: {currentUser.name}</h1>
-
-      <div
-        className={`${accountMenuOpen ? "translate-y-0 opacity-100 z-[1]" : "translate-y-[10px] opacity-0 z-[-1]"} bg-white w-max rounded-md absolute top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px]`}>
-        <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50">
-          <FiUser />
-          {currentUser.email}
-        </p>
-        <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50">
-          <IoSettingsOutline />
-          <Link to={dashboardLink}>Dashboard</Link>
-        </p>
-        <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-gray-600 hover:bg-gray-50">
-          <FiUser />
-          View Profile
-        </p>
-
-        <div className="mt-3 border-t border-gray-200 pt-[5px]">
-          <p onClick={handleLogout} className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] text-red-500 hover:bg-red-50">
-            <TbLogout2 />
-            Logout
-          </p>
-        </div>
-
-      </div>
-
-      <IoIosArrowUp
-        className={`${accountMenuOpen ? "rotate-0" : "rotate-[180deg]"} transition-all duration-300 text-gray-600 sm:block hidden`} />
-
+    {/* Search bar - only on md+ */}
+    <div className="relative md:flex hidden w-[250px]">
+      <input
+        className="w-full py-1.5 pr-4 border border-gray-400 pl-10 rounded-full outline-none focus:border-[#f83b6a]"
+        placeholder="Search..."
+      />
+      <IoIosSearch className="absolute top-[9px] left-3 text-gray-600 text-lg" />
     </div>
-  ) : (
-    <button>
-      <Link to="/login" className="block px-2 py-1 bg-red-500 hover:bg-secondary text-white rounded-md text-center transition-colors duration-300">
-        Login
-      </Link>
-    </button>
-  )
-}
 
-                <CiMenuFries onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-                             className="text-[1.8rem] text-[#424242]c cursor-pointer md:hidden flex"/>
-            </div>
-        </ul>
+    {/* Desktop Menu */}
+    <ul className="hidden md:flex gap-5 text-gray-600 items-center text-sm relative">
+      <li>
+        <Link to="/contract">Contract</Link>
+      </li>
 
-        {/* Mobile menu button */}
-        <div className="md:hidden">
-          <CiMenuFries
-            className="text-2xl text-gray-700 cursor-pointer"
-            onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+      {/* Product Dropdown */}
+      <li
+        className="relative group"
+        onMouseEnter={() => setIsProductHover(true)}
+        onMouseLeave={() => setIsProductHover(false)}
+      >
+        <div className="flex items-center gap-1 cursor-pointer">
+          <FaCar className="text-red-500 text-base" />
+          Products
+          <IoIosArrowUp
+            className={`transition-transform duration-300 ${isProductHover ? "rotate-0" : "rotate-180"}`}
           />
         </div>
-      </nav>
-    </header>
+
+        {/* Dropdown */}
+        <div
+          className={`absolute left-0 top-[100%] mt-2 bg-white rounded-md p-5 w-max shadow-lg z-30 transition-all duration-300 ${
+            isProductHover ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"
+          }`}
+        >
+          <div className="grid grid-cols-2 gap-6">
+            {/* Section 1 */}
+            <div>
+              <h3 className="text-gray-500 mb-2 font-medium">More Products</h3>
+              <div className="space-y-2">
+                <Link to="/product" className="flex items-start gap-2 group">
+                  <img src="https://i.ibb.co/LQBDJGD/icon-logo-container.png" className="w-7 h-7" />
+                  <div>
+                    <p className="font-medium group-hover:text-[#f83b6a]">Luxury Car</p>
+                    <p className="text-sm text-gray-400">Most popular car</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            {/* Section 2 */}
+            <div>
+              <h3 className="text-gray-500 mb-2 font-medium">Car Category</h3>
+              <Link to="/product" className="flex items-center gap-2">
+                <BsBuildings className="text-lg text-gray-600" />
+                <span>More than 10 car</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    {/* Right User Menu */}
+    <div className="flex items-center gap-4">
+      {/* Account Section */}
+      {currentUser ? (
+        <div className="relative">
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={() => setAccountMenuOpen(!accountMenuOpen)}
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              alt="user"
+              className="w-8 h-8 rounded-full object-cover"
+            />
+            <span className="hidden sm:block text-sm text-gray-600">Name: {currentUser.name}</span>
+            <IoIosArrowUp
+              className={`transition-transform duration-300 hidden sm:block ${
+                accountMenuOpen ? "rotate-0" : "rotate-180"
+              }`}
+            />
+          </div>
+
+          {/* Account Menu */}
+          <div
+            className={`absolute right-0 top-12 bg-white p-3 rounded-md shadow-md transition-all duration-300 text-sm ${
+              accountMenuOpen ? "block" : "hidden"
+            }`}
+          >
+            <p className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+              <FiUser />
+              {currentUser.email}
+            </p>
+            <Link to={dashboardLink} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+              <IoSettingsOutline />
+              Dashboard
+            </Link>
+            <p className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded">
+              <FiUser />
+              View Profile
+            </p>
+            <div className="border-t mt-2 pt-2">
+              <button
+                onClick={handleLogout}
+                className="flex items-center gap-2 text-red-500 hover:bg-red-50 p-2 rounded w-full"
+              >
+                <TbLogout2 />
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Link
+          to="/login"
+          className="px-3 py-1 bg-red-500 hover:bg-secondary text-white rounded-md text-sm"
+        >
+          Login
+        </Link>
+      )}
+
+      {/* Mobile Menu Button */}
+      <CiMenuFries
+        className="text-2xl text-gray-700 cursor-pointer md:hidden"
+        onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+      />
+    </div>
+  </nav>
+
+  {/* Mobile Menu Dropdown */}
+  {mobileSidebarOpen && (
+    <div className="md:hidden px-4 py-3 bg-white space-y-2 text-sm">
+      <Link to="/contract" className="block hover:text-[#f83b6a]">Contract</Link>
+      <Link to="/product" className="block hover:text-[#f83b6a]">Products</Link>
+      {currentUser && (
+        <>
+          <Link to={dashboardLink} className="block hover:text-[#f83b6a]">Dashboard</Link>
+          <button onClick={handleLogout} className="block text-red-500 hover:underline">Logout</button>
+        </>
+      )}
+    </div>
+  )}
+</header>
+
   );
 };

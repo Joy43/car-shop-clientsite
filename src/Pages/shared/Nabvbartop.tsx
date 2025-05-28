@@ -34,7 +34,7 @@ const Nabvbartop = () => {
         <p className="text-sm font-semibold text-gray-800">Car Shop</p>
         <ul className="flex gap-6 text-sm text-gray-700">
           <li className="hover:text-red-500 transition-colors duration-200">
-            <Link to="/contact">About Us</Link>
+            <Link to="/aboutcomany">About Us</Link>
           </li>
           <li className="hover:text-purple-600 transition-colors duration-200">
             <Link to="/compare">Compare (0)</Link>

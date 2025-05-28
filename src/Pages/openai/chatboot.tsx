@@ -1,8 +1,10 @@
+'use client';
+
 import { useState, useEffect, useRef } from 'react';
 import jsPDF from 'jspdf';
-import { FaCopy } from "react-icons/fa";
-import { FaFileDownload } from "react-icons/fa";
-import { IoMdSend } from "react-icons/io";
+import { FaCopy, FaFileDownload } from 'react-icons/fa';
+import { IoMdSend } from 'react-icons/io';
+
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
@@ -10,8 +12,6 @@ interface ChatMessage {
 }
 
 const Chatbot = () => {
-
-  // State Management
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'assistant', content: 'Hi! Ask me anything about Cars.', timestamp: new Date() }
   ]);
@@ -20,16 +20,13 @@ const Chatbot = () => {
   const [error, setError] = useState<string | null>(null);
   const [showCopyNotification, setShowCopyNotification] = useState(false);
 
-  // Refs
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto-scroll to bottom on new messages
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
 
-  // Copy to clipboard functionality
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text)
       .then(() => {
@@ -42,7 +39,6 @@ const Chatbot = () => {
       });
   };
 
-  // PDF Download functionality
   const handleDownloadPDF = () => {
     const doc = new jsPDF();
     let yPos = 20;
@@ -73,46 +69,55 @@ const Chatbot = () => {
     doc.save('chat-history.pdf');
   };
 
-  // API Communication
   const sendMessage = async () => {
     if (!input.trim()) return;
-    
+
     const userMessage: ChatMessage = {
       role: 'user',
       content: input,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-     headers: {
-  "Authorization": "Bearer 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" ,
-  "Content-Type": "application/json",
-  "HTTP-Referer": "https://car-shop-clientsite.vercel.app/carsupport", 
-  "X-Title": "car-shop-clientsite"         
-},
-        body: JSON.stringify({
-          model: "meta-llama/llama-3.3-8b-instruct:free",
-          messages: [...messages, userMessage].map(({ role, content }) => ({ role, content }))
-        })
-      });
+      const response = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=AIzaSyD703wGJOGmF-9n4nUe3oRSl1-tHiY8vqg',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [
+              ...messages.map((msg) => ({
+                role: msg.role,
+                parts: [{ text: msg.content }],
+              })),
+              {
+                role: 'user',
+                parts: [{ text: input }],
+              },
+            ],
+          }),
+        }
+      );
 
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
       const data = await response.json();
+      const assistantContent = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, no response.';
+
       const assistantMessage: ChatMessage = {
         role: 'assistant',
-        content: data.choices[0].message.content,
-        timestamp: new Date()
+        content: assistantContent,
+        timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, assistantMessage]);
+      setMessages((prev) => [...prev, assistantMessage]);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch response');
     } finally {
@@ -121,7 +126,6 @@ const Chatbot = () => {
     }
   };
 
-  // Event Handlers
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -131,7 +135,7 @@ const Chatbot = () => {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Knowledge Base Sidebar */}
+      {/* Sidebar */}
       <aside className="w-80 bg-white border-r border-gray-200 p-6 flex flex-col">
         <header className="mb-6">
           <h1 className="text-2xl font-bold text-red-600 mb-2">Car Expert AI</h1>
@@ -156,16 +160,14 @@ const Chatbot = () => {
           </ul>
         </section>
 
-        <footer className="pt-4 border-t border-gray-200">
-          <p className="text-xs text-gray-500">
-            Powered Carshop Automotive data updated 2025
-          </p>
+        <footer className="pt-4 border-t border-gray-200 text-xs text-gray-500">
+          Powered by Carshop | Data updated 2025
         </footer>
       </aside>
 
-      {/* --------------Chat Interface -----------------------*/}
+      {/* Chat Panel */}
       <main className="flex-1 flex flex-col">
-        {/* Header with PDF download */}
+        {/* Header */}
         <div className="border-b border-gray-200 bg-white p-4 flex justify-between items-center">
           <h2 className="text-xl font-semibold">Chat</h2>
           <button
@@ -177,7 +179,7 @@ const Chatbot = () => {
           </button>
         </div>
 
-        {/* Messages Container */}
+        {/* Messages */}
         <div className="flex-1 w-full overflow-y-auto p-4 space-y-4">
           {messages.map((message, index) => (
             <div
@@ -193,9 +195,9 @@ const Chatbot = () => {
               >
                 <button
                   onClick={() => handleCopy(message.content)}
-                  className={`absolute top-2 right-2 p-1 rounded transition-colors ${
-                    message.role === 'user' 
-                      ? 'text-white hover:bg-white/20' 
+                  className={`absolute top-2 right-2 p-1 rounded ${
+                    message.role === 'user'
+                      ? 'text-white hover:bg-white/20'
                       : 'text-gray-600 hover:bg-gray-100'
                   }`}
                   title="Copy message"
@@ -204,7 +206,10 @@ const Chatbot = () => {
                 </button>
                 <p className="whitespace-pre-wrap w-full">{message.content}</p>
                 <time className="text-xs mt-2 opacity-70 block">
-                  {message.timestamp?.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {message.timestamp?.toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
                 </time>
               </div>
             </div>
@@ -229,7 +234,7 @@ const Chatbot = () => {
           <div ref={bottomRef} />
         </div>
 
-        {/* Input Area */}
+        {/* Input Box */}
         <div className="border-t border-gray-200 bg-white p-4">
           <div className="max-w-3xl mx-auto relative">
             <textarea
@@ -261,4 +266,5 @@ const Chatbot = () => {
     </div>
   );
 };
+
 export default Chatbot;

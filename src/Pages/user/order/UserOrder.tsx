@@ -66,7 +66,7 @@ if(isError){
   return (
     <div className="min-h-screen p-4 md:p-6">
       <div className="mx-auto max-w-7xl">
-        <h1 className="mb-6 text-2xl font-bold text-gray-800">Your Orders</h1>
+        <h1 className="mb-6 text-2xl font-bold text-gray-800">My Orders</h1>
         
         <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
           <div className="overflow-x-auto">
@@ -78,7 +78,7 @@ if(isError){
                   <th className="hidden px-4 py-3 text-right text-sm font-semibold text-gray-600 md:table-cell md:px-6">Total</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 md:px-6">Status</th>
                   <th className="hidden px-4 py-3 text-left text-sm font-semibold text-gray-600 md:table-cell md:px-6">Date</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 md:px-6">Action</th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 md:px-6">status</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">

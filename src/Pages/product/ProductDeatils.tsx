@@ -5,6 +5,12 @@ import { useGetCarByIdQuery } from "../../redux/features/carProduct/carProduct.a
 import 'react-medium-image-zoom/dist/styles.css';
 import Loading from "../../Components/Loading";
 import Reviews from "./reviews";
+import { useAppSelector } from "../../redux/hooks";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
+import { useAddWishlistMutation } from "../../redux/features/wishlist/wishlist.api";
+import { toast } from "sonner";
+
+
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -13,10 +19,32 @@ const ProductDetails = () => {
   const [selectedImage, setSelectedImage] = useState<string>("");
 
 
-
   const product = response?.data;
   const imageUrls = product?.imageUrls || [];
 
+
+  // -------whishlist---------------
+  const currentUser = useAppSelector(selectCurrentUser);
+const [addToWishlist] = useAddWishlistMutation();
+
+const handleAddToWishlist = async () => {
+  if (!product) {
+    alert("Product details are not loaded yet.");
+    return;
+  }
+
+  try {
+    await addToWishlist({
+      userId: currentUser?.userId,
+      carId: product._id,
+    }).unwrap();
+
+    toast.success("Added to wishlist successfully!");
+  } catch (error) {
+    console.error("Failed to add to wishlist:", error);
+    toast.error("Something went wrong while adding to wishlist.");
+  }
+};
   useEffect(() => {
     if (imageUrls.length > 0) {
       setSelectedImage(imageUrls[0]);
@@ -105,7 +133,7 @@ const ProductDetails = () => {
                     </div>
          
 
-            {/*  right Product Details */}
+         
             {/* Right Product Details */}
 <div className="flex flex-col gap-6">
   {/* Title */}
@@ -151,7 +179,7 @@ const ProductDetails = () => {
   </div>
 
   {/* Add to Cart Button */}
-  <div>
+  <div className="flex gap-4">
     <Link to={`/product/checkout/${product._id}`} className="block">
       <button
         className="w-fit bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -163,6 +191,18 @@ const ProductDetails = () => {
         Add to Cart
       </button>
     </Link>
+    {/* --------------add to wishishlist----- */}
+   <button
+  onClick={handleAddToWishlist}
+  className="w-fit cursor-pointer bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+ 
+>
+  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+  </svg>
+add wishlist
+</button>
+
   </div>
 
   {/* Specifications */}

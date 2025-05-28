@@ -27,6 +27,8 @@ import UpdateCars from "../Pages/admin/ManageCars/UpdateCars";
 import Errorpage from "../Components/Errorpage";
 import Chatbot from "../Pages/openai/chatboot";
 import UserReview from "../Pages/user/userReview/userReview";
+import UserWishlist from "../Pages/user/UserWishlist/userWishlist";
+import UserOrder from "../Pages/user/order/UserOrder";
 
 
 
@@ -151,6 +153,14 @@ export const router =createBrowserRouter([
          {
             path:'review',
             element:<UserReview/>
+         },
+         {
+            path:'userWishlist',
+            element:<UserWishlist/>
+         },
+         {
+            path:'myorder',
+            element:<UserOrder/>
          },
          
 

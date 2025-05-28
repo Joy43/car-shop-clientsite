@@ -1,9 +1,8 @@
 import {
   FaHome,
   FaUser,
-
-
   FaSearch,
+  FaProductHunt,
  
 } from "react-icons/fa";
 import { BsCartCheck } from  "react-icons/bs";
@@ -64,6 +63,7 @@ const UserLayout = () => {
             { to: "/userdashboard/userhome", icon:  FaUser, label: "User Profile" },
    
             { to: "/userdashboard/myorder", icon: BsCartCheck , label: "Order" },
+            { to: "/userdashboard/userWishlist", icon: FaProductHunt , label: "WhishList" },
             { to: "/userdashboard/review", icon: MdReviews , label: "My-Review" },
             { to: "/", icon: FaHome , label: "Home" },
             

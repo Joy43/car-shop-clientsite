@@ -32,6 +32,8 @@ import UserOrder from "../Pages/user/order/UserOrder";
 import AboutUs from "../Pages/Home/AboutUs/AboutUs";
 import AboutCompany from "../Pages/Home/AboutCompnay/AboutCompany";
 import Contact from "../Pages/Contract/Contract";
+import Blogspage from "../Pages/Blogs/page";
+import BlogDetails from "../Pages/Blogs/BlogDetails";
 
 
 
@@ -71,6 +73,7 @@ export const router =createBrowserRouter([
              path:'/carsupport',
              element:<Chatbot/>
             },
+            // ----------product------------
             {
                 path:'product',
                 element:<ProductPage/>
@@ -94,10 +97,29 @@ export const router =createBrowserRouter([
                     </ProtectedRoute>
                 ) 
             },
-            {
+             {
                 path:"order/verification",
                 element:<VerifyOrder/>
             },
+            // ----------blog------------
+            {
+                path:'carblog',
+                element:<Blogspage/>
+    
+    
+             },
+             {
+                path: '/carblog',
+                children: [
+                  {
+                    path: '/carblog:id',  
+                    element: <BlogDetails />
+                  },
+                  
+                ]
+              },
+              
+           
             
          
         ]

@@ -4,6 +4,7 @@ import blog2 from "../../../assets/carblogs/carblog (4).png"
 import blog3 from "../../../assets/carblogs/carblog (3).png"
 import blog4 from "../../../assets/carblogs/carblog (5).png"
 import blog5 from "../../../assets/carblogs/carblog.png"
+import { Link } from "react-router-dom"
 
 const Blogs = () => {
   return (
@@ -12,9 +13,11 @@ const Blogs = () => {
         <h2 className="text-[20px] md:text-[40px] font-[600]">
           Our Latest Blog Posts
         </h2>
-        <button className="md:py-[1rem] py-[0.5rem] px-6 md:px-10 rounded-full md:text-[16px] text-[10px] bg-brandColor text-[#fff] flex items-center gap-2">
+       <Link to="carblog">
+       
+        <button className="md:py-[1rem] bg-red-500 py-[0.5rem] px-6 md:px-10 rounded-full md:text-[16px] text-[10px] bg-brandColor text-white flex items-center gap-2">
           See All Blog Posts
-        </button>
+        </button></Link>
       </div>
 
       {/* cards */}

@@ -1,6 +1,7 @@
 
 import logo from "../../assets/logo/carlogo.gif";
-
+import {CgFacebook} from "react-icons/cg";
+import {BsInstagram, BsLinkedin, BsTwitter} from "react-icons/bs";
 import { FaInstagram, FaPhone, FaWhatsapp, FaLinkedin, FaFacebook, FaFacebookF, FaLinkedinIn, FaSkype } from "react-icons/fa";
 
 import bikas from "../../assets/images/paylogo/bikas.png";
@@ -102,22 +103,24 @@ const Footer: React.FC = () => {
           </p>
         </div>
         {/* -----------newsletter------------- */}
-        <div className="flex flex-col gap-3">
-         <section className="w-full rounded-xl p-[20px]">
-
-            <h1 className="capitalize text-[1.5rem] sm:text-[2rem] font-[600] text-center text-[#FF354D]">Subscribe
-                to our newsletter</h1>
-
-            <div className="relative mt-6 w-full sm:w-[70%] mx-auto">
-                <input placeholder="Email Address"
-                       className="py-4 pl-6 pr-[130px] border rounded-full outline-none focus:ring-0 border-[#FF354D] w-full"/>
-                <button
-                    className="py-3 px-6 absolute top-[50%] translate-y-[-50%] transform right-1.5 hover:bg-[#ea253c] bg-[#FF354D] text-white rounded-full">Subscribe
-                </button>
-            </div>
-        </section>
-        </div>
-      </footer>
+         <div className="lg:w-[20%]">
+                    <h3 className="text-[1.2rem] font-semibold text-red-500 mb-2">Get in touch</h3>
+                    <div className="flex gap-[7px] text-red-400">
+                        <a className="text-[1.3rem] p-1.5 cursor-pointer rounded-full hover:bg-blue-400">
+                            <CgFacebook/>
+                        </a>
+                        <a className="text-[1.2rem] p-1.5 cursor-pointer rounded-full hover:bg-blue-400">
+                            <BsTwitter/>
+                        </a>
+                        <a className="text-[1.2rem] p-1.5 cursor-pointer rounded-full hover:bg-blue-400">
+                            <BsInstagram/>
+                        </a>
+                        <a className="text-[1.2rem] p-1.5 cursor-pointer rounded-full hover:bg-blue-400">
+                            <BsLinkedin/>
+                        </a>
+                    </div>
+                </div>
+    </footer>
       
         <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-5 mt-5 text-sm text-gray-600">
           <p>Copyright 2025 © Car shop. All rights reserved.</p>

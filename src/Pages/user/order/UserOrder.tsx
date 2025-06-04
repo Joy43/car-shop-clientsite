@@ -1,4 +1,3 @@
-"use client";
 
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import {

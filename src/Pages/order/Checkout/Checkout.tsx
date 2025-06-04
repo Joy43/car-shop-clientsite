@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useCreateOrderMutation } from "../../../redux/features/user/userOrder.api";
 import { toast } from "sonner";
 import Loading from "../../../Components/Loading";
-
-
 const Checkout = () => {
   const { id } = useParams();
   const { data: product, isLoading } = useGetCarByIdQuery(id as string);

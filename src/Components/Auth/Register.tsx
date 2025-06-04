@@ -1,4 +1,4 @@
-"use client";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, FieldValues } from "react-hook-form";
@@ -13,7 +13,7 @@ import {
   HiHome,
   HiExclamationCircle,
   HiMapPin,
-  HiPhoto,
+
 } from "react-icons/hi2";
 import { useRegisterMutation } from "../../redux/features/auth/authApi";
 

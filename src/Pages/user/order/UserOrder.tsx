@@ -1,32 +1,32 @@
 "use client";
-import { toast } from "sonner";
+
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import {
-  useDeleteOrderMutation,
+
   useGetAllOrderQuery,
 } from "../../../redux/features/user/userOrder.api";
 import { useAppSelector } from "../../../redux/hooks";
 import { TOrder } from "../../../types/order.type";
 import { useState } from "react";
-import Loading from "../../../Components/Loading";
+
 
 const UserOrder = () => {
   const [page, setPage] = useState(1);
-  const [loadingCancelId, setLoadingCancelId] = useState<string | null>(null);
+
   const limit = 8;
 
   const {
     data: orders,
-    isLoading,
+
     isError,
-    refetch,
+   
   } = useGetAllOrderQuery([
     { name: "limit", value: limit.toString() },
     { name: "page", value: page.toString() },
     { name: "sort", value: "id" },
   ]);
 
-  const [deleteOrder] = useDeleteOrderMutation();
+
   const currentUser = useAppSelector(selectCurrentUser);
   const currentUserEmail = currentUser?.email;
 
@@ -38,21 +38,7 @@ const UserOrder = () => {
   console.log('orders', orders?.data?.result);
   const totalOrders = orders?.meta?.total || 0;
   const totalPages = Math.ceil(totalOrders / limit);
-// -------------CANCEL ORDER FUNCTION---------
-  const handleCancel = async (orderId: string) => {
-    try {
-      setLoadingCancelId(orderId);
-      await deleteOrder(orderId).unwrap();
-      toast.success("Order canceled successfully!");
-      refetch();
-    } catch (error) {
-      toast.error("Failed to cancel order. Please try again.");
-    } finally {
-      setLoadingCancelId(null);
-    }
-  };
 
-  if (isLoading) return <Loading />;
 if(isError){
   return (
     <div className="min-h-screen p-4 md:p-6">

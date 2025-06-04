@@ -38,7 +38,7 @@ const Checkout = () => {
   return (
     <section className="font-poppins flex items-center justify-center min-h-screen bg-black bg-opacity-20">
       <div className="flex w-[1300px] p-10 bg-white border-2 border-gray-400 rounded-xl">
-        {/* Product Images Column */}
+        {/*----------------- Product Images Column ----------------------*/}
         <div className="flex flex-col gap-14 items-center mr-6">
           <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
             <path

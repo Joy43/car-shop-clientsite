@@ -194,13 +194,13 @@ const handleAddToWishlist = async () => {
     {/* --------------add to wishishlist----- */}
    <button
   onClick={handleAddToWishlist}
-  className="w-fit cursor-pointer bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+  className="w-fit cursor-pointer bg-gray-900 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
  
 >
   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
   </svg>
-add wishlist
+Add wishlist
 </button>
 
   </div>
@@ -227,15 +227,7 @@ add wishlist
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-   
-
-
-       
+</div> 
         </div>
    {/*-------------- Reviews Section------------- */}
         <Reviews productId={product._id} />

@@ -78,7 +78,7 @@ if(isError){
                   <th className="hidden px-4 py-3 text-right text-sm font-semibold text-gray-600 md:table-cell md:px-6">Total</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 md:px-6">Status</th>
                   <th className="hidden px-4 py-3 text-left text-sm font-semibold text-gray-600 md:table-cell md:px-6">Date</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600 md:px-6">status</th>
+                 
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
@@ -132,21 +132,7 @@ if(isError){
                           </span>
                         </div>
                       </td>
-                      <td className="px-4 py-3 text-sm md:px-6">
-                        {order.status !== "Paid" ? (
-                          <button
-                            onClick={() => handleCancel(order._id)}
-                            disabled={loadingCancelId === order._id}
-                            className={`text-sm font-medium text-red-600 transition-colors hover:text-red-800 ${
-                              loadingCancelId === order._id ? "opacity-50" : ""
-                            }`}
-                          >
-                            {loadingCancelId === order._id ? "Canceling..." : "Cancel"}
-                          </button>
-                        ) : (
-                          <span className="text-sm font-medium text-green-600">Completed</span>
-                        )}
-                      </td>
+                      
                     </tr>
                   ))
                 )}

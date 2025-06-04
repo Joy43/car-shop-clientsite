@@ -36,7 +36,7 @@ export const Navbar = () => {
   };
 
   const dashboardLink =
-    currentUser?.role === "admin" ? "/admindashboard/addcarproduct" : "/userdashboard";
+    currentUser?.role === "admin" ? "/admindashboard/adminprofile" : "/userdashboard/userhome";
 
   return (
     <header className="bg-stone-50 text-lg shadow-lg sticky top-0 z-50">
@@ -106,7 +106,9 @@ export const Navbar = () => {
           >
             <div className="flex items-center gap-1 cursor-pointer">
               <FaCar className="text-red-500 text-base" />
+             <Link to="/product" >
               Products
+             </Link>
               <IoIosArrowUp
                 className={`transition-transform duration-300 ${
                   isProductHover ? "rotate-0" : "rotate-180"
@@ -114,7 +116,7 @@ export const Navbar = () => {
               />
             </div>
 
-            {/* Dropdown */}
+            {/* ------------Dropdown------------------------- */}
             <div
               className={`absolute left-0 top-[100%] mt-2 bg-white rounded-md p-5 w-max shadow-lg z-30 transition-all duration-300 ${
                 isProductHover

@@ -139,7 +139,7 @@ const AdminProfile = () => {
           </p>
         </div>
         <div className="bg-sky-50 p-4 rounded-md shadow-sm">
-          <p className="text-gray-500 text-sm">User ID</p>
+          <p className="text-gray-500 text-sm">Admin ID</p>
           <p className="font-medium">{currentUser?.userId || "N/A"}</p>
         </div>
       </div>

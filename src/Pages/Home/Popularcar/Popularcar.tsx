@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { FaGasPump } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { BsChatQuoteFill, BsFillCarFrontFill } from "react-icons/bs";
@@ -6,92 +7,124 @@ import { useGetAllcarsQuery } from "../../../redux/features/carProduct/carProduc
 import { Link } from "react-router-dom";
 import Loading from "../../../Components/Loading";
 
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: "easeOut"
+    }
+  })
+};
+
 const Popularcar = () => {
   const { data: products, isLoading } = useGetAllcarsQuery(undefined);
 
-  if (isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
 
   return (
-   <div className="px-6 my-6 bg-slate-50">
-{/* ---------header section--------------- */}
+    <div className="px-6 my-6 bg-slate-50">
+      {/* Header section */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        className="mx-auto my-4 flex flex-col items-center text-center max-w-lg"
+      >
+        <h1 className="font-bold text-3xl font-mono">Buy Your Dream Car</h1>
+        <BsChatQuoteFill className="text-red-500 text-4xl mb-4" />
+        <p className="text-md">
+          Interdum neque adipiscing eros enim velit suspendisse pulvinar lacus rhoncus varius.
+          Inceptos lobortis. Sociosqu integer litora vulputate neque.
+        </p>
+      </motion.div>
 
-<div className="mx-auto my-4 flex flex-col items-center text-center max-w-lg">
-  <h1 className="font-bold text-3xl font-mono">Buy Your Dream Car</h1>
-  <BsChatQuoteFill className="text-red-500 text-4xl mb-4" />
-  <p className="text-md">
-    Interdum neque adipiscing eros enim velit suspendisse pulvinar lacus rhoncus varius. 
-    Inceptos lobortis. Sociosqu integer litora vulputate neque.
-  </p>
-</div>
+      {/* Car product section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products?.data?.slice(0, 6).map((car, index) => (
+          <motion.div
+            key={car._id}
+            className="bg-white shadow-md rounded-lg overflow-hidden w-96 border"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            custom={index}
+            variants={fadeInUp}
+          >
+            {/* Car image */}
+            <div className="relative">
+              <img
+                src={car.imageUrls[0]}
+                alt={car.brand + " " + car.model}
+                className="w-full h-48 object-cover"
+              />
+              {new Date(car.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) && (
+                <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                  Sale
+                </span>
+              )}
+            </div>
 
-{/* ---------car product ------------------- */}
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-{products?.data?.slice(0, 6).map((car) => (
-        <div key={car._id} className="bg-white shadow-md rounded-lg overflow-hidden w-96 border">
-          {/* -------car image section--------- */}
-          <div className="relative">
-            <img
-              src={car.imageUrls[0]}
-              alt={car.brand + " " + car.model}
-              className="w-full h-48 object-cover"
-            />
-            {new Date(car.createdAt) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000) && (
-              <span className="absolute top-2 right-2 bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
-                Sale
-              </span>
-            )}
-          </div>
-     {/* -----------car content--------- */}
-     <Link to={`/products/${car._id}`} className="block hover:shadow-lg transition duration-300 ease-in-out">
-     <div className="p-4">
-            <p className="text-gray-500 text-sm">{new Date(car.createdAt).toDateString()}</p>
-            <h3 className="text-lg font-semibold text-gray-900">{car.brand} {car.model}</h3>
-            <div className="flex items-center gap-1">
-              <span className="text-green-600 font-bold text-lg">{car.price.toLocaleString()}</span>
-              <span className="text-gray-400 text-sm">/BDT</span>
-            </div>
-            <div className="flex items-center text-yellow-500 text-sm mt-1">
-              {Array.from({ length: 5 }, (_, i) => (
-                <AiFillStar key={i} className={i < 4 ? "text-yellow-500" : "text-gray-300"} />
-              ))}
-              <span className="text-gray-500 text-xs ml-1">(5 Reviews)</span>
-            </div>
-            <p className="text-gray-600 text-sm mt-2">{car.description.slice(0, 80)}...</p>
-            <div className="border-t mt-3 pt-3 flex justify-between text-gray-600 text-xs">
-              <div className="flex items-center gap-1">
-                <BsFillCarFrontFill className="text-red-500" />
-                <span>{car.category}</span>
+            {/* Car content */}
+            <Link to={`/products/${car._id}`} className="block hover:shadow-lg transition duration-300 ease-in-out">
+              <div className="p-4">
+                <p className="text-gray-500 text-sm">{new Date(car.createdAt).toDateString()}</p>
+                <h3 className="text-lg font-semibold text-gray-900">{car.brand} {car.model}</h3>
+                <div className="flex items-center gap-1">
+                  <span className="text-green-600 font-bold text-lg">{car.price.toLocaleString()}</span>
+                  <span className="text-gray-400 text-sm">/BDT</span>
+                </div>
+                <div className="flex items-center text-yellow-500 text-sm mt-1">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <AiFillStar key={i} className={i < 4 ? "text-yellow-500" : "text-gray-300"} />
+                  ))}
+                  <span className="text-gray-500 text-xs ml-1">(5 Reviews)</span>
+                </div>
+                <p className="text-gray-600 text-sm mt-2">{car.description.slice(0, 80)}...</p>
+                <div className="border-t mt-3 pt-3 flex justify-between text-gray-600 text-xs">
+                  <div className="flex items-center gap-1">
+                    <BsFillCarFrontFill className="text-red-500" />
+                    <span>{car.category}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <MdSpeed className="text-blue-500" />
+                    <span>300KM/h</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <FaGasPump className="text-green-500" />
+                    <span>{car.inStock ? "Available" : "Sold Out"}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-red-400">📅</span>
+                    <span>{car?.year}</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center gap-1">
-                <MdSpeed className="text-blue-500" />
-                <span>300KM/h</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FaGasPump className="text-green-500" />
-                <span>{car.inStock ? "Available" : "Sold Out"}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span className="text-red-400">📅</span>
-                <span>{car?.year}</span>
-              </div>
-            </div>
-          </div>
-     </Link>
-     
-  
-        </div>
-      ))}
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Button see more */}
+      <motion.div
+        className="mt-4 py-2 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <Link to="/product">
+          <button className="text-white font-semibold bg-red-500 rounded-md p-2 mr-2">
+            See More
+          </button>
+        </Link>
+      </motion.div>
     </div>
-    {/* ------------button see more---------- */}
-<div className="mt-4 py-2 text-center">
-<Link to="/product">
-<button className="text-white font-semibold bg-red-500 rounded-md p-2 mr-2">
-        See More
-    </button>
-</Link>
-</div>
-   
-   </div>
   );
 };
 

@@ -22,7 +22,7 @@ export const Banner = () => {
       {/*-------------- Content ------------------*/}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
         <h1 className="text-4xl md:text-6xl font-extrabold text-white drop-shadow-2xl animate-fadeIn">
-          Car Shop
+          Car Blogs
         </h1>
         <p className="text-lg md:text-xl text-gray-300 mt-2 animate-fadeIn delay-200">
           Explore the ultimate collection of high-performance cars in the world . so we can explore it

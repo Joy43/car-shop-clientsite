@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import {  useAppSelector } from "../../../redux/hooks";
-import { FaUserCircle } from "react-icons/fa";
+
 
 const UserHome = () => {
   const currentUser = useAppSelector(selectCurrentUser);
-
+console.log(currentUser)
   const [timeLeft, setTimeLeft] = useState("");
 
   // Countdown Logic
@@ -41,7 +41,11 @@ const UserHome = () => {
     <div className="w-full max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-6 md:p-8 mt-10">
       <div className="flex items-center gap-6">
         <div className="text-red-500">
-          <FaUserCircle size={40} />
+         <img
+              src={currentUser?.image }
+              alt="user"
+              className="w-8 h-8 rounded-full object-cover"
+            />
         </div>
 
         <div className="flex-1">

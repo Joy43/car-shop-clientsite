@@ -7,18 +7,18 @@ import { Link } from "react-router-dom";
 const Nabvbartop = () => {
   return (
     <>
-      {/* Top Announcement Bar */}
-      <div className="bg-salt-400 text-black px-4  flex flex-col md:flex-row items-center justify-between gap-2">
-        <div className="flex items-center text-sm font-medium">
-          <CiDeliveryTruck className="text-red-400 text-xl mr-2" />
+      {/* ------------Top Announcement Bar--------------- */}
+      <div className="bg-salt-400 text-black px-4 text-lg  flex flex-col md:flex-row items-center justify-between gap-2">
+        <div className="flex items-center  font-medium">
+          <CiDeliveryTruck className="text-red-500 text-2xl  mr-2" />
           <span>40+ outlets nationwide with international delivery</span>
         </div>
         <div className="hidden md:flex items-center gap-6 text-gray-600">
-          <div className="flex items-center gap-1 hover:text-orange-300 cursor-pointer">
+          <div className="flex items-center gap-1 hover:text-red-400 cursor-pointer">
             <MdWifiCalling1 />
             <span className="text-sm">01701677162</span>
           </div>
-          <div className="flex items-center gap-1 hover:text-orange-300 cursor-pointer">
+          <div className="flex items-center gap-1 hover:text-red-400 cursor-pointer">
             <span className="text-sm">English</span>
             <IoChevronDownCircleSharp />
           </div>

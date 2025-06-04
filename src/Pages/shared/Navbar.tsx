@@ -29,7 +29,7 @@ export const Navbar = () => {
     currentUser?.role === "admin" ? "/admindashboard/addcarproduct" : "/userdashboard";
 
   return (
-   <header className="bg-white shadow-lg sticky top-0 z-50">
+   <header className="bg-stone-50 text-lg shadow-lg sticky top-0 z-50">
   <Nabvbartop />
   <nav className="px-4 py-3 flex justify-between items-center w-full">
     {/* Logo */}
@@ -47,11 +47,11 @@ export const Navbar = () => {
     </div>
 
     {/* Desktop Menu */}
-    <ul className="hidden md:flex gap-5 text-gray-600 items-center text-sm relative">
+    <ul className="hidden md:flex gap-5 text-gray-600 items-center  relative">
       <li>
         <Link to="/contract">Contract</Link>
       </li>
-
+<Link to="/carblog" className="block hover:text-[#f83b6a]">Blogs</Link>
       {/* Product Dropdown */}
       <li
         className="relative group"
@@ -110,7 +110,7 @@ export const Navbar = () => {
             onClick={() => setAccountMenuOpen(!accountMenuOpen)}
           >
             <img
-              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+              src={currentUser?.image || "https://cdn-icons-png.flaticon.com/512/149/149071.png"}
               alt="user"
               className="w-8 h-8 rounded-full object-cover"
             />
@@ -154,9 +154,9 @@ export const Navbar = () => {
       ) : (
         <Link
           to="/login"
-          className="px-3 py-1 bg-red-500 hover:bg-secondary text-white rounded-md text-sm"
+          className="px-3 py-2 bg-red-500 hover:bg-secondary text-white rounded-md text-sm"
         >
-          Login
+          Login Now
         </Link>
       )}
 
@@ -172,6 +172,7 @@ export const Navbar = () => {
   {mobileSidebarOpen && (
     <div className="md:hidden px-4 py-3 bg-white space-y-2 text-sm">
       <Link to="/contract" className="block hover:text-[#f83b6a]">Contract</Link>
+      <Link to="/carblog" className="block hover:text-[#f83b6a]">Blogs</Link>
       <Link to="/product" className="block hover:text-[#f83b6a]">Products</Link>
       {currentUser && (
         <>

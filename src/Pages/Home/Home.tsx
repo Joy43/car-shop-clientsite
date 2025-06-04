@@ -32,7 +32,7 @@ export const Home = () => {
         className="fixed bottom-6 right-6 bg-[#FA2B35] text-white p-2
          rounded-full shadow-lg hover:bg-green-600 transition duration-300"
       >
-        <MdContactSupport  size={30} />
+        <MdContactSupport  size={40} />
       </Link>
     </>
   )

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 
 export type TUser = {
+  image?: string;
   email: string;
   role: string;
   name: string;

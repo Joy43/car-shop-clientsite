@@ -117,7 +117,7 @@ const handleAddToWishlist = async () => {
 )}
    </div>
               {/* ----------main image------- */}
-                <div className="w-full md:w-[80%] bg-gray-100 rounded-sm h-[280px] md:h-[400px] relative flex items-center justify-center"
+                <div className="w-full md:w-[80%]  rounded-sm h-[280px] md:h-[400px] relative flex items-center justify-center"
                 
                 >
                   <img
@@ -194,7 +194,7 @@ const handleAddToWishlist = async () => {
     {/* --------------add to wishishlist----- */}
    <button
   onClick={handleAddToWishlist}
-  className="w-fit cursor-pointer bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+  className="w-fit cursor-pointer bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
  
 >
   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

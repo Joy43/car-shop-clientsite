@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import herovid from "../../../assets/images/hero.webm";
 
 export const Banner = () => {
@@ -24,13 +25,15 @@ export const Banner = () => {
           Car Shop
         </h1>
         <p className="text-lg md:text-xl text-gray-300 mt-2 animate-fadeIn delay-200">
-          Explore the ultimate collection of high-performance cars.
+          Explore the ultimate collection of high-performance cars in the world . so we can explore it
         </p>
 
         {/* --------------- Button -----------------------------*/}
-        <button className="mt-4 px-6 py-2 bg-red-500 hover:bg-purple-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg animate-fadeIn delay-500">
-          Explore Now
+      <Link to="/carblog">
+        <button className="mt-4 px-6 cursor-pointer py-2 bg-red-500 hover:bg-purple-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg animate-fadeIn delay-500">
+          Explore Blogs
         </button>
+      </Link>
       </div>
     </div>
   );

@@ -211,7 +211,7 @@ export const Navbar = () => {
           ) : (
             <Link
               to="/login"
-              className="px-3 py-2 bg-red-500 hover:bg-secondary text-white rounded-md text-sm"
+              className="px-3 py-2 bg-red-400 hover:bg-secondary text-white rounded-md text-sm"
             >
               Login Now
             </Link>

@@ -8,11 +8,19 @@ const Nabvbartop = () => {
   return (
     <>
       {/* ------------Top Announcement Bar--------------- */}
-      <div className="bg-salt-400 text-black px-4 text-lg  flex flex-col md:flex-row items-center justify-between gap-2">
-        <div className="flex items-center  font-medium">
+      <div className="bg-salt-400 text-gray-700 px-4 text-lg  flex flex-col md:flex-row items-center justify-between gap-2">
+        <div className="flex items-center  ">
           <CiDeliveryTruck className="text-red-500 text-2xl  mr-2" />
-          <span>40+ outlets nationwide with international delivery</span>
+          <p className="text-sm">40+ outlets nationwide with international delivery</p>
         </div>
+        <ul className="flex gap-6 text-sm ">
+          <li className="hover:text-red-500 transition-colors duration-200">
+            <Link to="/aboutcomany">About Us</Link>
+          </li>
+          <li className="hover:text-purple-600 transition-colors duration-200">
+            <Link to="/compare">Compare (0)</Link>
+          </li>
+        </ul>
         <div className="hidden md:flex items-center gap-6 text-gray-600">
           <div className="flex items-center gap-1 hover:text-red-400 cursor-pointer">
             <MdWifiCalling1 />
@@ -30,17 +38,7 @@ const Nabvbartop = () => {
       </div>
 
       {/* Secondary Navigation Bar */}
-      <div className="hidden md:flex justify-between items-center px-6 py-3 border-b border-gray-200">
-        <p className="text-sm font-semibold text-gray-800">Car Shop</p>
-        <ul className="flex gap-6 text-sm text-gray-700">
-          <li className="hover:text-red-500 transition-colors duration-200">
-            <Link to="/aboutcomany">About Us</Link>
-          </li>
-          <li className="hover:text-purple-600 transition-colors duration-200">
-            <Link to="/compare">Compare (0)</Link>
-          </li>
-        </ul>
-      </div>
+     
     </>
   );
 };

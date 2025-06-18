@@ -10,6 +10,8 @@ import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useAddWishlistMutation } from "../../redux/features/wishlist/wishlist.api";
 import { toast } from "sonner";
 
+// ---------mgnifier---------------
+
 
 
 const ProductDetails = () => {
@@ -87,7 +89,7 @@ const handleAddToWishlist = async () => {
 {/* -----------------product iteams---------------- */}
         <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* -----------left side------------- */}
-          <div className="flex flex-col-reverse gap-[15px] md:gap-0 md:flex-row">
+          <div className="flex flex-col-reverse gap-4 md:gap-0 md:flex-row">
             {/*----------- Image Gallery -------------
             */}
            
@@ -117,18 +119,22 @@ const handleAddToWishlist = async () => {
 )}
    </div>
               {/* ----------main image------- */}
-                <div className="w-full md:w-[80%]  rounded-sm h-[280px] md:h-[400px] relative flex items-center justify-center"
-                
-                >
-                  <img
-                    src={selectedImage}
-                    alt={product?.model}
-                    className="object-cover w-[200px] md:w-[300px] rounded-lg"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = "/placeholder-car.jpg";
-                    }}
-                  />
-                </div>
+{/* ----------main image------- */}
+<div className="w-full md:w-[80%] rounded-sm h-[280px] md:h-[400px] relative flex items-center justify-center p-4">
+  <div className="w-full max-w-[500px] h-full rounded-lg overflow-hidden relative">
+    <img
+      src={selectedImage}
+      alt={product?.model}
+      className="w-full h-full object-contain"
+      onError={(e) => {
+        (e.target as HTMLImageElement).src = "/placeholder-car.jpg";
+      }}
+    />
+  </div>
+</div>
+
+
+
 
                     </div>
          

@@ -9,6 +9,7 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 import { useAddWishlistMutation } from "../../redux/features/wishlist/wishlist.api";
 import { toast } from "sonner";
+import ReactImageMagnify from 'react-image-magnify';
 
 // ---------mgnifier---------------
 
@@ -120,26 +121,31 @@ const handleAddToWishlist = async () => {
    </div>
               {/* ----------main image------- */}
 {/* ----------main image------- */}
-<div className="w-full md:w-[80%] rounded-sm h-[280px] md:h-[400px] relative flex items-center justify-center p-4">
-  <div className="w-full max-w-[500px] h-full rounded-lg overflow-hidden relative">
-    <img
-      src={selectedImage}
-      alt={product?.model}
-      className="w-full h-full object-contain"
-      onError={(e) => {
-        (e.target as HTMLImageElement).src = "/placeholder-car.jpg";
-      }}
-    />
-  </div>
+<div className="w-full md:w-[80%] rounded-sm h-[280px] md:h-[400px] flex items-center justify-center p-4">
+  <ReactImageMagnify
+    {...{
+      smallImage: {
+        alt: product?.model,
+        isFluidWidth: true,
+        src: selectedImage,
+      },
+      largeImage: {
+        src: selectedImage,
+        width: 1200,
+        height: 1800,
+      },
+      enlargedImageContainerStyle: {
+        background: '#fff',
+        zIndex: 9999,
+      },
+      isHintEnabled: true,
+      lensStyle: { backgroundColor: 'rgba(0,0,0,.3)' },
+    }}
+  />
 </div>
 
 
-
-
-                    </div>
-         
-
-         
+                    </div>    
             {/* Right Product Details */}
 <div className="flex flex-col gap-6">
   {/* Title */}

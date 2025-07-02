@@ -30,6 +30,7 @@
     "react-hook-form": "^7.55.0",
     "react-icons": "^5.5.0",
     "react-image-magnifiers": "^1.4.0",
+    "react-image-magnify": "^2.7.4",
     "react-medium-image-zoom": "^5.2.14",
     "react-phone-number-input": "^3.4.12",
     "react-player": "^2.16.0",

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetblogsByIdQuery } from "../../redux/features/blog/blog.api";
+import Loading from "../../Components/Loading";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const BlogDetails = () => {
 
   const blog = response?.data;
 
-  if (isLoading) return <div className="text-center py-10">Loading...</div>;
+  if (isLoading) return <div className=""><Loading/></div>;
   if (isError || !blog)
     return <div className="text-center py-10 text-red-500">Blog not found.</div>;
 

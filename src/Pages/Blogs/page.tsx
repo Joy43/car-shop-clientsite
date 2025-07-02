@@ -1,3 +1,4 @@
+import Loading from "../../Components/Loading";
 import { useGetAllBlogsQuery } from "../../redux/features/blog/blog.api";
 import { Link } from "react-router-dom";
 
@@ -5,7 +6,7 @@ const Blogspage = () => {
   const { data, isLoading, isError } = useGetAllBlogsQuery([]);
   const blogs = data?.data || [];
 
-  if (isLoading) return <div className="text-center py-10">Loading...</div>;
+  if (isLoading) return <Loading></Loading>;
   if (isError) return <div className="text-center py-10 text-red-500">Something went wrong.</div>;
 
   return (

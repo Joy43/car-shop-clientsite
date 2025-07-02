@@ -1,9 +1,10 @@
+import Loading from "../../../Components/Loading";
 import { useGetAllReviewQuery } from "../../../redux/features/review/Review.api";
 
 const UserReview = () => {
   const { data, isLoading, isError } = useGetAllReviewQuery([]);
 
-  if (isLoading) return <p className="text-center text-gray-500">Loading...</p>;
+  if (isLoading) return <Loading/>;
   if (isError) return <p className="text-center text-red-500">Error loading reviews</p>;
 
 const reviews = data?.data?.result || [];

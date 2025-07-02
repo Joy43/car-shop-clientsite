@@ -27,12 +27,13 @@ const UserOrder = () => {
 
 
   const currentUser = useAppSelector(selectCurrentUser);
-  const currentUserEmail = currentUser?.email;
+const currentUserId = currentUser?.userId;
 
   const rawOrders = Array.isArray(orders?.data?.result) ? orders?.data.result : [];
-  const userOrders: TOrder[] = rawOrders.filter(
-    (order: TOrder) => order.user?.email === currentUserEmail
-  );
+const userOrders: TOrder[] = rawOrders.filter(
+  (order: TOrder) => order.user?._id === currentUserId
+);
+
   console.log('userOrders', userOrders);
   console.log('orders', orders?.data?.result);
   const totalOrders = orders?.meta?.total || 0;

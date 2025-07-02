@@ -1,4 +1,5 @@
 "use client";
+import Loading from "../../../Components/Loading";
 import { selectCurrentUser } from "../../../redux/features/auth/authSlice";
 import {
   useDeleteWishlistMutation,
@@ -25,7 +26,7 @@ const UserWishlist = () => {
   };
 
   if (isLoading)
-    return <p className="text-center text-gray-500">Loading...</p>;
+    return <Loading/>;
   if (isError)
     return (
       <p className="text-center text-red-500">Error loading wishlist</p>

@@ -1,15 +1,14 @@
 import { motion } from "framer-motion";
 import Footer from "../shared/Footer";
 import AboutUs from "./AboutUs/AboutUs";
-
 import Blogs from "./Blogs/Blogs";
 import NewsletterForm from "./Newsletter/Nesletter";
-// import CarPurchaseSection from "./CarPurchaseSection/CarPurchaseSection";
 import Popularcar from "./Popularcar/Popularcar";
 import Slider from "./Slider/Slider";
 import CustomerFeedback from "./Testomonia/Testomonia";
 
 import { MdContactSupport } from "react-icons/md";
+import { HiArrowNarrowRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 // Animation variants
@@ -95,6 +94,15 @@ export const Home = () => {
           <MdContactSupport size={40} />
         </Link>
       </motion.div>
+
+      {/* See More Button with Motion */}
+      <motion.div
+        className="flex justify-center mt-10"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      ></motion.div>
     </>
   );
 };

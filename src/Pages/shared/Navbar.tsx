@@ -169,7 +169,7 @@ export const Navbar = () => {
                   className="w-8 h-8 rounded-full object-cover"
                 />
                 <span className="hidden sm:block text-sm text-gray-600">
-                  Name: {currentUser.name}
+                  {currentUser.name}
                 </span>
                 <IoIosArrowUp
                   className={`transition-transform duration-300 hidden sm:block ${

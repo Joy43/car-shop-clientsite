@@ -1,14 +1,12 @@
-
-
 import { motion } from "framer-motion";
 import { FaGasPump } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { BsChatQuoteFill, BsFillCarFrontFill } from "react-icons/bs";
-import { MdSpeed } from "react-icons/md";
+
 import { useGetAllcarsQuery } from "../../../redux/features/carProduct/carProduct.api";
 import { Link } from "react-router-dom";
 import Loading from "../../../Components/Loading";
-
+import { HiArrowNarrowRight } from "react-icons/hi";
 // Animation variants
 const containerVariants = {
   hidden: {},
@@ -154,10 +152,7 @@ const Popularcar = () => {
                   <BsFillCarFrontFill className="text-[#EF4444]" />
                   <span>{car.category}</span>
                 </div>
-                <div className="flex items-center gap-1" title="Max Speed">
-                  <MdSpeed className="text-[#3B82F6]" />
-                  <span>300 KM/h</span>
-                </div>
+
                 <div
                   className="flex items-center gap-1"
                   title="Fuel Availability"
@@ -183,17 +178,18 @@ const Popularcar = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        <Link to="/product">
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 6px 15px rgba(255,53,77,0.4)",
-            }}
-            className="bg-[#FF354D] text-white font-semibold px-8 py-3 rounded-lg shadow-md transition"
-          >
-            See More
-          </motion.button>
-        </Link>
+       <Link to="/product">
+  <motion.button
+    whileHover={{
+      scale: 1.05,
+      boxShadow: "0 6px 15px rgba(255,53,77,0.4)",
+    }}
+    className="bg-[#FF354D] text-white font-semibold px-3 py-2 flex items-center mx-auto text-center gap-2 rounded-lg shadow-md transition"
+  >
+    <span>See More</span>
+    <HiArrowNarrowRight className="text-lg" />
+  </motion.button>
+</Link>
       </motion.div>
     </div>
   );

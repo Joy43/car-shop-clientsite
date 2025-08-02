@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { FaPhoneAlt } from 'react-icons/fa';
-import { BsChatQuoteFill } from 'react-icons/bs';
-import { useState, useEffect } from 'react';
+import { FaPhoneAlt } from "react-icons/fa";
+import { BsChatQuoteFill } from "react-icons/bs";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const feedbacks = [
   {
@@ -25,6 +26,27 @@ const feedbacks = [
   },
 ];
 
+// Animation variants
+const textVariants = {
+  enter: { opacity: 0, x: 50 },
+  center: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  exit: { opacity: 0, x: -50, transition: { duration: 0.5, ease: "easeIn" } },
+};
+
+const dotVariants = {
+  active: { scale: 1.4, backgroundColor: "#EF4444" },
+  inactive: { scale: 1, backgroundColor: "#D1D5DB" },
+};
+
+const contactCardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.5 },
+  }),
+};
+
 const CustomerFeedback = () => {
   const [currentFeedback, setCurrentFeedback] = useState(0);
 
@@ -33,100 +55,149 @@ const CustomerFeedback = () => {
   };
 
   const goToPrev = () => {
-    setCurrentFeedback((prev) => (prev - 1 + feedbacks.length) % feedbacks.length);
+    setCurrentFeedback(
+      (prev) => (prev - 1 + feedbacks.length) % feedbacks.length
+    );
   };
 
-  const goToIndex = (index:any) => {
+  const goToIndex = (index: number) => {
     setCurrentFeedback(index);
   };
 
   useEffect(() => {
-    const timer = setTimeout(goToNext, 5000);
+    const timer = setTimeout(goToNext, 6000);
     return () => clearTimeout(timer);
   }, [currentFeedback]);
 
   const current = feedbacks[currentFeedback];
 
   return (
-    <section className="container mx-auto px-6 py-12 grid lg:grid-cols-2 gap-8 items-center">
-      {/* -----Image Section----------- */}
-      <div className="relative">
-        <img
+    <section className="container mx-auto px-6 py-12 grid lg:grid-cols-2 gap-12 items-center min-h-[480px]">
+      {/* Image Section */}
+      <div className="relative flex justify-center">
+        <motion.img
+          key="car-bg"
           src="https://unicoderbd.com/template/chaka/assets/images/background/8.png"
           alt="Car Image"
           width={600}
           height={400}
-          className="rounded-sm shadow-sm"
+          className="rounded-sm shadow-md object-contain max-w-full"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          loading="lazy"
         />
       </div>
 
-      {/*----------- Feedback Section -------------------*/}
+      {/* Feedback Section */}
       <div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-4">Customer Feedback</h2>
-        <BsChatQuoteFill className="text-red-500 text-4xl mb-4" />
+        <h2 className="text-3xl font-bold text-gray-800 mb-4 select-none">
+          Customer Feedback
+        </h2>
+        <BsChatQuoteFill
+          className="text-red-500 text-5xl mb-6"
+          aria-hidden="true"
+        />
 
-        {/* Feedback Content */}
-        <div className="mb-8">
-          <p className="text-gray-600 mb-6">{current.text}</p>
-          <div className="flex items-center gap-4">
-            <img
-              src={current.img}
-              alt={current.name}
-              width={50}
-              height={50}
-              className="rounded-full border-2 border-gray-300"
-            />
-            <div>
-              <h4 className="text-lg font-semibold text-red-600">{current.name}</h4>
-              <p className="text-gray-500 text-sm">{current.title}</p>
+        {/* Animated feedback content */}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={currentFeedback}
+            variants={textVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="mb-10"
+          >
+            <p className="text-gray-600 text-lg leading-relaxed">
+              {current.text}
+            </p>
+            <div className="flex items-center gap-5 mt-6">
+              <img
+                src={current.img}
+                alt={current.name}
+                width={60}
+                height={60}
+                className="rounded-full border-2 border-gray-300 object-cover"
+              />
+              <div>
+                <h4 className="text-lg font-semibold text-red-600">
+                  {current.name}
+                </h4>
+                <p className="text-gray-500 text-sm">{current.title}</p>
+              </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </AnimatePresence>
 
-        {/* Navigation Controls */}
-        <div className="flex items-center justify-between mb-4">
+        {/* Navigation controls */}
+        <div className="flex items-center justify-between mb-8 max-w-sm mx-auto">
           <button
             onClick={goToPrev}
-            className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Previous feedback"
+            className="px-4 py-2 rounded-full hover:bg-gray-100 transition"
           >
             ← Previous
           </button>
-          <div className="flex gap-2">
-            {feedbacks.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => goToIndex(index)}
-                className={`h-3 w-3 rounded-full transition-colors ${
-                  index === currentFeedback ? 'bg-red-500' : 'bg-gray-300'
-                }`}
+
+          <div className="flex gap-3">
+            {feedbacks.map((_, idx) => (
+              <motion.button
+                key={idx}
+                onClick={() => goToIndex(idx)}
+                aria-label={`Go to feedback ${idx + 1}`}
+                className="w-3 h-3 rounded-full"
+                variants={dotVariants}
+                animate={idx === currentFeedback ? "active" : "inactive"}
+                whileHover={{ scale: 1.6 }}
+                transition={{ type: "spring", stiffness: 300 }}
               />
             ))}
           </div>
+
           <button
             onClick={goToNext}
-            className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Next feedback"
+            className="px-4 py-2 rounded-full hover:bg-gray-100 transition"
           >
             Next →
           </button>
         </div>
 
-        {/* Contact Information (keep this part exactly as it was) */}
-        <div className="mt-8 grid md:grid-cols-2 gap-4">
-          <div className="bg-red-600 text-white p-6 rounded-lg shadow-md">
-            <h4 className="text-2xl font-semibold">Reliability & Quality Service.</h4>
-            <p className="text-lg mt-2">
-              If you would like to take our service and support, please contact us through our
-              provided number.
+        {/* Contact Information Cards */}
+        <div className="mt-10 grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <motion.div
+            className="bg-red-600 text-white p-6 rounded-lg shadow-lg"
+            variants={contactCardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={0}
+          >
+            <h4 className="text-2xl font-semibold select-none">
+              Reliability & Quality Service.
+            </h4>
+            <p className="text-lg mt-2 leading-relaxed">
+              If you would like to take our service and support, please contact
+              us through our provided number.
             </p>
-          </div>
-          <div className="bg-blue-900 text-white p-6 rounded-lg shadow-md flex items-center gap-4">
-            <FaPhoneAlt className="text-2xl" />
+          </motion.div>
+
+          <motion.div
+            className="bg-blue-900 text-white p-6 rounded-lg shadow-lg flex items-center gap-6"
+            variants={contactCardVariants}
+            initial="hidden"
+            animate="visible"
+            custom={1}
+          >
+            <FaPhoneAlt className="text-3xl flex-shrink-0" />
             <div>
-              <h4 className="text-2xl font-semibold">+1 817-946-1548</h4>
+              <h4 className="text-2xl font-semibold select-none">
+                +1 817-946-1548
+              </h4>
               <p className="text-lg">9:00 AM - 8:00 PM</p>
               <p className="text-lg">Sunday Off</p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import Footer from "../shared/Footer";
 import AboutUs from "./AboutUs/AboutUs";
-import { Banner } from "./Banner/Banner";
+
 import Blogs from "./Blogs/Blogs";
 import NewsletterForm from "./Newsletter/Nesletter";
 // import CarPurchaseSection from "./CarPurchaseSection/CarPurchaseSection";
@@ -15,41 +15,58 @@ import { Link } from "react-router-dom";
 // Animation variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
 export const Home = () => {
   return (
     <>
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-      >
+      <motion.div initial="hidden" animate="visible" variants={fadeInUp}>
         <Slider />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
-        <Banner />
-      </motion.div>
-
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <Popularcar />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <AboutUs />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <CustomerFeedback />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <Blogs />
       </motion.div>
 
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeInUp}>
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
         <NewsletterForm />
       </motion.div>
 

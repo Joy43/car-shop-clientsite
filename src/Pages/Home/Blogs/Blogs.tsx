@@ -70,7 +70,7 @@ const Blogs = () => {
             />
             <div>
               <div className="flex items-center gap-3 text-[#64607D]">
-                <p>08-11-2021</p>
+                <p >08-11-2021</p>
                 <span>Category</span>
               </div>
 

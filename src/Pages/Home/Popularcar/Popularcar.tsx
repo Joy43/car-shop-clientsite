@@ -178,13 +178,13 @@ const Popularcar = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-       <Link to="/product">
+       <Link className="cursor-pointer" to="/product">
   <motion.button
     whileHover={{
       scale: 1.05,
       boxShadow: "0 6px 15px rgba(255,53,77,0.4)",
     }}
-    className="bg-[#FF354D] text-white font-semibold px-3 py-2 flex items-center mx-auto text-center gap-2 rounded-lg shadow-md transition"
+    className="bg-[#FF354D] cursor-pointer text-white font-semibold px-3 py-2 flex items-center mx-auto text-center gap-2 rounded-lg shadow-md transition"
   >
     <span>See More</span>
     <HiArrowNarrowRight className="text-lg" />

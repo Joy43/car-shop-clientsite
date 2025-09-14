@@ -164,41 +164,51 @@ const CustomerFeedback = () => {
           </button>
         </div>
 
-        {/* Contact Information Cards */}
-        <div className="mt-10 grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <motion.div
-            className="bg-red-600 text-white p-6 rounded-lg shadow-lg"
-            variants={contactCardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-          >
-            <h4 className="text-2xl font-semibold select-none">
-              Reliability & Quality Service.
-            </h4>
-            <p className="text-lg mt-2 leading-relaxed">
-              If you would like to take our service and support, please contact
-              us through our provided number.
-            </p>
-          </motion.div>
+     <div className="mt-10 grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+  {/* Service Info Card */}
+  <motion.div
+    className="bg-red-600 text-white p-6 rounded-2xl shadow-lg flex flex-col justify-center"
+    variants={contactCardVariants}
+    initial="hidden"
+    animate="visible"
+    custom={0}
+  >
+    <h4 className="text-xl md:text-2xl font-semibold select-none tracking-wide">
+      Reliability & Quality Service
+    </h4>
+    <p className="text-base md:text-lg mt-3 leading-relaxed opacity-90">
+      If you would like to take our service and support, please contact us
+      through our provided number.
+    </p>
+  </motion.div>
 
-          <motion.div
-            className="bg-blue-900 text-white p-6 rounded-lg shadow-lg flex items-center gap-6"
-            variants={contactCardVariants}
-            initial="hidden"
-            animate="visible"
-            custom={1}
-          >
-            <FaPhoneAlt className="text-3xl flex-shrink-0" />
-            <div>
-              <h4 className="text-2xl font-semibold select-none">
-                +1 817-946-1548
-              </h4>
-              <p className="text-lg">9:00 AM - 8:00 PM</p>
-              <p className="text-lg">Sunday Off</p>
-            </div>
-          </motion.div>
-        </div>
+  {/* Contact Info Card */}
+  <motion.div
+    className="bg-blue-900 text-white p-6 rounded-2xl shadow-lg flex items-center gap-5"
+    variants={contactCardVariants}
+    initial="hidden"
+    animate="visible"
+    custom={1}
+  >
+    {/* Icon */}
+    <div className="bg-white/20 p-4 rounded-full flex items-center justify-center">
+      <FaPhoneAlt className="text-2xl text-white" />
+    </div>
+
+    {/* Text Info */}
+    <div>
+      <h1 className="text-xl  font-bold tracking-wide select-none">
+        Call Now
+      </h1>
+      <h4 className="text-lg md:text-xl font-semibold select-none mt-1">
+        +880 817946548
+      </h4>
+      <p className="text-base md:text-lg mt-2 opacity-90">9:00 AM – 8:00 PM</p>
+      <p className="text-base md:text-lg opacity-90">Sunday Off</p>
+    </div>
+  </motion.div>
+</div>
+
       </div>
     </section>
   );

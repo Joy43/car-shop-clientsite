@@ -10,9 +10,9 @@ import visacard from "../../assets/images/paylogo/visacard.png";
 import douchbangla from "../../assets/images/paylogo/dutchbangla.png";
 import martercard from "../../assets/images/paylogo/mastercard.png";
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
-    <div className="bg-gray-50 mt-8">
+    <div className="bg-gray-50 mt-8 ">
       {/* Payment Info */}
       <div className="flex flex-col gap-6 p-6 bg-white rounded-lg shadow-md">
         <div className="flex flex-col gap-2 md:flex-row md:items-center">
@@ -125,7 +125,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-wrap items-center justify-between gap-4 border-t pt-5 mt-5 text-sm text-gray-600">
           <p>Copyright 2025 © Car shop. All rights reserved.</p>
           <ul className="flex gap-5">
-            <li><a href="#">Made by NI Car Shop</a></li>
+            <li><a href="">Made by NI Car Shop</a></li>
           </ul>
         </div>
     </div>

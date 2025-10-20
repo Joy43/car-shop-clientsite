@@ -6,11 +6,13 @@ git checkout main
 git reset --hard f403613
 git push origin main --force
 
+yarn add vitest jsdom @testing-library/react @testing-library/jest-dom -D
+
 
 
 
   {
-    https://rifatsarker.com/
+https://rifatsarker.com/
 https://github.com/rifat-sarker/Bi-cycle-store
 https://github.com/rifat-sarker/bicycle-store-client
 

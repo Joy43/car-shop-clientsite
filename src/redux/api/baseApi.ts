@@ -12,7 +12,7 @@ import { toast } from 'sonner';
 // --------base url here---------
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://server-car-industy.vercel.app/api',
-  // baseUrl: 'http://localhost:5000/api',
+
   credentials: 'include',
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
